@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi Kenangan - Tampilan Website</title>
+    
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CSS Kustom -->
+    <style>
+        /* Menambahkan efek scroll yang halus saat mengklik link navigasi */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #fff; /* Latar belakang putih bersih */
+        }
+
+        /* Memberi latar belakang abu-abu pada section tertentu untuk memisahkan konten */
+        .section-bg {
+            background-color: #f8f9fa;
+        }
+
+        /* --- Kustomisasi Navbar --- */
+        .navbar-custom {
+            background-color: #9d2533;
+        }
+        .navbar-custom .navbar-brand img {
+            height: 40px;
+        }
+        .navbar-custom .nav-link {
+            color: white;
+            font-weight: 500;
+        }
+        .navbar-custom .nav-link:hover {
+            color: #f0f0f0;
+        }
+
+        /* --- Kustomisasi Carousel Hero --- */
+        .hero-carousel .carousel-item img {
+            max-height: 450px;
+            object-fit: cover;
+        }
+
+        /* --- Kustomisasi Bagian Produk --- */
+        .product-section {
+            position: relative;
+        }
+        /* Penampung untuk produk agar bisa di-scroll secara horizontal */
+        .product-scroll-wrapper {
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            /* Menyembunyikan scrollbar bawaan browser */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .product-scroll-wrapper::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        /* Mencegah produk turun ke baris baru saat di-scroll */
+        .product-row {
+            flex-wrap: nowrap;
+        }
+
+        .product-card {
+            border: none;
+            background-color: transparent;
+            min-width: 160px; /* Memberi lebar minimum agar tidak terlalu rapat */
+        }
+        .product-card img {
+            border-radius: 8px;
+            max-width: 150px;
+            margin: auto;
+        }
+        .product-card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 0.75rem;
+        }
+
+        /* --- Kustomisasi Panah Navigasi Produk --- */
+        .product-nav-arrow {
+            position: absolute;
+            top: 40%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #333;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 10;
+            cursor: pointer;
+        }
+        .product-nav-arrow:hover {
+            background-color: white;
+            color: #000;
+        }
+        .product-nav-arrow.prev {
+            left: -20px;
+        }
+        .product-nav-arrow.next {
+            right: -20px;
+        }
+
+        /* --- Gaya untuk Bagian How to Order --- */
+        .how-to-order-step {
+            text-align: center;
+        }
+        .how-to-order-step .icon {
+            font-size: 3rem;
+            color: #9d2533;
+        }
+
+        /* --- Kustomisasi Footer --- */
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 40px 0;
+        }
+        .footer h5 {
+            color: #ffc107;
+        }
+        .footer a {
+            color: #adb5bd;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: white;
+        }
+        .footer .social-icons a {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =================================================================
+    1. HEADER & NAVBAR (Bagian Kepala Website)
+    ================================================================== -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="https://placehold.co/150x40/ffffff/9d2533?text=Logo+Brand" alt="Logo Kopi Kenangan">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <!-- Tautan navigasi sekarang mengarah ke ID section -->
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#menu">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#how-to-order">How to Order</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#blog">Blog</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- =================================================================
+        2. HERO CAROUSEL (Bagian Promosi Utama)
+        ================================================================== -->
+        <section id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
+            <!-- Konten Carousel tidak berubah -->
+            <div class="carousel-inner">
+                <div class="carousel-item active"><img src="https://placehold.co/1600x450/9d2533/ffffff?text=Can+Packages+Meriahkan+Harimu" class="d-block w-100" alt="Promosi 1"></div>
+                <div class="carousel-item"><img src="https://placehold.co/1600x450/9d2533/ffffff?text=Cup+Size+Ekspresikan+Harimu" class="d-block w-100" alt="Promosi 2"></div>
+                <div class="carousel-item"><img src="https://placehold.co/1600x450/333333/ffffff?text=Promo+Menarik+Lainnya" class="d-block w-100" alt="Promosi 3"></div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>
+        </section>
+
+        <!-- =================================================================
+        3. PROMO BANNERS (Bagian Banner Promosi Kecil)
+        ================================================================== -->
+        <section class="promo-banners">
+            <div class="container my-4">
+                <div class="row g-3">
+                    <div class="col-6 col-md-3"><img src="https://placehold.co/400x150/0dcaf0/ffffff?text=Cashback+15.000" class="img-fluid rounded" alt="Banner Promo 1"></div>
+                    <div class="col-6 col-md-3"><img src="https://placehold.co/400x150/ffc107/ffffff?text=Diskon+20%25+Bank+X" class="img-fluid rounded" alt="Banner Promo 2"></div>
+                    <div class="col-6 col-md-3"><img src="https://placehold.co/400x150/6f42c1/ffffff?text=Bayar+Pakai+Poin" class="img-fluid rounded" alt="Banner Promo 3"></div>
+                    <div class="col-6 col-md-3"><img src="https://placehold.co/400x150/fd7e14/ffffff?text=Gratis+Ongkir" class="img-fluid rounded" alt="Banner Promo 4"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+        4. PRODUCT DISPLAY (Bagian Tampilan Produk)
+        - Struktur diubah untuk mendukung scrolling horizontal.
+        - `product-scroll-wrapper` adalah container yang bisa di-scroll.
+        - `product-row` adalah baris flexbox yang isinya tidak akan wrap (turun ke bawah).
+        - Tombol panah sekarang memiliki ID untuk JavaScript.
+        ================================================================== -->
+        <section class="product-section">
+            <div class="container my-5">
+                <div class="position-relative">
+                    <div class="product-scroll-wrapper" id="product-wrapper">
+                        <div class="row product-row g-4">
+                            <!-- Produk di sini -->
+                            <div class="col"><div class="card product-card text-center"><img src="https://placehold.co/200x200/f8f9fa/333?text=Kopi" class="card-img-top" alt="Kopi Susu"><div class="card-body"><h6 class="product-card-title">KOPI SUSU</h6></div></div></div>
+                            <div class="col"><div class="card product-card text-center"><img src="https://placehold.co/200x200/f8f9fa/333?text=Kopi" class="card-img-top" alt="Kopi Gula"><div class="card-body"><h6 class="product-card-title">KOPI GULA</h6></div></div></div>
+                            <div class="col"><div class="card product-card text-center"><img src="https://placehold.co/200x200/f8f9fa/333?text=Kopi" class="card-img-top" alt="Kopi Kaleng"><div class="card-body"><h6 class="product-card-title">KOPI KALENG</h6></div></div></div>
+                            <div class="col"><div class="card product-card text-center"><img src="https://placehold.co/200x200/f8f9fa/333?text=Kopi" class="card-img-top" alt="Kopi Aren"><div class="card-body"><h6 class="product-card-title">KOPI AREN</h6></div></div></div>
+                            <div class="col"><div class="card product-card text-center"><img src="https://placehold.co/200x200/f8f9fa/333?text=Kopi" class="card-img-top" alt="Kopi Susu 2"><div class="card-body"><h6 class="product-card-title">KOPI SUSU</h6></div></div></div>
+                            <div class="col"><div class="card product-card text-center"><img src="https://placehold.co/200x200/f8f9fa/333?text=Kopi" class="card-img-top" alt="Kopi Gula 2"><div class="card-body"><h6 class="product-card-title">KOPI GULA</h6></div></div></div>
+                            <!-- Tambahkan lebih banyak produk jika perlu -->
+                            <div class="col"><div class="card product-card text-center"><img src="https://placehold.co/200x200/f8f9fa/333?text=Kopi" class="card-img-top" alt="Kopi Hitam"><div class="card-body"><h6 class="product-card-title">KOPI HITAM</h6></div></div></div>
+                            <div class="col"><div class="card product-card text-center"><img src="https://placehold.co/200x200/f8f9fa/333?text=Kopi" class="card-img-top" alt="Kopi Jahe"><div class="card-body"><h6 class="product-card-title">KOPI JAHE</h6></div></div></div>
+                        </div>
+                    </div>
+                    <!-- Tombol Panah Navigasi Produk -->
+                    <div id="prev-btn" class="product-nav-arrow prev d-none d-md-flex"><i class="bi bi-chevron-left"></i></div>
+                    <div id="next-btn" class="product-nav-arrow next d-none d-md-flex"><i class="bi bi-chevron-right"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+        Sisa Section (About, Menu, How to Order, Blog) tidak berubah
+        ================================================================== -->
+        <section id="about" class="py-5 section-bg"><!-- Konten About Us --><div class="container"><div class="row align-items-center"><div class="col-md-6"><img src="https://placehold.co/600x400/333/fff?text=Tentang+Kami" class="img-fluid rounded shadow" alt="Tentang Kopi Kenangan"></div><div class="col-md-6 mt-4 mt-md-0"><h2 class="display-5 fw-bold">Cerita di Balik Setiap Cangkir</h2><p class="lead">Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.</p><p>Setiap cangkir yang kami sajikan adalah hasil dari kerja keras, dedikasi, dan cinta kami terhadap kopi. Mari nikmati kenangan di setiap tegukan.</p><a href="#" class="btn btn-dark">Selengkapnya</a></div></div></div></section>
+        <section id="menu" class="py-5"><!-- Konten Menu --><div class="container"><div class="text-center mb-5"><h2 class="display-5 fw-bold">Menu Favorit Kami</h2><p class="lead text-muted">Temukan minuman favoritmu di sini.</p></div><div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4"><div class="col"><div class="card h-100 shadow-sm"><img src="https://placehold.co/300x300/f8f9fa/333?text=Kopi" class="card-img-top" alt="Kopi Kenangan Mantan"><div class="card-body"><h5 class="card-title">Kopi Kenangan Mantan</h5><p class="card-text">Kopi susu dengan gula aren asli, rasa klasik yang selalu di hati.</p></div><div class="card-footer bg-transparent border-0"><p class="fw-bold">Rp 18.000</p></div></div></div><div class="col"><div class="card h-100 shadow-sm"><img src="https://placehold.co/300x300/f8f9fa/333?text=Cokelat" class="card-img-top" alt="Cokelat"><div class="card-body"><h5 class="card-title">Dua Shot Iced Shaken</h5><p class="card-text">Dua shot espresso dengan susu segar, lebih kuat dan mantap.</p></div><div class="card-footer bg-transparent border-0"><p class="fw-bold">Rp 24.000</p></div></div></div><div class="col"><div class="card h-100 shadow-sm"><img src="https://placehold.co/300x300/f8f9fa/333?text=Susu" class="card-img-top" alt="Susu"><div class="card-body"><h5 class="card-title">Milk Tea Gula Aren</h5><p class="card-text">Teh susu klasik dengan manis legit dari gula aren pilihan.</p></div><div class="card-footer bg-transparent border-0"><p class="fw-bold">Rp 19.000</p></div></div></div><div class="col"><div class="card h-100 shadow-sm"><img src="https://placehold.co/300x300/f8f9fa/333?text=Teh" class="card-img-top" alt="Teh"><div class="card-body"><h5 class="card-title">Avocado Coffee</h5><p class="card-text">Perpaduan unik jus alpukat, espresso, dan es krim cokelat.</p></div><div class="card-footer bg-transparent border-0"><p class="fw-bold">Rp 28.000</p></div></div></div></div></div></section>
+        <section id="how-to-order" class="py-5 section-bg"><!-- Konten How to Order --><div class="container"><div class="text-center mb-5"><h2 class="display-5 fw-bold">3 Langkah Mudah Menikmati Kopimu</h2></div><div class="row"><div class="col-md-4 mb-4 mb-md-0 how-to-order-step"><div class="icon mb-3"><i class="bi bi-phone"></i></div><h3>Pesan via Aplikasi</h3><p class="text-muted">Download aplikasi kami, pilih menu favoritmu, dan tentukan lokasi pengantaran.</p></div><div class="col-md-4 mb-4 mb-md-0 how-to-order-step"><div class="icon mb-3"><i class="bi bi-wallet2"></i></div><h3>Bayar dengan Mudah</h3><p class="text-muted">Pilih berbagai metode pembayaran yang aman dan praktis, dari e-wallet hingga kartu debit.</p></div><div class="col-md-4 how-to-order-step"><div class="icon mb-3"><i class="bi bi-cup-hot"></i></div><h3>Tunggu dan Nikmati</h3><p class="text-muted">Kopimu akan segera kami siapkan dan antar. Selamat menikmati kenangan!</p></div></div></div></section>
+        <section id="blog" class="py-5"><!-- Konten Blog --><div class="container"><div class="text-center mb-5"><h2 class="display-5 fw-bold">Dari Blog Kami</h2><p class="lead text-muted">Baca cerita dan tips menarik seputar dunia kopi.</p></div><div class="row"><div class="col-lg-4 col-md-6 mb-4"><div class="card h-100 shadow-sm"><img src="https://placehold.co/400x250/6c757d/fff?text=Biji+Kopi" class="card-img-top" alt="Blog 1"><div class="card-body"><h5 class="card-title">Mengenal Perbedaan Arabika dan Robusta</h5><p class="card-text">Sudah tahu bedanya? Yuk, cari tahu karakteristik unik dari dua jenis biji kopi paling populer di dunia.</p><a href="#" class="btn btn-sm btn-outline-dark">Baca Selengkapnya</a></div></div></div><div class="col-lg-4 col-md-6 mb-4"><div class="card h-100 shadow-sm"><img src="https://placehold.co/400x250/6c757d/fff?text=Proses" class="card-img-top" alt="Blog 2"><div class="card-body"><h5 class="card-title">Tips Menyeduh Kopi di Rumah Seperti Barista</h5><p class="card-text">Tidak perlu alat mahal, dengan beberapa trik sederhana ini kamu bisa membuat kopi nikmat di rumah.</p><a href="#" class="btn btn-sm btn-outline-dark">Baca Selengkapnya</a></div></div></div><div class="col-lg-4 col-md-6 mb-4"><div class="card h-100 shadow-sm"><img src="https://placehold.co/400x250/6c757d/fff?text=Manfaat" class="card-img-top" alt="Blog 3"><div class="card-body"><h5 class="card-title">Manfaat Kopi untuk Produktivitas Harian</h5><p class="card-text">Selain bikin melek, kopi punya banyak manfaat lain. Temukan bagaimana kopi bisa jadi teman produktifmu.</p><a href="#" class="btn btn-sm btn-outline-dark">Baca Selengkapnya</a></div></div></div></div></div></section>
+
+    </main>
+
+    <!-- =================================================================
+    9. FOOTER SECTION (Bagian Kaki Website)
+    ================================================================== -->
+    <footer class="footer"><!-- Konten Footer --><div class="container"><div class="row"><div class="col-md-4 mb-3"><h5>Tentang Kami</h5><p>Menyajikan kopi berkualitas dari biji pilihan Indonesia untuk menemani setiap kenanganmu.</p></div><div class="col-md-2 mb-3"><h5>Navigasi</h5><ul class="list-unstyled"><li><a href="#about">About</a></li><li><a href="#menu">Menu</a></li><li><a href="#blog">Blog</a></li><li><a href="#">Karir</a></li></ul></div><div class="col-md-3 mb-3"><h5>Hubungi Kami</h5><ul class="list-unstyled"><li>Email: support@kopibrand.com</li><li>Telepon: (021) 1234-5678</li></ul></div><div class="col-md-3 mb-3"><h5>Ikuti Kami</h5><div class="social-icons"><a href="#"><i class="bi bi-instagram"></i></a><a href="#"><i class="bi bi-facebook"></i></a><a href="#"><i class="bi bi-twitter"></i></a></div></div></div><hr><div class="text-center"><p>&copy; 2025 Nama Brand Anda. All Rights Reserved.</p></div></div></footer>
+
+
+    <!-- Bootstrap JS Bundle CDN (termasuk Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- =================================================================
+    JAVASCRIPT KUSTOM UNTUK FUNGSI SCROLL PRODUK
+    ================================================================== -->
+    <script>
+        // Menunggu seluruh konten halaman dimuat sebelum menjalankan script
+        document.addEventListener("DOMContentLoaded", function() {
+            // Memilih elemen-elemen yang diperlukan
+            const wrapper = document.getElementById('product-wrapper');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            // Cek apakah elemen-elemen tersebut ada di halaman
+            if (wrapper && prevBtn && nextBtn) {
+                // Menambahkan fungsi pada tombol 'Next' (kanan)
+                nextBtn.addEventListener('click', function() {
+                    // Menggeser kontainer sejauh 300 piksel ke kanan
+                    wrapper.scrollBy({
+                        left: 300,
+                        behavior: 'smooth' // Efek geser yang halus
+                    });
+                });
+
+                // Menambahkan fungsi pada tombol 'Prev' (kiri)
+                prevBtn.addEventListener('click', function() {
+                    // Menggeser kontainer sejauh 300 piksel ke kiri
+                    wrapper.scrollBy({
+                        left: -300,
+                        behavior: 'smooth' // Efek geser yang halus
+                    });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
+
