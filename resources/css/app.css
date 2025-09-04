@@ -9,3 +9,9 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@font-face {
+    font-family: 'Halima Sofira';
+    src: url('../fonts/Halima-Sofira.ttf') format('truetype');
+    font-weight: normal;
+}
