@@ -7,73 +7,55 @@
 {{-- Memulai section 'content' untuk diisi ke dalam @yield('content') di layout --}}
 @section('content')
 
-{{-- =================================================================
-4. PRODUCT DISPLAY (Tampilan Produk Unggulan)
-================================================================== --}}
-<section class="product-section bg-light py-5">
-    <div class="container">
-        {{-- Judul Section --}}
-        <div class="text-center mb-4">
-            <h2 class="display-5 fw-bold">Pilihan Populer</h2>
-            <p class="lead text-muted">Minuman yang paling sering dipesan oleh teman-temanmu.</p>
-        </div>
-
-        {{-- Wrapper untuk Carousel/Scroller Produk --}}
+<!-- =================================================================
+4. PRODUCT DISPLAY (Bagian Tampilan Produk)
+================================================================== -->
+<section class="product-section">
+    <div class="container my-3">
         <div class="position-relative">
             <div class="product-scroll-wrapper" id="product-wrapper">
-                {{-- Data produk ini idealnya datang dari Controller --}}
-                @php
-                    $popularProducts = [
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                    ];
-                @endphp
-
-                {{-- Baris Produk yang dapat di-scroll --}}
-                {{-- Menggunakan flex-nowrap agar item tidak turun ke bawah --}}
-                <div class="row flex-nowrap g-3">
-
-                    {{-- Loop untuk menampilkan setiap produk --}}
-                    @foreach ($popularProducts as $product)
-                        {{-- Mengatur lebar kolom untuk berbagai ukuran layar --}}
-                        <div class="col-6 col-md-4 col-lg-3">
-                            {{-- Kartu Produk --}}
-                            <div class="card product-card h-100 text-center border-0 shadow-sm">
-                                {{-- Wrapper untuk gambar agar ukurannya konsisten --}}
-                                <div class="product-img-container">
-                                    <img src="{{ asset($product['image']) }}" class="card-img-top product-img" alt="{{ $product['name'] }}">
-                                </div>
-                                <div class="card-body d-flex align-items-center justify-content-center">
-                                    <h6 class="product-card-title fw-bold mb-0">{{ $product['name'] }}</h6>
-                                </div>
-                                {{-- Membuat seluruh kartu dapat diklik --}}
-                                <a href="#" class="stretched-link" aria-label="Lihat detail untuk {{ $product['name'] }}"></a>
+                <div class="row product-row g-1">
+                    <!-- Produk di sini -->
+                    <div class="col">
+                        <div class="card product-card text-center">
+                            <div class="img-wrapper" style="height: 150px; display: flex; align-items: center; justify-content: center;">
+                                {{-- Menggunakan helper asset() untuk path gambar yang benar di Laravel --}}
+                                <img src="{{ asset('img/coffe/1.png') }}" class="card-img-top" alt="Kopi Susu" style="max-height: 100%; width: auto;">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="product-card-title">KOPI SUSU</h6>
                             </div>
                         </div>
-                    @endforeach
-
+                    </div>
+                    <div class="col">
+                        <div class="card product-card text-center">
+                            <div class="img-wrapper" style="height: 150px; display: flex; align-items: center; justify-content: center;">
+                                <img src="{{ asset('img/coffe/1.png') }}" class="card-img-top" alt="Kopi Gula" style="max-height: 100%; width: auto;">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="product-card-title">KOPI GULA</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card product-card text-center">
+                            <div class="img-wrapper" style="height: 150px; display: flex; align-items: center; justify-content: center;">
+                                <img src="{{ asset('img/coffe/1.png') }}" class="card-img-top" alt="Kopi Kaleng" style="max-height: 100%; width: auto;">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="product-card-title">KOPI KALENG</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ulangi struktur yang sama untuk produk lainnya -->
                 </div>
             </div>
-
-            {{-- Tombol Navigasi (hanya tampil di layar medium ke atas) --}}
-            <button id="prev-btn" class="product-nav-arrow prev d-none d-md-flex" aria-label="Geser ke kiri">
-                <i class="bi bi-chevron-left"></i>
-            </button>
-            <button id="next-btn" class="product-nav-arrow next d-none d-md-flex" aria-label="Geser ke kanan">
-                <i class="bi bi-chevron-right"></i>
-            </button>
+            <div id="prev-btn" class="product-nav-arrow prev d-none d-md-flex"><i class="bi bi-chevron-left"></i></div>
+            <div id="next-btn" class="product-nav-arrow next d-none d-md-flex"><i class="bi bi-chevron-right"></i></div>
         </div>
     </div>
 </section>
+
 <!-- =================================================================
 Sisa Section (About, Menu, How to Order, Blog)
 ================================================================== -->
