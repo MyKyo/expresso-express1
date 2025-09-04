@@ -62,11 +62,11 @@ Sisa Section (About, Menu, How to Order, Blog)
 <section id="about" class="py-5 section-bg">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-6"><img src="https://placehold.co/600x400/333/fff?text=Tentang+Kami" class="img-fluid rounded shadow" alt="Tentang Kopi Kenangan"></div>
+            <div class="col-md-6"><img src="{{ asset('img/about/2.png')}}" class="img-fluid rounded shadow" alt="Tentang Kopi Kenangan"></div>
             <div class="col-md-6 mt-4 mt-md-0">
                 <h2 class="display-5 fw-bold">Cerita di Balik Setiap Cangkir</h2>
                 <p class="lead">Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.</p>
-                <p>Setiap cangkir yang kami sajikan adalah hasil dari kerja keras, dedikasi, dan cinta kami terhadap kopi. Mari nikmati kenangan di setiap tegukan.</p><a href="#" class="btn btn-dark">Selengkapnya</a>
+                <p>Setiap cangkir yang kami sajikan adalah hasil dari kerja keras, dedikasi, dan cinta kami terhadap kopi. Mari nikmati kenangan di setiap tegukan.
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@ Sisa Section (About, Menu, How to Order, Blog)
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
             <div class="col">
-                <div class="card h-100 shadow-sm"><img src="https://placehold.co/300x300/f8f9fa/333?text=Kopi" class="card-img-top" alt="Kopi Kenangan Mantan">
+                <div class="card h-100 shadow-sm"><img src="{{ asset('img/coffe/6.png') }}" class="card-img-top" alt="Kopi Kenangan Mantan">
                     <div class="card-body">
                         <h5 class="card-title">Kopi Kenangan Mantan</h5>
                         <p class="card-text">Kopi susu dengan gula aren asli, rasa klasik yang selalu di hati.</p>
@@ -90,7 +90,7 @@ Sisa Section (About, Menu, How to Order, Blog)
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 shadow-sm"><img src="https://placehold.co/300x300/f8f9fa/333?text=Cokelat" class="card-img-top" alt="Cokelat">
+                <div class="card h-100 shadow-sm"><img src="{{ asset('img/coffe/8.png') }}" class="card-img-top" alt="Cokelat">
                     <div class="card-body">
                         <h5 class="card-title">Dua Shot Iced Shaken</h5>
                         <p class="card-text">Dua shot espresso dengan susu segar, lebih kuat dan mantap.</p>
@@ -101,7 +101,7 @@ Sisa Section (About, Menu, How to Order, Blog)
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 shadow-sm"><img src="https://placehold.co/300x300/f8f9fa/333?text=Susu" class="card-img-top" alt="Susu">
+                <div class="card h-100 shadow-sm"><img src="{{ asset('img/coffe/8.png') }}" class="card-img-top" alt="Susu">
                     <div class="card-body">
                         <h5 class="card-title">Milk Tea Gula Aren</h5>
                         <p class="card-text">Teh susu klasik dengan manis legit dari gula aren pilihan.</p>
@@ -112,7 +112,7 @@ Sisa Section (About, Menu, How to Order, Blog)
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 shadow-sm"><img src="https://placehold.co/300x300/f8f9fa/333?text=Teh" class="card-img-top" alt="Teh">
+                <div class="card h-100 shadow-sm"><img src="{{ asset('img/coffe/9.png') }}" class="card-img-top" alt="Teh">
                     <div class="card-body">
                         <h5 class="card-title">Avocado Coffee</h5>
                         <p class="card-text">Perpaduan unik jus alpukat, espresso, dan es krim cokelat.</p>
