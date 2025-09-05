@@ -11,50 +11,39 @@
 4. PRODUCT DISPLAY (Tampilan Produk Unggulan) - MENGGUNAKAN CAROUSEL
 ================================================================== --}}
 <section class="product-section bg-light py-5">
-    <div class="container">
-        {{-- Judul Section --}}
-        <div class="text-center mb-4">
-            <h2 class="display-5 fw-bold "style="font-family: 'Halima Sofira', sans-serif;">Pilihan Populer</h2>
-            <p class="lead text-muted">Minuman yang paling sering dipesan oleh teman-temanmu.</p>
-        </div>
+   <div class="position-relative">
+    <div class="product-scroll-wrapper" id="product-wrapper">
+        @php
+            $popularProducts = [
+                ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
+                ['name' => 'AMERICANO', 'image' => 'img/coffe/1.png'],
+                ['name' => 'LATTE', 'image' => 'img/coffe/1.png'],
+                ['name' => 'CAPPUCCINO', 'image' => 'img/coffe/1.png'],
+                ['name' => 'MOCHA', 'image' => 'img/coffe/1.png'],
+                ['name' => 'KOPI AREN', 'image' => 'img/coffe/1.png'],
+                ['name' => 'ESPRESSO', 'image' => 'img/coffe/1.png'],
+                ['name' => 'KOPI TUBRUK', 'image' => 'img/coffe/1.png'],
+            ];
+        @endphp
 
-        {{-- Wrapper untuk Carousel/Scroller Produk --}}
-        <div class="position-relative">
-            <div class="product-scroll-wrapper" id="product-wrapper">
-                @php
-                    $popularProducts = [
-                        ['name' => 'KOPI SUSU', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'AMERICANO', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'LATTE', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'CAPPUCCINO', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'MOCHA', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI AREN', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'ESPRESSO', 'image' => 'img/coffe/1.png'],
-                        ['name' => 'KOPI TUBRUK', 'image' => 'img/coffe/1.png'],
-                    ];
-                @endphp
-
-                {{-- Baris Produk yang dapat di-scroll --}}
-                <div class="row flex-nowrap g-3 px-2 px-md-0">
-                    @foreach ($popularProducts as $product)
-                        <div class="col-auto">
-                            <div class="card product-card text-center">
-                                <img src="{{ asset($product['image']) }}" class="card-img-top" alt="{{ $product['name'] }}">
-                                <div class="card-body p-2">
-                                    <h6 class="product-card-title fw-bold mb-0">{{ $product['name'] }}</h6>
-                                </div>
-                                <a href="#" class="stretched-link" aria-label="Lihat detail untuk {{ $product['name'] }}"></a>
-                            </div>
-                        </div>
-                    @endforeach
+        <div class="product-row d-flex">
+            @foreach($popularProducts as $product)
+                <div class="text-center product-card">
+                    <img src="{{ asset($product['image']) }}" alt="{{ $product['name'] }}" class="img-fluid">
+                    <div class="product-card-title">{{ $product['name'] }}</div>
                 </div>
-            </div>
-
-            {{-- Tombol Navigasi. Visibilitasnya diatur oleh JavaScript --}}
-            <button id="prev-btn" class="product-nav-arrow prev" aria-label="Geser ke kiri"><i class="bi bi-chevron-left"></i></button>
-            <button id="next-btn" class="product-nav-arrow next" aria-label="Geser ke kanan"><i class="bi bi-chevron-right"></i></button>
+            @endforeach
         </div>
     </div>
+
+    {{-- TOMBOL NAVIGASI: di luar wrapper, tetap di bawah --}}
+    <button id="prev-btn" type="button" class="product-nav-arrow prev" aria-label="Geser ke kiri">
+        <i class="bi bi-chevron-left"></i>
+    </button>
+    <button id="next-btn" type="button" class="product-nav-arrow next" aria-label="Geser ke kanan">
+        <i class="bi bi-chevron-right"></i>
+    </button>
+</div>
 </section>
 
 {{-- =================================================================
@@ -92,54 +81,6 @@
                 <h2 class="display-5 fw-bold "style="font-family: 'Halima Sofira', sans-serif;">Cerita di Balik Setiap Cangkir</h2>
                 <p class="lead">Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.</p>
                 <p>Setiap cangkir yang kami sajikan adalah hasil dari kerja keras, dedikasi, dan cinta kami terhadap kopi. Mari nikmati kenangan di setiap tegukan.</p><a href="#" class="btn btn-dark">Selengkapnya</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-{{-- Sisa section tidak berubah --}}
-<section id="menu" class="py-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold "style="font-family: 'Halima Sofira', sans-serif;">Menu Favorit Kami</h2>
-            <p class="lead text-muted">Temukan minuman favoritmu di sini.</p>
-        </div>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-            <div class="col">
-                <div class="card h-100 shadow-sm"><img src="{{ asset('img/coffe/6.png') }}" class="card-img-top" alt="Kopi Kenangan Mantan">
-                    <div class="card-body">
-                        <h5 class="card-title "style="font-family: 'Halima Sofira', sans-serif;">Kopi Kenangan Mantan</h5>
-                        <p class="card-text">Kopi susu dengan gula aren asli, rasa klasik yang selalu di hati.</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0"><p class="fw-bold">Rp 18.000</p></div>
-                </div>
-            </div>
-             <div class="col">
-                <div class="card h-100 shadow-sm"><img src="{{ asset('img/coffe/8.png') }}" class="card-img-top" alt="Cokelat">
-                    <div class="card-body">
-                        <h5 class="card-title "style="font-family: 'Halima Sofira', sans-serif;">Dua Shot Iced Shaken</h5>
-                        <p class="card-text">Dua shot espresso dengan susu segar, lebih kuat dan mantap.</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0"><p class="fw-bold">Rp 24.000</p></div>
-                </div>
-            </div>
-             <div class="col">
-                <div class="card h-100 shadow-sm"><img src="{{ asset('img/coffe/8.png') }}" class="card-img-top" alt="Susu">
-                    <div class="card-body">
-                        <h5 class="card-title "style="font-family: 'Halima Sofira', sans-serif;">Milk Tea Gula Aren</h5>
-                        <p class="card-text">Teh susu klasik dengan manis legit dari gula aren pilihan.</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0"><p class="fw-bold">Rp 19.000</p></div>
-                </div>
-            </div>
-             <div class="col">
-                <div class="card h-100 shadow-sm"><img src="{{ asset('img/coffe/9.png') }}" class="card-img-top" alt="Teh">
-                    <div class="card-body">
-                        <h5 class="card-title "style="font-family: 'Halima Sofira', sans-serif;">Avocado Coffee</h5>
-                        <p class="card-text">Perpaduan unik jus alpukat, espresso, dan es krim cokelat.</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0"><p class="fw-bold">Rp 28.000</p></div>
-                </div>
             </div>
         </div>
     </div>

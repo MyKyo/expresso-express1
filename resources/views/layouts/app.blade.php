@@ -117,67 +117,174 @@
         {{-- =================================================================
         CSS UNTUK CAROUSEL PRODUK (PILIHAN POPULER)
         ================================================================== --}}
-        /* Penampung untuk produk agar bisa di-scroll secara horizontal */
-        .product-scroll-wrapper {
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
-        }
+        /* Wrapper: scroll horizontal, tanpa scrollbar */
+.position-relative {
+    position: relative;
+}
 
-        .product-scroll-wrapper::-webkit-scrollbar {
-            display: none; /* Chrome, Safari and Opera */
-        }
-        
-        .product-card {
-            border: none;
-            background-color: transparent;
-            min-width: 160px; /* Memberi lebar minimum agar tidak terlalu rapat */
-        }
+.product-scroll-wrapper {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding: 15px 0;
+    gap: 12px;
+}
 
-        .product-card img {
-            border-radius: 8px;
-            max-width: 150px; /* Membatasi lebar gambar */
-            margin: auto;
-        }
+.product-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
 
-        .product-card-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #333;
-            margin-top: 0.75rem;
-        }
+.product-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+}
 
-        /* Panah Navigasi Produk */
-        .product-nav-arrow {
-            position: absolute;
-            top: 40%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 1px solid #ddd;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #333;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-        .product-nav-arrow:hover {
-            background-color: white;
-            transform: translateY(-50%) scale(1.1);
-        }
-        .product-nav-arrow.prev {
-            left: -20px;
-        }
-        .product-nav-arrow.next {
-            right: -20px;
-        }
+.product-card {
+    min-width: 180px;
+    flex: 0 0 auto;
+    border: none;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.product-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.product-card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 0.75rem;
+    text-align: center;
+}
+.product-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+}
+
+.product-nav-arrow.prev {
+    left: 10px;
+}
+
+.product-nav-arrow.next {
+    right: 10px;
+}
+
+.product-nav-arrow:hover {
+    background-color: white;
+    transform: translateY(-50%) scale(1.1);
+    color: #000;
+}
+/* Kontainer utama */
+.position-relative {
+    position: relative;
+    margin: 0 auto;
+}
+
+/* Wrapper produk: atur lebar agar hanya 5 produk terlihat */
+.product-scroll-wrapper {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;  /* Edge */
+    scrollbar-width: none;     /* Firefox */
+    padding: 15px 0;
+    gap: 12px;
+
+    /* 🔥 Atur lebar: cukup untuk 5 produk */
+    max-width: calc(5 * 180px + 4 * 16px); /* 5 kartu + 4 gap (16px) */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Sembunyikan scrollbar */
+.product-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Baris produk */
+.product-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px; /* Jarak antar produk */
+}
+
+/* Kartu produk: ukuran tetap */
+.product-card {
+    min-width: 180px;
+    max-width: 180px;
+    flex: 0 0 auto; /* Jangan stretch */
+    border: none;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Gambar */
+.product-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Judul */
+.product-card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 0.75rem;
+    text-align: center;
+}
+@media (max-width: 768px) {
+    .product-card {
+        min-width: 150px;
+        max-width: 150px;
+    }
+    .product-scroll-wrapper {
+        max-width: calc(3 * 150px + 2 * 16px); /* 3 produk */
+    }
+}
+
+@media (max-width: 576px) {
+    .product-card {
+        min-width: 130px;
+        max-width: 130px;
+    }
+    .product-scroll-wrapper {
+        max-width: calc(2 * 130px + 16px);
+    }
+}
 
         .how-to-order-step {
             text-align: center;
@@ -237,41 +344,51 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- JAVASCRIPT KUSTOM UNTUK FUNGSI SCROLL PRODUK -->
-   <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const wrapper = document.getElementById('product-wrapper');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const wrapper = document.getElementById('product-wrapper');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
 
-            if (wrapper && prevBtn && nextBtn) {
-                // Sembunyikan tombol di perangkat sentuh untuk menghindari tumpang tindih dengan gestur swipe
-                const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-                if(isTouchDevice) {
-                    prevBtn.style.display = 'none';
-                    nextBtn.style.display = 'none';
-                    return; // Hentikan eksekusi script jika ini perangkat sentuh
-                }
+        if (!wrapper || !prevBtn || !nextBtn) {
+            console.error("Elemen tidak ditemukan!");
+            return;
+        }
 
-                const checkButtons = () => {
-                    // Cek apakah bisa scroll ke kiri
-                    prevBtn.style.display = wrapper.scrollLeft > 0 ? 'flex' : 'none';
-                    
-                    // Cek apakah bisa scroll ke kanan (dengan toleransi 1px)
-                    const maxScrollLeft = wrapper.scrollWidth - wrapper.clientWidth;
-                    nextBtn.style.display = wrapper.scrollLeft < maxScrollLeft - 1 ? 'flex' : 'none';
-                };
+        // Hitung lebar rata-rata per produk (termasuk gap)
+        const scrollAmount = 180 + 16; // lebar kartu + gap
 
-                nextBtn.addEventListener('click', () => wrapper.scrollBy({ left: 300, behavior: 'smooth' }));
-                prevBtn.addEventListener('click', () => wrapper.scrollBy({ left: -300, behavior: 'smooth' }));
-                
-                wrapper.addEventListener('scroll', checkButtons);
-                window.addEventListener('resize', checkButtons);
-                
-                // Panggil sekali saat halaman dimuat untuk mengatur state awal tombol
-                checkButtons();
-            }
+        nextBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            wrapper.scrollBy({
+                left: scrollAmount * 1, // geser 1 produk
+                behavior: 'smooth'
+            });
         });
-   </script>
+
+        prevBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            wrapper.scrollBy({
+                left: -scrollAmount * 1,
+                behavior: 'smooth'
+            });
+        });
+
+        // Opsional: Atur opacity tombol saat di ujung
+        wrapper.addEventListener('scroll', function () {
+            const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+
+            prevBtn.style.opacity = wrapper.scrollLeft > 0 ? '1' : '0.4';
+            prevBtn.style.pointerEvents = wrapper.scrollLeft > 0 ? 'auto' : 'none';
+
+            nextBtn.style.opacity = wrapper.scrollLeft < maxScroll ? '1' : '0.4';
+            nextBtn.style.pointerEvents = wrapper.scrollLeft < maxScroll ? 'auto' : 'none';
+        });
+
+        // Jalankan sekali saat load
+        wrapper.dispatchEvent(new Event('scroll'));
+    });
+</script>
 
     @stack('scripts')
 </body>
