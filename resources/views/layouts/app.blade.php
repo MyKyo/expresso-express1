@@ -15,15 +15,15 @@
 
     <!-- CSS Kustom -->
     <style>
+        /* --- FONT: HALIMA SOFIRA --- */
+        @font-face {
+            font-family: 'Halima Sofira';
+            src: url('{{ asset('fonts/Halima-Sofira.ttf') }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
 
-           /* --- FONT: HALIMA SOFIRA --- */
-    @font-face {
-        font-family: 'Halima Sofira';
-        src: url('{{ asset('fonts/Halima-Sofira.ttf') }}') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    }
         /* Menambahkan efek scroll yang halus saat mengklik link navigasi */
         html {
             scroll-behavior: smooth;
@@ -31,64 +31,113 @@
 
         body {
             background-color: #fff;
+            padding-top: 56px
             /* font-family: 'Halima Sofira'; */
-            /* Latar belakang putih bersih */
         }
 
-        /* Memberi latar belakang abu-abu pada section tertentu untuk memisahkan konten */
         .section-bg {
             background-color: #f8f9fa;
         }
 
-        /* --- Kustomisasi Navbar --- */
-        .navbar-custom {
-            background-color: #670103;
-        }
-        
+        /* ...existing code... */
+.navbar-custom {
+    background-color: #670103;
+    transition: all 0.3s ease;
+}
 
-        /* --- Kustomisasi Carousel Hero --- */
-       .hero-carousel .carousel-item video,
-       .hero-carousel .carousel-item img {
-        height: 455px !important;
-        object-fit: cover;
+/* Efek hover pada link navbar */
+.navbar-custom .nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Animasi underline pada hover link navbar */
+.navbar-custom .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navbar-custom .nav-link:hover::after {
+    width: 70%;
+}
+
+/* Penyesuaian untuk mobile */
+/* Penyesuaian untuk mobile */
+@media (max-width: 991.98px) {
+    .navbar-custom {
+        padding-top: 0.5rem;
+        padding-bottom: 0.10rem;
+    }
+    
+    .navbar-custom .navbar-nav {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .navbar-custom .nav-link::after {
+        display: none;
+    }
+
+    /* === KODE PERBAIKAN TEGAS DITAMBAHKAN DI SINI === */
+
+    /* 1. Paksa area menu (collapse) agar lebarnya tidak meluap */
+    .navbar-custom .navbar-collapse {
+        width: 100% !important;
+        flex-basis: 100%;
+    }
+
+    /* 2. Paksa daftar menu (nav) menjadi tumpukan vertikal */
+    .navbar-custom .navbar-nav {
+        width: 100%;
+        flex-direction: column; /* Ini adalah properti kunci yang memaksa menu tersusun ke bawah */
+        align-items: center; /* Agar item menu tetap di tengah */
+    }
+
+    /* ============================================== */
+
+}
+/* ...existing code... */
+
+        #heroCarousel .carousel-item video,
+        #heroCarousel .carousel-item img {
+            object-fit: cover;
         }
 
-        /* --- Kustomisasi Bagian Produk --- */
-        .product-section {
-            position: relative;
-        }
-
+        {{-- =================================================================
+        CSS UNTUK CAROUSEL PRODUK (PILIHAN POPULER)
+        ================================================================== --}}
         /* Penampung untuk produk agar bisa di-scroll secara horizontal */
         .product-scroll-wrapper {
             overflow-x: auto;
             scroll-behavior: smooth;
-            /* Menyembunyikan scrollbar bawaan browser */
-            -ms-overflow-style: none;
-            /* IE and Edge */
-            scrollbar-width: none;
-            /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
 
         .product-scroll-wrapper::-webkit-scrollbar {
-            display: none;
-            /* Chrome, Safari and Opera */
+            display: none; /* Chrome, Safari and Opera */
         }
-
-        /* Mencegah produk turun ke baris baru saat di-scroll */
-        .product-row {
-            flex-wrap: nowrap;
-        }
-
+        
         .product-card {
             border: none;
             background-color: transparent;
-            min-width: 160px;
-            /* Memberi lebar minimum agar tidak terlalu rapat */
+            min-width: 160px; /* Memberi lebar minimum agar tidak terlalu rapat */
         }
 
         .product-card img {
             border-radius: 8px;
-            max-width: 150px;
+            max-width: 150px; /* Membatasi lebar gambar */
             margin: auto;
         }
 
@@ -99,12 +148,12 @@
             margin-top: 0.75rem;
         }
 
-        /* --- Kustomisasi Panah Navigasi Produk --- */
+        /* Panah Navigasi Produk */
         .product-nav-arrow {
             position: absolute;
             top: 40%;
             transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.9);
             border: 1px solid #ddd;
             border-radius: 50%;
             width: 40px;
@@ -114,26 +163,22 @@
             justify-content: center;
             font-size: 1.5rem;
             color: #333;
-            text-decoration: none;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 10;
             cursor: pointer;
+            transition: all 0.2s ease-in-out;
         }
-
         .product-nav-arrow:hover {
             background-color: white;
-            color: #000;
+            transform: translateY(-50%) scale(1.1);
         }
-
         .product-nav-arrow.prev {
             left: -20px;
         }
-
         .product-nav-arrow.next {
             right: -20px;
         }
 
-        /* --- Gaya untuk Bagian How to Order --- */
         .how-to-order-step {
             text-align: center;
         }
@@ -143,7 +188,6 @@
             color: #9d2533;
         }
 
-       /* --- Kustomisasi Footer --- */
         .footer {
             background-color: #670103;
             color: white;
@@ -176,95 +220,20 @@
         .footer .social-icons a:hover {
             color: #ffc107;
         }
-
-        .footer .company-info {
-            margin-bottom: 20px;
-        }
-
-        .footer .company-info h5 {
-            margin-bottom: 15px;
-        }
-
-        .footer .company-info p {
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .footer .links-section ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer .links-section li {
-            margin-bottom: 8px;
-        }
-
-        .footer .app-download {
-            text-align: center;
-        }
-
-        .footer .app-download .qr-code {
-            width: 80px;
-            height: 80px;
-            background-color: white;
-            border-radius: 10px;
-            margin: 0 auto 15px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .footer .app-download .download-text {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .footer .app-download .download-subtext {
-            font-size: 0.9rem;
-            color: #adb5bd;
-            margin-bottom: 15px;
-        }
-
-        .footer .app-stores img {
-            height: 40px;
-            margin: 5px;
-        }
-
-        .footer .bottom-bar {
-            border-top: 1px solid #495057;
-            padding-top: 20px;
-            margin-top: 30px;
-        }
-
-        .footer .bottom-bar .social-icons a {
-            font-size: 1.2rem;
-            margin-left: 15px;
-        }
     </style>
 </head>
 
 <body>
 
-    {{-- Memasukkan file navbar --}}
     @include('partials._navbar')
 
     <main>
-        {{-- Memasukkan file banner --}}
         @include('partials._banner')
-
-        {{-- Ini adalah area dimana konten utama dari setiap halaman akan ditampilkan --}}
         @yield('content')
     </main>
 
-    {{-- Memasukkan file footer --}}
     @include('partials._footer')
 
-
-    <!-- Bootstrap JS Bundle CDN (termasuk Popper.js) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- JAVASCRIPT KUSTOM UNTUK FUNGSI SCROLL PRODUK -->
@@ -275,24 +244,37 @@
             const nextBtn = document.getElementById('next-btn');
 
             if (wrapper && prevBtn && nextBtn) {
-                nextBtn.addEventListener('click', function () {
-                    wrapper.scrollBy({
-                        left: 300,
-                        behavior: 'smooth'
-                    });
-                });
+                // Sembunyikan tombol di perangkat sentuh untuk menghindari tumpang tindih dengan gestur swipe
+                const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+                if(isTouchDevice) {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                    return; // Hentikan eksekusi script jika ini perangkat sentuh
+                }
 
-                prevBtn.addEventListener('click', function () {
-                    wrapper.scrollBy({
-                        left: -300,
-                        behavior: 'smooth'
-                    });
-                });
+                const checkButtons = () => {
+                    // Cek apakah bisa scroll ke kiri
+                    prevBtn.style.display = wrapper.scrollLeft > 0 ? 'flex' : 'none';
+                    
+                    // Cek apakah bisa scroll ke kanan (dengan toleransi 1px)
+                    const maxScrollLeft = wrapper.scrollWidth - wrapper.clientWidth;
+                    nextBtn.style.display = wrapper.scrollLeft < maxScrollLeft - 1 ? 'flex' : 'none';
+                };
+
+                nextBtn.addEventListener('click', () => wrapper.scrollBy({ left: 300, behavior: 'smooth' }));
+                prevBtn.addEventListener('click', () => wrapper.scrollBy({ left: -300, behavior: 'smooth' }));
+                
+                wrapper.addEventListener('scroll', checkButtons);
+                window.addEventListener('resize', checkButtons);
+                
+                // Panggil sekali saat halaman dimuat untuk mengatur state awal tombol
+                checkButtons();
             }
         });
-    </script>
-    {{-- Section untuk script tambahan jika diperlukan per halaman --}}
+   </script>
+
     @stack('scripts')
 </body>
 
 </html>
+
