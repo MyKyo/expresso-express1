@@ -55,7 +55,6 @@
                         <div class="qr-code">QR</div>
                         <p class="download-subtext">sekarang juga</p>
                         <div class="app-stores">
-                            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
                             <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1276560000&h=3e6b5fad197be0c8c2f78abf6c4b959f" alt="Download on the App Store">
                         </div>
                     </div>
