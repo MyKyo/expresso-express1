@@ -10,7 +10,7 @@
 {{-- =================================================================
 4. PRODUCT DISPLAY (Tampilan Produk Unggulan) - MENGGUNAKAN CAROUSEL
 ================================================================== --}}
-<section class="product-section bg-light py-5">
+<section id="menu" class="product-section bg-light py-5">
    <div class="position-relative">
     <div class="product-scroll-wrapper" id="product-wrapper">
         @php

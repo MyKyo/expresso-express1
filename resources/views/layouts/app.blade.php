@@ -39,252 +39,296 @@
             background-color: #f8f9fa;
         }
 
-        /* ...existing code... */
-.navbar-custom {
-    background-color: #670103;
-    transition: all 0.3s ease;
-}
+        .navbar-custom {
+            background-color: #670103;
+            transition: all 0.3s ease;
+        }
 
-/* Efek hover pada link navbar */
-.navbar-custom .nav-link {
-    position: relative;
-    transition: color 0.3s ease;
-}
+        /* Efek hover pada link navbar */
+        .navbar-custom .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
 
-.navbar-custom .nav-link:hover {
-    color: rgba(255, 255, 255, 0.9);
-}
+        .navbar-custom .nav-link:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
 
-/* Animasi underline pada hover link navbar */
-.navbar-custom .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 50%;
-    background-color: #fff;
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
+        /* Animasi underline pada hover link navbar */
+        .navbar-custom .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
 
-.navbar-custom .nav-link:hover::after {
-    width: 70%;
-}
+        .navbar-custom .nav-link:hover::after {
+            width: 70%;
+        }
 
-/* Penyesuaian untuk mobile */
-/* Penyesuaian untuk mobile */
-@media (max-width: 991.98px) {
-    .navbar-custom {
-        padding-top: 0.5rem;
-        padding-bottom: 0.10rem;
-    }
-    
-    .navbar-custom .navbar-nav {
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-    }
+        /* Penyesuaian untuk mobile */
+        @media (max-width: 991.98px) {
+            .navbar-custom {
+                padding-top: 0.5rem;
+                padding-bottom: 0.10rem;
+            }
+            
+            .navbar-custom .navbar-nav {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
 
-    .navbar-custom .nav-link::after {
-        display: none;
-    }
+            .navbar-custom .nav-link::after {
+                display: none;
+            }
 
-    /* === KODE PERBAIKAN TEGAS DITAMBAHKAN DI SINI === */
+            /* === KODE PERBAIKAN TEGAS DITAMBAHKAN DI SINI === */
 
-    /* 1. Paksa area menu (collapse) agar lebarnya tidak meluap */
-    .navbar-custom .navbar-collapse {
-        width: 100% !important;
-        flex-basis: 100%;
-    }
+            /* 1. Paksa area menu (collapse) agar lebarnya tidak meluap */
+            .navbar-custom .navbar-collapse {
+                width: 100% !important;
+                flex-basis: 100%;
+            }
 
-    /* 2. Paksa daftar menu (nav) menjadi tumpukan vertikal */
-    .navbar-custom .navbar-nav {
-        width: 100%;
-        flex-direction: column; /* Ini adalah properti kunci yang memaksa menu tersusun ke bawah */
-        align-items: center; /* Agar item menu tetap di tengah */
-    }
+            /* 2. Paksa daftar menu (nav) menjadi tumpukan vertikal */
+            .navbar-custom .navbar-nav {
+                width: 100%;
+                flex-direction: column; /* Ini adalah properti kunci yang memaksa menu tersusun ke bawah */
+                align-items: center; /* Agar item menu tetap di tengah */
+            }
 
-    /* ============================================== */
+            /* ============================================== */
 
-}
-/* ...existing code... */
+        }
 
-        #heroCarousel .carousel-item video,
-        #heroCarousel .carousel-item img {
+        /* =================================================================
+         * CSS UNTUK HERO CAROUSEL (BANNER UTAMA) - DITERAPKAN DARI FILE
+         * =================================================================
+        */
+
+        /*
+         * STYLING UNTUK TAMPILAN DESKTOP (Default)
+        */
+        .carousel-item > .carousel-image-desktop,
+        .carousel-item > .carousel-video-item {
+            width: 100%;
+            height: 70vh; /* Anda bisa sesuaikan tinggi ini */
             object-fit: cover;
         }
+
+        /*
+         * STYLING UNTUK KONTROL CAROUSEL
+        */
+        .carousel-control-prev,
+        .carousel-control-next {
+            top: 50%;
+            transform: translateY(-50%);
+            height: auto;
+            align-items: center;
+            padding-top: 0;
+        }
+
+        .carousel-indicators {
+            margin-bottom: 1rem;
+        }
+
+        /*
+         * MEDIA QUERY UNTUK TAMPILAN MOBILE (767px ke bawah)
+        */
+        @media (max-width: 767.98px) {
+            .carousel-item > .carousel-video-item,
+            .carousel-item > .carousel-image-mobile {
+                height: auto; /* Kunci utama agar tinggi dinamis */
+            }
+
+            .carousel-video-item {
+                aspect-ratio: 9 / 16; 
+                object-fit: cover;   
+            }
+        }
+        
+        /* =================================================================
+         * AKHIR DARI CSS HERO CAROUSEL
+         * =================================================================
+        */
+
 
         {{-- =================================================================
         CSS UNTUK CAROUSEL PRODUK (PILIHAN POPULER)
         ================================================================== --}}
         /* Wrapper: scroll horizontal, tanpa scrollbar */
-.position-relative {
-    position: relative;
-}
+        .position-relative {
+            position: relative;
+        }
 
-.product-scroll-wrapper {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    padding: 15px 0;
-    gap: 12px;
-}
+        .product-scroll-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            padding: 15px 0;
+            gap: 12px;
+        }
 
-.product-scroll-wrapper::-webkit-scrollbar {
-    display: none;
-}
+        .product-scroll-wrapper::-webkit-scrollbar {
+            display: none;
+        }
 
-.product-row {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 16px;
-}
+        .product-row {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 16px;
+        }
 
-.product-card {
-    min-width: 180px;
-    flex: 0 0 auto;
-    border: none;
-    background-color: transparent;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
+        .product-card {
+            min-width: 180px;
+            flex: 0 0 auto;
+            border: none;
+            background-color: transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
 
-.product-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
 
-.product-card:hover img {
-    transform: scale(1.05);
-}
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
 
-.product-card-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #333;
-    margin-top: 0.75rem;
-    text-align: center;
-}
-.product-nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.95);
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: #333;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    z-index: 10;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    outline: none;
-}
+        .product-card-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 0.75rem;
+            text-align: center;
+        }
+        .product-nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.95);
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            outline: none;
+        }
 
-.product-nav-arrow.prev {
-    left: 10px;
-}
+        .product-nav-arrow.prev {
+            left: 10px;
+        }
 
-.product-nav-arrow.next {
-    right: 10px;
-}
+        .product-nav-arrow.next {
+            right: 10px;
+        }
 
-.product-nav-arrow:hover {
-    background-color: white;
-    transform: translateY(-50%) scale(1.1);
-    color: #000;
-}
-/* Kontainer utama */
-.position-relative {
-    position: relative;
-    margin: 0 auto;
-}
+        .product-nav-arrow:hover {
+            background-color: white;
+            transform: translateY(-50%) scale(1.1);
+            color: #000;
+        }
+        /* Kontainer utama */
+        .position-relative {
+            position: relative;
+            margin: 0 auto;
+        }
 
-/* Wrapper produk: atur lebar agar hanya 5 produk terlihat */
-.product-scroll-wrapper {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;  /* Edge */
-    scrollbar-width: none;     /* Firefox */
-    padding: 15px 0;
-    gap: 12px;
+        /* Wrapper produk: atur lebar agar hanya 5 produk terlihat */
+        .product-scroll-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;  /* Edge */
+            scrollbar-width: none;     /* Firefox */
+            padding: 15px 0;
+            gap: 12px;
 
-    /* 🔥 Atur lebar: cukup untuk 5 produk */
-    max-width: calc(5 * 180px + 4 * 16px); /* 5 kartu + 4 gap (16px) */
-    margin-left: auto;
-    margin-right: auto;
-}
+            /* 🔥 Atur lebar: cukup untuk 5 produk */
+            max-width: calc(5 * 180px + 4 * 16px); /* 5 kartu + 4 gap (16px) */
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-/* Sembunyikan scrollbar */
-.product-scroll-wrapper::-webkit-scrollbar {
-    display: none;
-}
+        /* Sembunyikan scrollbar */
+        .product-scroll-wrapper::-webkit-scrollbar {
+            display: none;
+        }
 
-/* Baris produk */
-.product-row {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 16px; /* Jarak antar produk */
-}
+        /* Baris produk */
+        .product-row {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 16px; /* Jarak antar produk */
+        }
 
-/* Kartu produk: ukuran tetap */
-.product-card {
-    min-width: 180px;
-    max-width: 180px;
-    flex: 0 0 auto; /* Jangan stretch */
-    border: none;
-    background-color: transparent;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
+        /* Kartu produk: ukuran tetap */
+        .product-card {
+            min-width: 180px;
+            max-width: 180px;
+            flex: 0 0 auto; /* Jangan stretch */
+            border: none;
+            background-color: transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
 
-/* Gambar */
-.product-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-}
+        /* Gambar */
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
 
-/* Judul */
-.product-card-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #333;
-    margin-top: 0.75rem;
-    text-align: center;
-}
-@media (max-width: 768px) {
-    .product-card {
-        min-width: 150px;
-        max-width: 150px;
-    }
-    .product-scroll-wrapper {
-        max-width: calc(3 * 150px + 2 * 16px); /* 3 produk */
-    }
-}
+        /* Judul */
+        .product-card-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 0.75rem;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .product-card {
+                min-width: 150px;
+                max-width: 150px;
+            }
+            .product-scroll-wrapper {
+                max-width: calc(3 * 150px + 2 * 16px); /* 3 produk */
+            }
+        }
 
-@media (max-width: 576px) {
-    .product-card {
-        min-width: 130px;
-        max-width: 130px;
-    }
-    .product-scroll-wrapper {
-        max-width: calc(2 * 130px + 16px);
-    }
-}
+        @media (max-width: 576px) {
+            .product-card {
+                min-width: 130px;
+                max-width: 130px;
+            }
+            .product-scroll-wrapper {
+                max-width: calc(2 * 130px + 16px);
+            }
+        }
 
         .how-to-order-step {
             text-align: center;
@@ -351,8 +395,8 @@
         const nextBtn = document.getElementById('next-btn');
 
         if (!wrapper || !prevBtn || !nextBtn) {
-            console.error("Elemen tidak ditemukan!");
-            return;
+            // console.error("Elemen tidak ditemukan!"); // <-- BARIS INI DIHAPUS
+            return; // Keluar dari fungsi jika elemen tidak ada di halaman ini
         }
 
         // Hitung lebar rata-rata per produk (termasuk gap)
