@@ -372,6 +372,11 @@
 							<ul class="submenu">
 								<li><a href="/admin/kategori" class="@if ($activePage == 'kategori') active @endif">Data Kategori</a></li>
 								<li><a href="/admin/jenis" class="@if ($activePage == 'jenis') active @endif">Data Jenis</a></li>
+								<li><a href="/admin/banner" class="@if ($activePage == 'banner') active @endif">Data Banner</a></li>
+								<li><a href="/admin/blog" class="@if ($activePage == 'blog') active @endif">Data Blog</a></li>
+								<li><a href="/admin/product" class="@if ($activePage == 'product') active @endif">Data Produk Populer</a></li>
+								<li><a href="/admin/coffee" class="@if ($activePage == 'coffee') active @endif">Interactive Coffee</a></li>
+								<li><a href="/admin/about" class="@if ($activePage == 'about') active @endif">Tentang Kami</a></li>
 							</ul>
 						</li>
 					</ul>

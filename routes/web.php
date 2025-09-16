@@ -1,10 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BlogPostController;
+use App\Http\Controllers\BlogController as PublicBlogController;
+use App\Http\Controllers\AboutController as PublicAboutController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CoffeeItemController;
 use App\Http\Controllers\Admin\KategoriController;
 
 /*
@@ -30,7 +37,7 @@ Route::get('/clear', function() {
 });
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('home');
 });
 
 // Authentication
@@ -56,4 +63,81 @@ Route::prefix('admin/kategori')
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update/{id}', 'update')->name('update');
         Route::get('/delete/{id}', 'delete')->name('delete');
+    });
+
+// Banner
+Route::prefix('admin/banner')
+    ->name('admin.banner.')
+    ->middleware('cekLevel:1 2')
+    ->controller(BannerController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/add', 'create')->name('add');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{banner}', 'edit')->name('edit');
+        Route::post('/update/{banner}', 'update')->name('update');
+        Route::get('/delete/{banner}', 'destroy')->name('delete');
+        Route::post('/toggle/{banner}', 'toggle')->name('toggle');
+    });
+
+// Blog Admin
+Route::prefix('admin/blog')
+    ->name('admin.blog.')
+    ->middleware('cekLevel:1 2')
+    ->controller(BlogPostController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/add', 'create')->name('add');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{blog}', 'edit')->name('edit');
+        Route::post('/update/{blog}', 'update')->name('update');
+        Route::get('/delete/{blog}', 'destroy')->name('delete');
+    });
+
+// Blog Public
+Route::get('/blog', [PublicBlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [PublicBlogController::class, 'show'])->name('blog.show');
+Route::get('/about', [PublicAboutController::class, 'show'])->name('about.show');
+
+// Product Admin
+Route::prefix('admin/product')
+    ->name('admin.product.')
+    ->middleware('cekLevel:1 2')
+    ->controller(ProductController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/add', 'create')->name('add');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{product}', 'edit')->name('edit');
+        Route::post('/update/{product}', 'update')->name('update');
+        Route::get('/delete/{product}', 'destroy')->name('delete');
+    });
+
+// Coffee Items Admin
+Route::prefix('admin/coffee')
+    ->name('admin.coffee.')
+    ->middleware('cekLevel:1 2')
+    ->controller(CoffeeItemController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/add', 'create')->name('add');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{coffee}', 'edit')->name('edit');
+        Route::post('/update/{coffee}', 'update')->name('update');
+        Route::get('/delete/{coffee}', 'destroy')->name('delete');
+    });
+
+// About Admin
+use App\Http\Controllers\Admin\AboutController as AdminAboutController;
+Route::prefix('admin/about')
+    ->name('admin.about.')
+    ->middleware('cekLevel:1 2')
+    ->controller(AdminAboutController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/add', 'create')->name('add');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{about}', 'edit')->name('edit');
+        Route::post('/update/{about}', 'update')->name('update');
+        Route::get('/delete/{about}', 'destroy')->name('delete');
     });
