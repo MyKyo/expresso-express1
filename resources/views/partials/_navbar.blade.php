@@ -23,6 +23,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-center py-2" href="#blog">Blog</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center py-2" href="#tim">Tim</a>
+                    </li>
                 </ul>
             </div>
         </div>
