@@ -49,6 +49,7 @@
 </div>
 </section>
 
+
 {{-- =================================================================
    INTERACTIVE COFFEE DISPLAY
 ================================================================== --}}
@@ -69,54 +70,6 @@
                     <!-- Thumbnail akan di-generate dari JS -->
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-{{-- =================================================================
-   ABOUT SECTION
-================================================================== --}}
-<section id="about" class="py-5 section-bg">
-    <div class="container">
-        <div class="row align-items-center">
-            @php
-                $about = \App\Models\About::where('is_published', true)->latest('id')->first();
-            @endphp
-            <div class="col-md-6"><img src="{{ $about && $about->image_path ? asset('storage/'.$about->image_path) : asset('img/about/2.png') }}" class="img-fluid rounded shadow" alt="Tentang Kami"></div>
-            <div class="col-md-6 mt-4 mt-md-0">
-                <h2 class="display-5 fw-bold "style="font-family: 'Halima Sofira', sans-serif;">{{ $about->title ?? 'Cerita di Balik Setiap Cangkir' }}</h2>
-                <p class="lead">{{ $about ? Str::limit(strip_tags($about->content), 160) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.' }}</p>
-                <a href="{{ route('about.show') }}" class="btn btn-dark">Selengkapnya</a>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="blog" class="py-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold "style="font-family: 'Halima Sofira', sans-serif;">Dari Blog Kami</h2>
-            <p class="lead text-muted">Baca cerita dan tips menarik seputar dunia kopi.</p>
-        </div>
-        @php
-            $latestPosts = \App\Models\BlogPost::where('is_published', true)->latest('published_at')->take(3)->get();
-        @endphp
-        <div class="row">
-            @forelse($latestPosts as $post)
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 shadow-sm">
-                    @if($post->cover_path)
-                        <img src="{{ asset('storage/'.$post->cover_path) }}" class="card-img-top" alt="{{ $post->title }}">
-                    @endif
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $post->title }}</h5>
-                        <p class="card-text">{{ Str::limit(strip_tags($post->excerpt ?: $post->content), 120) }}</p>
-                        <a href="{{ route('blog.show', $post->slug) }}" class="btn btn-sm btn-outline-dark">Baca Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            @empty
-            <div class="col-12 text-center">Belum ada artikel.</div>
-            @endforelse
         </div>
     </div>
 </section>
@@ -170,37 +123,53 @@
         </div>
     </div>
 </section>
-
-{{-- =================================================================
-   TEAM SECTION
-================================================================== --}}
-<section id="team" class="py-5 bg-white">
+<section id="blog" class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold" style="font-family: 'Halima Sofira', sans-serif;">Tim Kami</h2>
-            <p class="lead text-muted">Kenali orang-orang di balik Expresso Express.</p>
+            <h2 class="display-5 fw-bold "style="font-family: 'Halima Sofira', sans-serif;">Dari Blog Kami</h2>
+            <p class="lead text-muted">Baca cerita dan tips menarik seputar dunia kopi.</p>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-4 text-center mb-4">
-                <img src="{{ asset('img/team1.jpg') }}" alt="Nama 1" class="rounded-circle mb-3 shadow" width="120" height="120">
-                <h5 class="fw-bold mb-1">Nama 1</h5>
-                <p class="text-muted mb-0">Project Manager</p>
+        @php
+            $latestPosts = \App\Models\BlogPost::where('is_published', true)->latest('published_at')->take(3)->get();
+        @endphp
+        <div class="row">
+            @forelse($latestPosts as $post)
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    @if($post->cover_path)
+                        <img src="{{ asset('storage/'.$post->cover_path) }}" class="card-img-top" alt="{{ $post->title }}">
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $post->title }}</h5>
+                        <p class="card-text">{{ Str::limit(strip_tags($post->excerpt ?: $post->content), 120) }}</p>
+                        <a href="{{ route('blog.show', $post->slug) }}" class="btn btn-sm btn-outline-dark">Baca Selengkapnya</a>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4 text-center mb-4">
-                <img src="{{ asset('img/team2.jpg') }}" alt="Nama 2" class="rounded-circle mb-3 shadow" width="120" height="120">
-                <h5 class="fw-bold mb-1">Nama 2</h5>
-                <p class="text-muted mb-0">Developer</p>
-            </div>
-            <div class="col-md-4 text-center mb-4">
-                <img src="{{ asset('img/team3.jpg') }}" alt="Nama 3" class="rounded-circle mb-3 shadow" width="120" height="120">
-                <h5 class="fw-bold mb-1">Nama 3</h5>
-                <p class="text-muted mb-0">Designer</p>
+            @empty
+            <div class="col-12 text-center">Belum ada artikel.</div>
+            @endforelse
+        </div>
+    </div>
+</section>
+{{-- =================================================================
+   ABOUT SECTION
+================================================================== --}}
+<section id="about" class="py-5 section-bg">
+    <div class="container">
+        <div class="row align-items-center">
+            @php
+                $about = \App\Models\About::where('is_published', true)->latest('id')->first();
+            @endphp
+            <div class="col-md-6"><img src="{{ $about && $about->image_path ? asset('storage/'.$about->image_path) : asset('img/about/2.png') }}" class="img-fluid rounded shadow" alt="Tentang Kami"></div>
+            <div class="col-md-6 mt-4 mt-md-0">
+                <h2 class="display-5 fw-bold "style="font-family: 'Halima Sofira', sans-serif;">{{ $about->title ?? 'Cerita di Balik Setiap Cangkir' }}</h2>
+                <p class="lead">{{ $about ? Str::limit(strip_tags($about->content), 160) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.' }}</p>
+                <a href="{{ route('about.show') }}" class="btn btn-dark">Selengkapnya</a>
             </div>
         </div>
     </div>
 </section>
-
-
 {{-- Script untuk bagian Interaktif --}}
 @php
     $coffeeModels = \App\Models\CoffeeItem::where('is_active', true)

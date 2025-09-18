@@ -13,39 +13,27 @@
         @forelse($activeBanners as $index => $banner)
             <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                 @php
-                    $desktopPath = $banner->image_desktop_path ? asset('storage/'.$banner->image_desktop_path) : asset('img/banner/banner_1.png');
-                    $mobilePath = $banner->image_mobile_path ? asset('storage/'.$banner->image_mobile_path) : $desktopPath;
+                    $imgPath = $banner->image_desktop_path ? asset('storage/'.$banner->image_desktop_path) : asset('img/banner/banner_1.png');
                 @endphp
-                
-                <!-- Desktop Banner -->
-                <div class="d-none d-md-block position-relative" style="height: 70vh;">
-                    <img src="{{ $desktopPath }}" 
-                         class="img-fluid w-100 h-100 object-fit-cover" 
-                         alt="{{ $banner->title ?? 'Banner Desktop' }}"
-                         loading="lazy">
-                </div>
-                
-                <!-- Mobile Banner -->
-                <div class="d-block d-md-none position-relative" style="height: 50vh;">
-                    <img src="{{ $mobilePath }}" 
-                         class="img-fluid w-100 h-100 object-fit-cover" 
-                         alt="{{ $banner->title ?? 'Banner Mobile' }}"
-                         loading="lazy">
-                </div>
+                <img 
+                    src="{{ $imgPath }}" 
+                    class="d-block w-100"
+                    style="width:100vw; min-height:300px; height:70vh; object-fit:cover; background:#222;"
+                    alt="{{ $banner->title ?? 'Banner' }}"
+                    loading="lazy">
             </div>
         @empty
             <div class="carousel-item active">
-                <div class="position-relative" style="height: 70vh;">
-                    <img src="{{ asset('img/banner/banner_1.png') }}" 
-                         class="img-fluid w-100 h-100 object-fit-cover" 
-                         alt="Default Banner"
-                         loading="lazy">
-                </div>
+                <img 
+                    src="{{ asset('img/banner/banner_1.png') }}" 
+                    class="d-block w-100"
+                    style="width:100vw; min-height:300px; height:70vh; object-fit:cover; background:#222;"
+                    alt="Default Banner"
+                    loading="lazy">
             </div>
         @endforelse
     </div>
 
-    <!-- Kontrol Panah - Enhanced with Bootstrap -->
     <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
@@ -55,9 +43,8 @@
         <span class="visually-hidden">Next</span>
     </button>
 
-    <!-- Indikator - Bootstrap Enhanced -->
     @if($activeBanners->count() > 1)
-        <div class="carousel-indicators">
+        <div class="carousel-indicators custom-indicators">
             @foreach($activeBanners as $i => $banner)
                 <button type="button" 
                         data-bs-target="#heroCarousel" 
@@ -70,3 +57,28 @@
         </div>
     @endif
 </div>
+
+<style>
+.custom-indicators {
+    bottom: 18px !important; /* sedikit di bawah gambar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.custom-indicators button {
+    width: 28px !important;   /* garis horizontal */
+    height: 4px !important;
+    border-radius: 2px !important;
+    margin: 0 2px !important;
+    background-color: #fff !important;
+    opacity: 0.5;
+    border: none;
+    transition: opacity 0.2s, background-color 0.2s;
+    box-shadow: none;
+}
+.custom-indicators .active {
+    opacity: 1;
+    background-color: #bfa6a6 !important; /* warna garis aktif sesuai contoh */
+}
+</style>
