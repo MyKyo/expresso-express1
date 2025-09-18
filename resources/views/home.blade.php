@@ -122,6 +122,56 @@
 </section>
 
 {{-- =================================================================
+   HOW TO ORDER SECTION
+================================================================== --}}
+<section id="how-to-order" class="py-5 section-bg">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold" style="font-family: 'Halima Sofira', sans-serif;">Cara Pemesanan</h2>
+            <p class="lead text-muted">Langkah mudah untuk memesan kopi favorit Anda di Expresso Express.</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3 text-center mb-4">
+                <div class="mb-3">
+                    <span class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width:60px;height:60px;font-size:2rem;">
+                        <i class="bi bi-cup-hot"></i>
+                    </span>
+                </div>
+                <h5 class="fw-bold mb-1">Pilih Menu</h5>
+                <p class="text-muted mb-0">Lihat dan pilih kopi atau minuman favorit Anda dari daftar menu.</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="mb-3">
+                    <span class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width:60px;height:60px;font-size:2rem;">
+                        <i class="bi bi-cart"></i>
+                    </span>
+                </div>
+                <h5 class="fw-bold mb-1">Pesan Online</h5>
+                <p class="text-muted mb-0">Klik tombol pesan dan isi detail pesanan Anda dengan mudah.</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="mb-3">
+                    <span class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width:60px;height:60px;font-size:2rem;">
+                        <i class="bi bi-credit-card"></i>
+                    </span>
+                </div>
+                <h5 class="fw-bold mb-1">Pembayaran</h5>
+                <p class="text-muted mb-0">Lakukan pembayaran melalui metode yang tersedia.</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="mb-3">
+                    <span class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width:60px;height:60px;font-size:2rem;">
+                        <i class="bi bi-truck"></i>
+                    </span>
+                </div>
+                <h5 class="fw-bold mb-1">Kopi Dikirim</h5>
+                <p class="text-muted mb-0">Pesanan Anda akan segera diproses dan dikirim ke alamat Anda.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- =================================================================
    TEAM SECTION
 ================================================================== --}}
 <section id="team" class="py-5 bg-white">
