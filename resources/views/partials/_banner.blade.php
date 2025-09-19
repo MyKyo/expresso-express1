@@ -1,7 +1,7 @@
 <!-- =================================================================
 2. HERO CAROUSEL (Bagian Promosi Utama) - BOOTSTRAP OPTIMIZED
 ================================================================== -->
-<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
     <div class="carousel-inner">
         @php
             $activeBanners = \App\Models\Banner::where('is_active', true)
@@ -13,14 +13,21 @@
         @forelse($activeBanners as $index => $banner)
             <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                 @php
-                    $imgPath = $banner->image_desktop_path ? asset('storage/'.$banner->image_desktop_path) : asset('img/banner/banner_1.png');
+                    $desktopImg = $banner->image_desktop_path ? asset('storage/'.$banner->image_desktop_path) : asset('img/banner/banner_5.png');
+                    $mobileImg  = $banner->image_mobile_path ? asset('storage/'.$banner->image_mobile_path) : $desktopImg;
                 @endphp
-                <img 
-                    src="{{ $imgPath }}" 
-                    class="d-block w-100"
-                    style="width:100vw; min-height:300px; height:70vh; object-fit:cover; background:#222;"
-                    alt="{{ $banner->title ?? 'Banner' }}"
-                    loading="lazy">
+                
+                <picture>
+                    <!-- untuk mobile -->
+                    <source media="(max-width: 768px)" srcset="{{ $mobileImg }}">
+                    <!-- untuk desktop -->
+                    <img 
+                        src="{{ $desktopImg }}" 
+                        class="d-block w-100"
+                        style="width:100vw; min-height:300px; height:70vh; object-fit:cover; background:#222;"
+                        alt="{{ $banner->title ?? 'Banner' }}"
+                        loading="lazy">
+                </picture>
             </div>
         @empty
             <div class="carousel-item active">
@@ -59,26 +66,34 @@
 </div>
 
 <style>
-.custom-indicators {
-    bottom: 18px !important; /* sedikit di bawah gambar */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+.banner-wrapper {
+    display: block;
+    width: 100%;
+    background: #222; /* fallback background */
+    overflow: hidden;
 }
-.custom-indicators button {
-    width: 28px !important;   /* garis horizontal */
-    height: 4px !important;
-    border-radius: 2px !important;
-    margin: 0 2px !important;
-    background-color: #fff !important;
-    opacity: 0.5;
-    border: none;
-    transition: opacity 0.2s, background-color 0.2s;
-    box-shadow: none;
+
+.banner-img {
+    width: 100%;
+    height: 70vh;          /* default desktop */
+    min-height: 300px;
+    object-fit: cover;
 }
-.custom-indicators .active {
-    opacity: 1;
-    background-color: #bfa6a6 !important; /* warna garis aktif sesuai contoh */
+
+/* Tablet & mobile */
+@media (max-width: 768px) {
+    .banner-img {
+        height: 45vh;      /* lebih pendek di tablet/HP */
+        min-height: 200px;
+    }
+}
+
+/* Layar sangat kecil */
+@media (max-width: 480px) {
+    .banner-img {
+        height: 35vh;      /* makin pendek biar pas */
+        min-height: 150px;
+    }
 }
 </style>
+
