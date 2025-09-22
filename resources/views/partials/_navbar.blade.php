@@ -1,15 +1,20 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top shadow-sm px-0">
-        <div class="d-flex w-100 justify-content-between align-items-center">
-            <a class="navbar-brand d-flex align-items-center ps-0" href="{{ url('/') }}">
+        <div class="container-fluid px-3">
+            <!-- Logo kiri -->
+            <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                 <img src="{{ asset('assets/img/logo/logo.png') }}" alt="Expresso Express" height="40">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+
+            <!-- Tombol toggle (kanan pada mobile) -->
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end me-0" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+
+            <!-- Menu kanan -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link text-center py-2" href="#menu">Menu</a>
                     </li>
@@ -27,19 +32,25 @@
         </div>
     </nav>
 </header>
+
 <style>
-.navbar .container {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    width: 100%;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
+/* Logo selalu rapat kiri */
 .navbar-brand {
     margin-left: 0 !important;
+    padding-left: 0 !important;
 }
-#navbarNav {
-    margin-right: 0 !important;
+
+/* Supaya menu rapi */
+.navbar-nav .nav-link {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Saat mobile, menu turun full width */
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        text-align: center;
+        width: 100%;
+    }
 }
 </style>
