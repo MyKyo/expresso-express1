@@ -30,8 +30,8 @@ class CoffeeItemController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string', 'max:1000'],
+            'name' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
+            'description' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
             'is_active' => ['nullable', 'boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
@@ -42,9 +42,12 @@ class CoffeeItemController extends Controller
             $imagePath = $request->file('image')->store('coffee', 'public');
         }
 
+        $namePath = $request->file('name')->store('coffee/name', 'public');
+        $descPath = $request->hasFile('description') ? $request->file('description')->store('coffee/description', 'public') : null;
+
         CoffeeItem::create([
-            'name' => $validated['name'],
-            'description' => $validated['description'] ?? null,
+            'name' => $namePath,
+            'description' => $descPath,
             'image_path' => $imagePath,
             'is_active' => (bool)($validated['is_active'] ?? true),
             'sort_order' => $validated['sort_order'] ?? 0,
@@ -62,25 +65,39 @@ class CoffeeItemController extends Controller
     public function update(Request $request, CoffeeItem $coffee)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string', 'max:1000'],
+            'name' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
+            'description' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
             'is_active' => ['nullable', 'boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
         ]);
 
         $data = [
-            'name' => $validated['name'],
-            'description' => $validated['description'] ?? null,
             'is_active' => (bool)($validated['is_active'] ?? true),
             'sort_order' => $validated['sort_order'] ?? 0,
         ];
+
+        if ($request->hasFile('name')) {
+            if ($coffee->name) {
+                Storage::disk('public')->delete($coffee->name);
+            }
+            $data['name'] = $request->file('name')->store('coffee/name', 'public');
+        }
+
+        if ($request->hasFile('description')) {
+            if ($coffee->description) {
+                Storage::disk('public')->delete($coffee->description);
+            }
+            $data['description'] = $request->file('description')->store('coffee/description', 'public');
+        }
+
         if ($request->hasFile('image')) {
             if ($coffee->image_path) {
                 Storage::disk('public')->delete($coffee->image_path);
             }
             $data['image_path'] = $request->file('image')->store('coffee', 'public');
         }
+
         $coffee->update($data);
         return redirect()->route('admin.coffee.index')->with('success', 'Item kopi diperbarui');
     }
