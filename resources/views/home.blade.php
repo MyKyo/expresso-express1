@@ -7,9 +7,11 @@
 {{-- Memulai section 'content' untuk diisi ke dalam @yield('content') di layout --}}
 @section('content')
 
-{{-- =================================================================
-4. PRODUCT DISPLAY (Tampilan Produk Unggulan) - MENGGUNAKAN CAROUSEL
-================================================================== --}}
+{{-- ================================================================
+   SECTION: PRODUK UNGGULAN (Carousel horizontal scroll)
+   Menampilkan daftar produk aktif dalam bentuk kartu yang bisa discroll
+   dengan tombol navigasi untuk desktop dan mobile.
+================================================================ --}}
 <section id="menu" class="product-section bg-light py-5">
    <div class="position-relative">
     <div class="product-scroll-wrapper" id="product-wrapper">
@@ -39,7 +41,7 @@
         </button>
     </div>
 
-    {{-- TOMBOL NAVIGASI desktop/tablet: di luar wrapper --}}
+    {{-- Tombol navigasi untuk desktop/tablet (posisi di luar wrapper) --}}
     <button id="prev-btn" type="button" class="product-nav-arrow prev d-none d-md-flex" aria-label="Geser ke kiri">
         <i class="bi bi-chevron-left"></i>
     </button>
@@ -50,33 +52,33 @@
 </section>
 
 
-{{-- =================================================================
-   INTERACTIVE COFFEE DISPLAY
-================================================================== --}}
-<section style="background-color:#670103; padding:60px 0;">
-    <div class="container-fluid px-0">
-        <div class="row g-0 align-items-center">
+{{-- ================================================================
+   SECTION: INTERAKTIF KOLEKSI KOPI
+   Thumbnail dinamis (dari DB) untuk mengganti gambar dan deskripsi utama.
+================================================================ --}}
+<section style="padding:60px 0; background: transparent;">
+    <div class="container">
+        <div class="rounded-5 shadow overflow-hidden coffee-wrap" style="background-color:#670103;">
+            <div class="row g-4 align-items-center justify-content-center justify-content-md-between p-4 p-md-5">
             
-            <!-- Thumbnail -->
-            <div class="col-md-4 d-flex flex-wrap gap-3 justify-content-center justify-content-md-start order-md-1 p-4">
-                <div id="thumbnail-container" class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
-                    <!-- Thumbnail akan di-generate dari JS -->
-                </div>
-            </div>
+			<!-- Teks + Thumbnail (kiri) -->
+			<div class="col-md-6 d-flex flex-column justify-content-center text-white text-center text-md-start order-md-1">
+				<img id="main-text" class="mb-3 animate-up" alt="coffee name image" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
+				<img id="main-desc" class="animate-up" alt="coffee description image" style="max-width: 420px; width:100%; height:auto; object-fit:contain;" />
+				<div id="thumb-desktop-wrap" class="mt-3 d-none d-md-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
+					<div id="thumbnail-container" class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start"><!-- Thumbnail di-generate via JS --></div>
+				</div>
+			</div>
 
-            <!-- Teks -->
-            <div class="col-md-4 d-flex flex-column justify-content-center text-white text-center text-md-start order-md-2 p-4">
-                <h3 id="main-text" class="mb-2 animate-up" style="font-family: 'Halima Sofira', sans-serif;"></h3>
-                <p id="main-desc" style="font-size:0.95rem;" class="animate-up"></p>
-            </div>
+			<!-- Gambar utama (kanan) -->
+			<div id="main-col" class="col-md-5 text-center order-md-2">
+			<div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 900px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
+					<img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
+				</div>
+				<div id="thumb-mobile-wrap" class="d-flex d-md-none mt-3 justify-content-center"><!-- Thumbnails dipindah ke sini pada mobile --></div>
+			</div>
 
-            <!-- Gambar utama -->
-            <div class="col-md-4 text-center order-md-3 p-4">
-                <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 320px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
-                    <img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
-                </div>
             </div>
-
         </div>
     </div>
 </section>
@@ -90,6 +92,34 @@
 }
 #thumbnail-container img:hover {
     transform: scale(1.05);
+}
+/* Mobile horizontal scroll for thumbnails */
+@media (max-width: 767.98px) {
+    #thumb-mobile-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+    #thumb-mobile-wrap::-webkit-scrollbar { height: 6px; }
+    #thumb-mobile-wrap::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.4); border-radius: 3px; }
+    #thumbnail-container {
+        display: inline-flex !important;
+        flex-wrap: nowrap !important;
+        gap: 12px !important;
+        padding: 6px 4px;
+    }
+}
+</style>
+<style>
+@media (min-width: 768px) {
+    .coffee-wrap { overflow: visible !important; }
+    #main-col { position: relative; min-height: 420px; }
+    #main-box {
+        position: absolute;
+        top: -100px;
+        left: 10%;
+        transform: translateX(-50%);
+    }
 }
 </style>
 
@@ -162,132 +192,28 @@
     </div>
 </section>
 
+{{-- Style tunggal untuk tampilan Cara Pemesanan (menghapus duplikasi) --}}
 <style>
-/* Section Cara Pemesanan */
-#how-to-order {
-    background: #1d0203;
-}
-
-#how-to-order h2 {
-    color: #faf3f3ff;
-    
-}
-
-#how-to-order p.lead {
-    color: hsla(0, 20%, 97%, 1.00);
-}
-
-#how-to-order img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-/* Langkah-langkah */
-#how-to-order .step-box {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    padding: 15px;
-    border-radius: 12px;
-    background: #eeececff;
-}
-
-#how-to-order .step-box:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-/* Ikon bulat */
-#how-to-order .step-box span {
-    transition: background 0.3s ease;
-}
-
-#how-to-order .step-box:hover span {
-    background: #1d0203 !important;
-    color: rgba(215, 214, 214, 1) !important;
-}
-
-/* Judul rata kanan untuk desktop */
-#how-to-order .section-header { 
-    text-align: center;
-}
-@media (min-width: 768px) {
-    #how-to-order .section-header {
-        text-align: right;
-    }
-}
-
-/* Jarak antar item */
-#how-to-order .row .col-md-6 {
-    padding: 10px 20px;
-}
-<style>
-/* Section Cara Pemesanan */
-#how-to-order {
-    background: #670103; /* biar kontras */
-    color: #fff; /* default semua teks putih */
-}
-
-#how-to-order h2,
-#how-to-order p,
-#how-to-order h5 {
-    color: #fff !important;
-}
-
-#how-to-order img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-/* Langkah-langkah */
-#how-to-order .step-box {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    padding: 15px;
-    border-radius: 12px;
-    background: transparent; /* biar background transparan */
-    color: #fff;
-}
-
-#how-to-order .step-box:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 20px rgba(255,255,255,0.2);
-}
-
-/* Ikon bulat */
-#how-to-order .step-box span {
-    background: rgba(255,255,255,0.15) !important;
-    color: #fff !important;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-#how-to-order .step-box:hover span {
-    background: #fff !important;
-    color: #670103 !important;
-}
-
-/* Judul rata kanan untuk desktop */
-#how-to-order .section-header {
-    text-align: center;
-}
-@media (min-width: 768px) {
-    #how-to-order .section-header {
-        text-align: right;
-    }
-}
-
-/* Jarak antar item */
-#how-to-order .row .col-md-6 {
-    padding: 10px 20px;
-}
+#how-to-order { background: #670103; color: #fff; }
+#how-to-order h2, #how-to-order p, #how-to-order h5 { color: #fff !important; }
+#how-to-order img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+#how-to-order .step-box { transition: transform .3s ease, box-shadow .3s ease; padding: 15px; border-radius: 12px; background: transparent; color: #fff; }
+#how-to-order .step-box:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(255,255,255,0.2); }
+#how-to-order .step-box span { background: rgba(255,255,255,0.15) !important; color: #fff !important; transition: background .3s ease, color .3s ease; }
+#how-to-order .step-box:hover span { background: #fff !important; color: #670103 !important; }
+#how-to-order .section-header { text-align: center; }
+@media (min-width: 768px) { #how-to-order .section-header { text-align: right; } }
+#how-to-order .row .col-md-6 { padding: 10px 20px; }
 </style>
 
 
+{{-- ================================================================
+   SECTION: BLOG TERBARU — 3 artikel terbaru yang dipublikasikan
+================================================================ --}}
 <section id="blog" class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold "style="font-family: 'Halima Sofira', sans-serif;">Dari Blog Kami</h2>
+            <h2 class="display-5 fw-bold" style="font-family: 'Halima Sofira', sans-serif;">Dari Blog Kami</h2>
             <p class="lead text-muted">Baca cerita dan tips menarik seputar dunia kopi.</p>
         </div>
         @php
@@ -314,9 +240,9 @@
     </div>
 </section>
 
-{{-- =================================================================
-   ABOUT SECTION
-================================================================== --}}
+{{-- ================================================================
+   SECTION: TENTANG KAMI — Ringkasan singkat dengan tombol menuju halaman penuh
+================================================================ --}}
 <section id="about" class="py-5 section-bg">
     <div class="container">
         <div class="row align-items-center">
@@ -325,7 +251,7 @@
             @endphp
             <div class="col-md-6"><img src="{{ $about && $about->image_path ? asset('storage/'.$about->image_path) : asset('img/about/2.png') }}" class="img-fluid rounded shadow" alt="Tentang Kami"></div>
             <div class="col-md-6 mt-4 mt-md-0">
-                <h2 class="display-5 fw-bold "style="font-family: 'Halima Sofira', sans-serif;">{{ $about->title ?? 'Cerita di Balik Setiap Cangkir' }}</h2>
+                <h2 class="display-5 fw-bold" style="font-family: 'Halima Sofira', sans-serif;">{{ $about->title ?? 'Cerita di Balik Setiap Cangkir' }}</h2>
                 <p class="lead">{{ $about ? Str::limit(strip_tags($about->content), 160) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.' }}</p>
                 <a href="{{ route('about.show') }}" class="btn btn-dark">Selengkapnya</a>
             </div>
@@ -341,8 +267,8 @@
     $coffees = $coffeeModels->map(function($i){
         return [
             'image' => $i->image_path ? asset('storage/'.$i->image_path) : asset('img/coffe/1.png'),
-            'name' => $i->name,
-            'desc' => $i->description,
+            'name' => $i->name ? asset('storage/'.$i->name) : null,
+            'desc' => $i->description ? asset('storage/'.$i->description) : null,
         ];
     })->values();
 @endphp
@@ -368,25 +294,27 @@ document.addEventListener('DOMContentLoaded', function() {
         coffees = [];
     }
     const thumbnailContainer = document.getElementById('thumbnail-container');
+    const thumbMobileWrap = document.getElementById('thumb-mobile-wrap');
+    const thumbDesktopWrap = document.getElementById('thumb-desktop-wrap');
     const mainImg = document.getElementById('main-img');
     const mainText = document.getElementById('main-text');
     const mainDesc = document.getElementById('main-desc');
     if(coffees.length > 0){
         mainImg.src = coffees[0].image;
-        mainText.textContent = coffees[0].name;
-        mainDesc.textContent = coffees[0].desc;
+        if (coffees[0].name) { mainText.src = coffees[0].name; } else { mainText.removeAttribute('src'); }
+        if (coffees[0].desc) { mainDesc.src = coffees[0].desc; } else { mainDesc.removeAttribute('src'); }
     }
     coffees.forEach(coffee => {
         const thumb = document.createElement('div');
         thumb.className = 'card shadow-sm rounded-3';
-        thumb.style.cssText = 'width: 70px; height: 70px; cursor: pointer; overflow: hidden;';
+        thumb.style.cssText = 'min-width: 70px; width: 70px; height: 70px; cursor: pointer; overflow: hidden;';
         thumb.dataset.image = coffee.image;
         thumb.dataset.name = coffee.name;
         thumb.dataset.desc = coffee.desc;
         const img = document.createElement('img');
         img.src = coffee.image;
         img.className = 'w-100 h-100 object-fit-cover rounded-3';
-        img.alt = coffee.name;
+        img.alt = 'thumbnail';
         thumb.appendChild(img);
         thumbnailContainer.appendChild(thumb);
         thumb.addEventListener('click', () => {
@@ -398,14 +326,30 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             void mainImg.offsetWidth;
             mainImg.src = coffee.image;
-            mainText.textContent = coffee.name;
-            mainDesc.textContent = coffee.desc;
+            if (coffee.name) { mainText.src = coffee.name; } else { mainText.removeAttribute('src'); }
+            if (coffee.desc) { mainDesc.src = coffee.desc; } else { mainDesc.removeAttribute('src'); }
             mainImg.classList.add('animate-zoom-out');
             mainText.classList.add('animate-up');
             mainDesc.classList.add('animate-up');
             mainImg.parentElement.classList.add('animate-up');
         });
     });
+
+    function moveThumbnails() {
+        if (window.innerWidth < 768) {
+            if (thumbMobileWrap && thumbnailContainer && thumbnailContainer.parentElement !== thumbMobileWrap) {
+                thumbMobileWrap.innerHTML = '';
+                thumbMobileWrap.appendChild(thumbnailContainer);
+            }
+        } else {
+            if (thumbDesktopWrap && thumbnailContainer && thumbnailContainer.parentElement !== thumbDesktopWrap) {
+                thumbDesktopWrap.innerHTML = '';
+                thumbDesktopWrap.appendChild(thumbnailContainer);
+            }
+        }
+    }
+    moveThumbnails();
+    window.addEventListener('resize', moveThumbnails);
 });
 </script>
 @endpush

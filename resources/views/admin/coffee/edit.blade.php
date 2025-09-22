@@ -10,12 +10,18 @@
         <form action="{{ route('admin.coffee.update', $item) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group mb-3">
-                <label>Nama</label>
-                <input type="text" name="name" class="form-control" value="{{ $item->name }}" required>
+                <label>Nama (gambar)</label>
+                <input type="file" name="name" class="form-control" accept="image/*">
+                @if($item->name)
+                    <img src="{{ asset('storage/'.$item->name) }}" class="img-fluid mt-2" style="max-height:120px;" />
+                @endif
             </div>
             <div class="form-group mb-3">
-                <label>Deskripsi</label>
-                <input type="text" name="description" class="form-control" value="{{ $item->description }}">
+                <label>Deskripsi (gambar)</label>
+                <input type="file" name="description" class="form-control" accept="image/*">
+                @if($item->description)
+                    <img src="{{ asset('storage/'.$item->description) }}" class="img-fluid mt-2" style="max-height:120px;" />
+                @endif
             </div>
             <div class="form-group mb-3">
                 <label>Gambar</label>

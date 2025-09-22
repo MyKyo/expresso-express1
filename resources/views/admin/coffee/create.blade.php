@@ -10,12 +10,12 @@
         <form action="{{ route('admin.coffee.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group mb-3">
-                <label>Nama</label>
-                <input type="text" name="name" class="form-control" required>
+                <label>Nama (gambar)</label>
+                <input type="file" name="name" class="form-control" accept="image/*" required>
             </div>
             <div class="form-group mb-3">
-                <label>Deskripsi</label>
-                <input type="text" name="description" class="form-control">
+                <label>Deskripsi (gambar)</label>
+                <input type="file" name="description" class="form-control" accept="image/*">
             </div>
             <div class="form-group mb-3">
                 <label>Gambar</label>

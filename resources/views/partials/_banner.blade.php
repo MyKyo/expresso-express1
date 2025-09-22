@@ -19,14 +19,14 @@
                 
                 <picture>
                     <!-- untuk mobile -->
-                    <source media="(max-width: 768px)" srcset="{{ $mobileImg }}">
+                    <source media="(max-width: 600px)" srcset="{{ $mobileImg }}">
                     <!-- untuk desktop -->
                     <img 
                         src="{{ $desktopImg }}" 
                         class="d-block w-100"
-                        style="width:100vw; min-height:300px; height:70vh; object-fit:cover; background:#222;"
+                        style="object-fit:contain; background:#222;"
                         alt="{{ $banner->title ?? 'Banner' }}"
-                        loading="lazy">
+                        loading="eager">
                 </picture>
             </div>
         @empty
@@ -34,7 +34,7 @@
                 <img 
                     src="{{ asset('img/banner/banner_1.png') }}" 
                     class="d-block w-100"
-                    style="width:100vw; min-height:300px; height:70vh; object-fit:cover; background:#222;"
+                    style="width:100vw; min-height:300px; height:70vh; object-fit:contain; background:#222;"
                     alt="Default Banner"
                     loading="lazy">
             </div>
@@ -64,36 +64,3 @@
         </div>
     @endif
 </div>
-
-<style>
-.banner-wrapper {
-    display: block;
-    width: 100%;
-    background: #222; /* fallback background */
-    overflow: hidden;
-}
-
-.banner-img {
-    width: 100%;
-    height: 70vh;          /* default desktop */
-    min-height: 300px;
-    object-fit: cover;
-}
-
-/* Tablet & mobile */
-@media (max-width: 768px) {
-    .banner-img {
-        height: 45vh;      /* lebih pendek di tablet/HP */
-        min-height: 200px;
-    }
-}
-
-/* Layar sangat kecil */
-@media (max-width: 480px) {
-    .banner-img {
-        height: 35vh;      /* makin pendek biar pas */
-        min-height: 150px;
-    }
-}
-</style>
-
