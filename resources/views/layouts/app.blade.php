@@ -308,7 +308,7 @@
         /* Gambar */
         .product-card img {
             width: 100%;
-            height: 150px;
+            height: 170px;
             object-fit: cover;
             border-radius: 8px;
         }

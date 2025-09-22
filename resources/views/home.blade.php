@@ -208,7 +208,7 @@
 }
 
 /* Judul rata kanan untuk desktop */
-#how-to-order .section-header {
+#how-to-order .section-header { 
     text-align: center;
 }
 @media (min-width: 768px) {
@@ -313,8 +313,6 @@
         </div>
     </div>
 </section>
-
-tambahkan css nya disini 
 
 {{-- =================================================================
    ABOUT SECTION

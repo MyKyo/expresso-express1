@@ -55,9 +55,6 @@
                         <a href="#" aria-label="App Store">
                             <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" style="height:32px;">
                         </a>
-                        <a href="#" aria-label="Google Play">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" style="height:32px;">
-                        </a>
                     </div>
                     <div>
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://expressoexpress.com" alt="QR Code" style="height:48px;">
