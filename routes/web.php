@@ -141,3 +141,18 @@ Route::prefix('admin/about')
         Route::post('/update/{about}', 'update')->name('update');
         Route::get('/delete/{about}', 'destroy')->name('delete');
     });
+
+// Team Admin
+use App\Http\Controllers\Admin\TeamController;
+Route::prefix('admin/team')
+    ->name('admin.team.')
+    ->middleware('cekLevel:1 2')
+    ->controller(TeamController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/add', 'create')->name('add');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{team}', 'edit')->name('edit');
+        Route::post('/update/{team}', 'update')->name('update');
+        Route::get('/delete/{team}', 'destroy')->name('delete');
+    });

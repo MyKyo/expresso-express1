@@ -107,49 +107,59 @@
         }
 
         /* =================================================================
-         * CSS UNTUK HERO CAROUSEL (BANNER UTAMA) - DITERAPKAN DARI FILE
+         * CSS UNTUK HERO CAROUSEL (BANNER UTAMA) - BOOTSTRAP OPTIMIZED
          * =================================================================
         */
 
         /*
-         * STYLING UNTUK TAMPILAN DESKTOP (Default)
-        */
-        .carousel-item > .carousel-image-desktop,
-        .carousel-item > .carousel-video-item {
-            width: 100%;
-            height: 70vh; /* Anda bisa sesuaikan tinggi ini */
-            object-fit: cover;
-        }
-
-        /*
-         * STYLING UNTUK KONTROL CAROUSEL
+         * Enhanced carousel controls styling
         */
         .carousel-control-prev,
         .carousel-control-next {
-            top: 50%;
-            transform: translateY(-50%);
-            height: auto;
-            align-items: center;
-            padding-top: 0;
+            width: 5%;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            opacity: 1;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 2rem;
+            height: 2rem;
         }
 
         .carousel-indicators {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 5px;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .carousel-indicators button.active {
+            opacity: 1;
         }
 
         /*
-         * MEDIA QUERY UNTUK TAMPILAN MOBILE (767px ke bawah)
+         * Responsive banner heights using Bootstrap utilities
         */
         @media (max-width: 767.98px) {
-            .carousel-item > .carousel-video-item,
-            .carousel-item > .carousel-image-mobile {
-                height: 50vh; /* Samakan tinggi di mobile */
-                object-fit: cover; /* Crop tanpa stretch */
+            .carousel-indicators {
+                margin-bottom: 1rem;
             }
-
-            .carousel-video-item {
-                aspect-ratio: auto; /* Biarkan mengikuti height yang ditentukan */
-                object-fit: cover;
+            
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: 8%;
             }
         }
         
@@ -298,7 +308,7 @@
         /* Gambar */
         .product-card img {
             width: 100%;
-            height: 150px;
+            height: 170px;
             object-fit: cover;
             border-radius: 8px;
         }

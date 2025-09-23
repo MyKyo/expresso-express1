@@ -50,9 +50,15 @@
             <!-- Newsletter / Apps -->
             <div class="col-lg-2 col-md-6">
                 <h6 class="text-uppercase fw-bold mb-3">Stay Updated</h6>
-                <div class="d-flex align-items-center gap-2">
-                    <a href="#" class="btn btn-outline-light btn-sm" aria-label="App Store">App Store</a>
-                    <a href="#" class="btn btn-outline-light btn-sm" aria-label="Google Play">Google Play</a>
+                <div class="d-flex flex-column align-items-start gap-2">
+                    <div class="d-flex gap-2 mb-2">
+                        <a href="#" aria-label="App Store">
+                            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" style="height:32px;">
+                        </a>
+                    </div>
+                    <div>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://expressoexpress.com" alt="QR Code" style="height:48px;">
+                    </div>
                 </div>
             </div>
         </div>

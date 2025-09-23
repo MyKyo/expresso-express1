@@ -49,48 +49,126 @@
 </div>
 </section>
 
+
 {{-- =================================================================
    INTERACTIVE COFFEE DISPLAY
 ================================================================== --}}
-<section class="py-5">
-    <div class="container p-4 position-relative rounded-3 shadow" style="background-color: #670103;">
-        <div class="row align-items-center">
-            <div class="col-md-4 text-center order-md-3">
-                <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 320px; width: 100%; aspect-ratio: 1/1; background: none; overflow: hidden; border-radius: 20px;">
-                    <img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
-                </div>
-            </div>
-                         <div class="col-md-4 d-flex flex-column justify-content-center text-white my-4 my-md-0 text-center text-md-start order-md-2">
-                 <h3 id="main-text" class="mb-2 animate-up" style="font-family: 'Halima Sofira', sans-serif;"></h3>
-                 <p id="main-desc" style="font-size:0.95rem;" class="animate-up"></p>
-             </div>
-            <div class="col-md-4 d-flex flex-wrap gap-3 justify-content-center justify-content-md-start order-md-1">
+<section style="background-color:#670103; padding:60px 0;">
+    <div class="container-fluid px-0">
+        <div class="row g-0 align-items-center">
+            
+            <!-- Thumbnail -->
+            <div class="col-md-4 d-flex flex-wrap gap-3 justify-content-center justify-content-md-start order-md-1 p-4">
                 <div id="thumbnail-container" class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
                     <!-- Thumbnail akan di-generate dari JS -->
+                </div>
+            </div>
+
+            <!-- Teks -->
+            <div class="col-md-4 d-flex flex-column justify-content-center text-white text-center text-md-start order-md-2 p-4">
+                <h3 id="main-text" class="mb-2 animate-up" style="font-family: 'Halima Sofira', sans-serif;"></h3>
+                <p id="main-desc" style="font-size:0.95rem;" class="animate-up"></p>
+            </div>
+
+            <!-- Gambar utama -->
+            <div class="col-md-4 text-center order-md-3 p-4">
+                <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 320px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
+                    <img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<style>
+#thumbnail-container img {
+    max-width: 100px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform .3s;
+}
+#thumbnail-container img:hover {
+    transform: scale(1.05);
+}
+/* Tambahkan di style pada file home.blade.php */
+section[style*="background-color:#670103"] {
+    border-radius: 40px 40px 0 0; /* radius hanya di atas */
+    overflow: hidden;
+}
+</style>
+
 {{-- =================================================================
-   ABOUT SECTION
+   HOW TO ORDER SECTION (EXPRESSO EXPRESS APP PROMO)
 ================================================================== --}}
-<section id="about" class="py-5 section-bg">
-    <div class="container">
+<section id="how-to-order" class="py-5" style="background:#670103;">
+    <div class="container-fluid px-0" style="border: radius 40px;">
         <div class="row align-items-center">
-            @php
-                $about = \App\Models\About::where('is_published', true)->latest('id')->first();
-            @endphp
-            <div class="col-md-6"><img src="{{ $about && $about->image_path ? asset('storage/'.$about->image_path) : asset('img/about/2.png') }}" class="img-fluid rounded shadow" alt="Tentang Kami"></div>
-            <div class="col-md-6 mt-4 mt-md-0">
-                <h2 class="display-5 fw-bold "style="font-family: 'Halima Sofira', sans-serif;">{{ $about->title ?? 'Cerita di Balik Setiap Cangkir' }}</h2>
-                <p class="lead">{{ $about ? Str::limit(strip_tags($about->content), 160) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.' }}</p>
-                <a href="{{ route('about.show') }}" class="btn btn-dark">Selengkapnya</a>
+            <!-- Kolom Kiri: Teks & Logo Store -->
+            <div class="col-lg-6 col-md-12 text-white px-5 py-4">
+                <div class="mb-4">
+                    <h5 class="fw-normal" style="letter-spacing:2px;">EXPRESSO EXPRESS APP</h5>
+                    <h2 class="fw-bold mb-3" style="font-size:2.2rem;line-height:1.2;">
+                        MOODBOOSTER KAMU<br>
+                        TERLETAK DI GENGGAMANMU!
+                    </h2>
+                    <h3 class="fw-bold mb-4" style="font-size:1.5rem;">
+                        DAPATKAN PROMO DAN EXPERIENCE<br>
+                        PENUH HANYA TERSEDIA DI APLIKASI
+                    </h3>
+                    <p class="mt-4" style="font-size:1.1rem;">Unduh sekarang</p>
+                   <div class="d-flex gap-3 mt-2 justify-content-start align-items-center flex-wrap">
+                    <a href="#" class="text-decoration-none">
+                     <img src="{{ asset('assets/img/asset_15.png') }}" alt="Get it on Google Play" style="height: 48px; max-width: 100%;">
+                    </a>
+                 <a href="#" class="text-decoration-none">
+                 <img src="{{ asset('assets/img/asset_16.png') }}" alt="Download on the App Store" style="height: 48px; max-width: 100%;">
+                </a>
+            </div>
+                </div>
+            </div>
+            <!-- Kolom Kanan: Mockup HP -->
+            <div class="col-lg-6 col-md-12 text-center px-0 py-4">
+                <img src="{{ asset('assets/img/asset14.png') }}" alt="Mockup App Expresso Express" class="img-fluid" style="max-height:500px;">
             </div>
         </div>
     </div>
 </section>
+
+<style>
+#how-to-order {
+    background: #1b0404ff; /* warna latar belakang hitam  */
+    color: #fff;
+     border-radius: 0 0 40px 40px; /* radius hanya di bawah */
+    overflow: hidden;
+}
+
+#how-to-order h2,
+#how-to-order h3,
+#how-to-order h5,
+#how-to-order p {
+    color: #fff !important;
+}
+
+#how-to-order img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 991.98px) {
+    #how-to-order .px-5 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    #how-to-order .py-4 {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+}
+</style>
+
+
 <section id="blog" class="py-5">
     <div class="container">
         <div class="text-center mb-5">
@@ -121,6 +199,24 @@
     </div>
 </section>
 
+{{-- =================================================================
+   ABOUT SECTION
+================================================================== --}}
+<section id="about" class="py-5 section-bg">
+    <div class="container">
+        <div class="row align-items-center">
+            @php
+                $about = \App\Models\About::where('is_published', true)->latest('id')->first();
+            @endphp
+            <div class="col-md-6"><img src="{{ $about && $about->image_path ? asset('storage/'.$about->image_path) : asset('img/about/2.png') }}" class="img-fluid rounded shadow" alt="Tentang Kami"></div>
+            <div class="col-md-6 mt-4 mt-md-0">
+                <h2 class="display-5 fw-bold "style="font-family: 'Halima Sofira', sans-serif;">{{ $about->title ?? 'Cerita di Balik Setiap Cangkir' }}</h2>
+                <p class="lead">{{ $about ? Str::limit(strip_tags($about->content), 160) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.' }}</p>
+                <a href="{{ route('about.show') }}" class="btn btn-dark">Selengkapnya</a>
+            </div>
+        </div>
+    </div>
+</section>
 {{-- Script untuk bagian Interaktif --}}
 @php
     $coffeeModels = \App\Models\CoffeeItem::where('is_active', true)

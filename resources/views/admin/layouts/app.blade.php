@@ -129,7 +129,7 @@
 		@endif
 
 		<div class="header">
-			<div class="header-left">
+			<div class="header-left ">
 				<div class="menu-icon bi bi-list"></div>
 			</div>
 			<div class="header-right">
@@ -346,9 +346,9 @@
 		<div class="left-side-bar">
 			<div class="brand-logo">
 				<a href="/">
-					<img src="{{url('assets-admin')}}/vendors/images/started.svg" alt="" class="dark-logo" />
+					<img src="{{ asset('assets/img/logo/logo.png') }}" alt="" class="dark-logo" />
 					<img
-						src="{{url('assets-admin')}}/vendors/images/strated-white.svg"
+						src="{{ asset('assets/img/logo/logo.png') }}"
 						alt=""
 						class="light-logo"
 					/>
@@ -370,13 +370,12 @@
 								<span class="micon dw dw-file"></span><span class="mtext">Data Master</span>
 							</a>
 							<ul class="submenu">
-								<li><a href="/admin/kategori" class="@if ($activePage == 'kategori') active @endif">Data Kategori</a></li>
-								<li><a href="/admin/jenis" class="@if ($activePage == 'jenis') active @endif">Data Jenis</a></li>
 								<li><a href="/admin/banner" class="@if ($activePage == 'banner') active @endif">Data Banner</a></li>
 								<li><a href="/admin/blog" class="@if ($activePage == 'blog') active @endif">Data Blog</a></li>
 								<li><a href="/admin/product" class="@if ($activePage == 'product') active @endif">Data Produk Populer</a></li>
 								<li><a href="/admin/coffee" class="@if ($activePage == 'coffee') active @endif">Interactive Coffee</a></li>
 								<li><a href="/admin/about" class="@if ($activePage == 'about') active @endif">Tentang Kami</a></li>
+								<li><a href="/admin/team" class="@if ($activePage == 'team') active @endif">Tim Kami</a></li>
 							</ul>
 						</li>
 					</ul>
