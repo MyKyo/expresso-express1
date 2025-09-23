@@ -94,192 +94,71 @@
 </style>
 
 {{-- =================================================================
-   HOW TO ORDER SECTION
+   HOW TO ORDER SECTION (EXPRESSO EXPRESS APP PROMO)
 ================================================================== --}}
-<section id="how-to-order" class="py-5 section-bg">
-    <div class="container">
-        <div class="mb-5 text-center text-md-end">
-    <h2 class="display-5 fw-bold" style="font-family: 'Halima Sofira', sans-serif;">Cara Pemesanan</h2>
-    <p class="lead text-muted">Langkah mudah untuk memesan kopi favorit Anda di Expresso Express.</p>
-</div>
-        <div class="row align-items-center justify-content-center">
-            
-       <!-- Kolom Mockup HP -->
-<div class="col-lg-5 col-md-6 text-center mb-4">
-    <img src="{{ asset('assets/img/image.png') }}" 
-         alt="Mockup HP Expresso Express" 
-         class="img-fluid"
-         style="max-height: 550px; object-fit: contain; margin-top: -160px;">
-</div>
-
-            <!-- Kolom Langkah-langkah -->
-            <div class="col-lg-7 col-md-6">
-                <div class="row text-center">
-                    <div class="col-md-6 mb-4">
-                        <div class="mb-3">
-                            <span class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center"
-                                style="width:60px;height:60px;font-size:2rem;">
-                                <i class="bi bi-cup-hot"></i>
-                            </span>
-                        </div>
-                        <h5 class="fw-bold mb-1">Pilih Menu</h5>
-                        <p class="text-muted mb-0">Lihat dan pilih kopi atau minuman favorit Anda dari daftar menu.</p>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="mb-3">
-                            <span class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center"
-                                style="width:60px;height:60px;font-size:2rem;">
-                                <i class="bi bi-cart"></i>
-                            </span>
-                        </div>
-                        <h5 class="fw-bold mb-1">Pesan Online</h5>
-                        <p class="text-muted mb-0">Klik tombol pesan dan isi detail pesanan Anda dengan mudah.</p>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="mb-3">
-                            <span class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center"
-                                style="width:60px;height:60px;font-size:2rem;">
-                                <i class="bi bi-credit-card"></i>
-                            </span>
-                        </div>
-                        <h5 class="fw-bold mb-1">Pembayaran</h5>
-                        <p class="text-muted mb-0">Lakukan pembayaran melalui metode yang tersedia.</p>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="mb-3">
-                            <span class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center"
-                                style="width:60px;height:60px;font-size:2rem;">
-                                <i class="bi bi-truck"></i>
-                            </span>
-                        </div>
-                        <h5 class="fw-bold mb-1">Kopi Dikirim</h5>
-                        <p class="text-muted mb-0">Pesanan Anda akan segera diproses dan dikirim ke alamat Anda.</p>
-                    </div>
+<section id="how-to-order" class="py-5" style="background:#000000;">
+    <div class="container-fluid px-0">
+        <div class="row align-items-center">
+            <!-- Kolom Kiri: Teks & Logo Store -->
+            <div class="col-lg-6 col-md-12 text-white px-5 py-4">
+                <div class="mb-4">
+                    <h5 class="fw-normal" style="letter-spacing:2px;">EXPRESSO EXPRESS APP</h5>
+                    <h2 class="fw-bold mb-3" style="font-size:2.2rem;line-height:1.2;">
+                        MOODBOOSTER KAMU<br>
+                        TERLETAK DI GENGGAMANMU!
+                    </h2>
+                    <h3 class="fw-bold mb-4" style="font-size:1.5rem;">
+                        DAPATKAN PROMO DAN EXPERIENCE<br>
+                        PENUH HANYA TERSEDIA DI APLIKASI
+                    </h3>
+                    <p class="mt-4" style="font-size:1.1rem;">Unduh sekarang</p>
+                   <div class="d-flex gap-3 mt-2 justify-content-start align-items-center flex-wrap">
+                    <a href="#" class="text-decoration-none">
+                     <img src="{{ asset('assets/img/asset_15.png') }}" alt="Get it on Google Play" style="height: 48px; max-width: 100%;">
+                    </a>
+                 <a href="#" class="text-decoration-none">
+                 <img src="{{ asset('assets/img/asset_16.png') }}" alt="Download on the App Store" style="height: 48px; max-width: 100%;">
+                </a>
+                </div>
                 </div>
             </div>
-
+            <!-- Kolom Kanan: Mockup HP -->
+            <div class="col-lg-6 col-md-12 text-center px-0 py-4">
+                <img src="{{ asset('assets/img/asset14.png') }}" alt="Mockup App Expresso Express" class="img-fluid" style="max-height:500px;">
+            </div>
         </div>
     </div>
 </section>
 
 <style>
-/* Section Cara Pemesanan */
 #how-to-order {
-    background: #1d0203;
-}
-
-#how-to-order h2 {
-    color: #faf3f3ff;
-    
-}
-
-#how-to-order p.lead {
-    color: hsla(0, 20%, 97%, 1.00);
-}
-
-#how-to-order img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-/* Langkah-langkah */
-#how-to-order .step-box {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    padding: 15px;
-    border-radius: 12px;
-    background: #eeececff;
-}
-
-#how-to-order .step-box:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-/* Ikon bulat */
-#how-to-order .step-box span {
-    transition: background 0.3s ease;
-}
-
-#how-to-order .step-box:hover span {
-    background: #1d0203 !important;
-    color: rgba(215, 214, 214, 1) !important;
-}
-
-/* Judul rata kanan untuk desktop */
-#how-to-order .section-header { 
-    text-align: center;
-}
-@media (min-width: 768px) {
-    #how-to-order .section-header {
-        text-align: right;
-    }
-}
-
-/* Jarak antar item */
-#how-to-order .row .col-md-6 {
-    padding: 10px 20px;
-}
-<style>
-/* Section Cara Pemesanan */
-#how-to-order {
-    background: #670103; /* biar kontras */
-    color: #fff; /* default semua teks putih */
-}
-
-#how-to-order h2,
-#how-to-order p,
-#how-to-order h5 {
-    color: #fff !important;
-}
-
-#how-to-order img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-/* Langkah-langkah */
-#how-to-order .step-box {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    padding: 15px;
-    border-radius: 12px;
-    background: transparent; /* biar background transparan */
+    background: #1b0404ff; /* warna latar belakang hitam  */
     color: #fff;
 }
 
-#how-to-order .step-box:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 20px rgba(255,255,255,0.2);
-}
-
-/* Ikon bulat */
-#how-to-order .step-box span {
-    background: rgba(255,255,255,0.15) !important;
+#how-to-order h2,
+#how-to-order h3,
+#how-to-order h5,
+#how-to-order p {
     color: #fff !important;
-    transition: background 0.3s ease, color 0.3s ease;
 }
 
-#how-to-order .step-box:hover span {
-    background: #fff !important;
-    color: #670103 !important;
+#how-to-order img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
-/* Judul rata kanan untuk desktop */
-#how-to-order .section-header {
-    text-align: center;
-}
-@media (min-width: 768px) {
-    #how-to-order .section-header {
-        text-align: right;
+@media (max-width: 991.98px) {
+    #how-to-order .px-5 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
     }
-}
-
-/* Jarak antar item */
-#how-to-order .row .col-md-6 {
-    padding: 10px 20px;
+    #how-to-order .py-4 {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
 }
 </style>
 

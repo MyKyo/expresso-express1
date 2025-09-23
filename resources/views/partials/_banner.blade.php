@@ -45,6 +45,7 @@
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
+    
     <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
@@ -94,6 +95,21 @@
         height: 35vh;      /* makin pendek biar pas */
         min-height: 150px;
     }
+}
+
+/* Indicator carousel khusus banner (hindari conflict/duplikasi) */
+#heroCarousel .carousel-indicators.custom-indicators [data-bs-target] {
+    width: 12px;
+    height: 12px;
+    border-radius: 0;
+    background-color: #ffffff;
+    border: 0;
+    opacity: 0.6;
+    margin: 0 5px;
+}
+
+#heroCarousel .carousel-indicators.custom-indicators .active {
+    opacity: 1;
 }
 </style>
 
