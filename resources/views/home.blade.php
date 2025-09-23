@@ -76,7 +76,6 @@
                     <img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
                 </div>
             </div>
-
         </div>
     </div>
 </section>
@@ -91,13 +90,18 @@
 #thumbnail-container img:hover {
     transform: scale(1.05);
 }
+/* Tambahkan di style pada file home.blade.php */
+section[style*="background-color:#670103"] {
+    border-radius: 40px 40px 0 0; /* radius hanya di atas */
+    overflow: hidden;
+}
 </style>
 
 {{-- =================================================================
    HOW TO ORDER SECTION (EXPRESSO EXPRESS APP PROMO)
 ================================================================== --}}
-<section id="how-to-order" class="py-5" style="background:#000000;">
-    <div class="container-fluid px-0">
+<section id="how-to-order" class="py-5" style="background:#670103;">
+    <div class="container-fluid px-0" style="border: radius 40px;">
         <div class="row align-items-center">
             <!-- Kolom Kiri: Teks & Logo Store -->
             <div class="col-lg-6 col-md-12 text-white px-5 py-4">
@@ -119,7 +123,7 @@
                  <a href="#" class="text-decoration-none">
                  <img src="{{ asset('assets/img/asset_16.png') }}" alt="Download on the App Store" style="height: 48px; max-width: 100%;">
                 </a>
-                </div>
+            </div>
                 </div>
             </div>
             <!-- Kolom Kanan: Mockup HP -->
@@ -134,6 +138,8 @@
 #how-to-order {
     background: #1b0404ff; /* warna latar belakang hitam  */
     color: #fff;
+     border-radius: 0 0 40px 40px; /* radius hanya di bawah */
+    overflow: hidden;
 }
 
 #how-to-order h2,

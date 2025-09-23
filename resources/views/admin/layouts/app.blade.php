@@ -129,7 +129,7 @@
 		@endif
 
 		<div class="header">
-			<div class="header-left">
+			<div class="header-left ">
 				<div class="menu-icon bi bi-list"></div>
 			</div>
 			<div class="header-right">
