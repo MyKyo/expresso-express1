@@ -66,7 +66,9 @@
 				<img id="main-label" class="mb-3 animate-up" alt="coffee label image" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
 				<img id="main-text" class="mb-3 animate-up" alt="coffee name image" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
                 <img id="main-desc" class="mb-3 animate-up" alt="coffee description image" style="max-width: 420px; width:100%; height:auto; object-fit:contain;" />
-				<div class="text-white-50 small mt-2">Pilih kemasan mu</div>
+				<p class="text-white small fw-semibold mt-2 mb-1">
+                <i class="bi bi-box-seam me-2"></i> Pilih Kemasanmu
+                </p>
 				<div id="thumb-desktop-wrap" class="mt-2 d-none d-md-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
 					<div id="thumbnail-container" class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start"><!-- Thumbnail di-generate via JS --></div>
 				</div>
@@ -74,7 +76,7 @@
 
 			<!-- Gambar utama (kanan) -->
 			<div id="main-col" class="col-md-5 text-center order-md-2">
-            <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 540px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
+            <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 600px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
 					<img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
 				</div>
 				<div id="thumb-mobile-wrap" class="d-flex d-md-none mt-3 justify-content-center"><!-- Thumbnails dipindah ke sini pada mobile --></div>
@@ -115,10 +117,10 @@
 <style>
 @media (min-width: 768px) {
     .coffee-wrap { overflow: visible !important; }
-    #main-col { position: relative; min-height: 420px; }
+    #main-col { position: relative; min-height: 400px; }
     #main-box {
         position: absolute;
-        top: -120px; /* naikkan sedikit untuk mengurangi space atas */
+        top: -110px; /* naikkan sedikit untuk mengurangi space atas */
         left: 0;
         transform: none; /* dekatkan ke kolom kiri */
     }
@@ -292,18 +294,24 @@
 @push('scripts')
 <style>
 @keyframes slideUp {
-    0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); }
+    0% { opacity: 0; transform: translateY(50px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 .animate-up { animation: slideUp 0.8s ease forwards; }
+
 @keyframes slideUpSmall {
-    0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); }
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 .animate-up-small { animation: slideUpSmall 0.5s ease forwards; }
+
 @keyframes zoomOut {
-    0% { transform: scale(1.2); opacity: 0; } 100% { transform: scale(1); opacity: 1; }
+    0% { transform: scale(1.2); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
-.animate-zoom-out { animation: zoomOut 0.5s ease forwards; }
+.animate-zoom-out { animation: zoomOut 0.6s ease forwards; }
 </style>
+
 <script id="coffee-data" type="application/json">{!! json_encode($coffees) !!}</script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -321,12 +329,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainLabel = document.getElementById('main-label');
     const mainText = document.getElementById('main-text');
     const mainDesc = document.getElementById('main-desc');
+
+    // tampilkan item pertama
     if(coffees.length > 0){
         mainImg.src = coffees[0].image;
         if (coffees[0].label) { mainLabel.src = coffees[0].label; } else { mainLabel.removeAttribute('src'); }
         if (coffees[0].name) { mainText.src = coffees[0].name; } else { mainText.removeAttribute('src'); }
         if (coffees[0].desc) { mainDesc.src = coffees[0].desc; } else { mainDesc.removeAttribute('src'); }
     }
+
+    // generate thumbnail
     coffees.forEach(coffee => {
         const thumb = document.createElement('div');
         thumb.className = 'card shadow-sm rounded-3 animate-up-small';
@@ -335,32 +347,44 @@ document.addEventListener('DOMContentLoaded', function() {
         thumb.dataset.name = coffee.name;
         thumb.dataset.label = coffee.label;
         thumb.dataset.desc = coffee.desc;
+
         const img = document.createElement('img');
         img.src = coffee.image;
         img.className = 'w-100 h-100 object-fit-cover rounded-3';
         img.alt = 'thumbnail';
+
         thumb.appendChild(img);
         thumbnailContainer.appendChild(thumb);
+
         thumb.addEventListener('click', () => {
-            ['animate-zoom-out', 'animate-up'].forEach(cls => {
+            // reset animasi
+            ['animate-zoom-out','animate-up'].forEach(cls => {
                 mainImg.classList.remove(cls);
+                mainLabel.classList.remove(cls);
                 mainText.classList.remove(cls);
                 mainDesc.classList.remove(cls);
                 mainImg.parentElement.classList.remove(cls);
             });
+
+            // force reflow agar animasi bisa diulang
             void mainImg.offsetWidth;
+
+            // update gambar
             mainImg.src = coffee.image;
             if (coffee.label) { mainLabel.src = coffee.label; } else { mainLabel.removeAttribute('src'); }
             if (coffee.name) { mainText.src = coffee.name; } else { mainText.removeAttribute('src'); }
             if (coffee.desc) { mainDesc.src = coffee.desc; } else { mainDesc.removeAttribute('src'); }
-            mainImg.classList.add('animate-zoom-out');
-            mainLabel.classList.add('animate-up');
+
+            // kasih animasi baru
+            mainImg.classList.add('animate-zoom-out'); // gambar utama tetap zoom-out
+            mainLabel.classList.add('animate-up');     // label persis sama animasi dengan text & desc
             mainText.classList.add('animate-up');
             mainDesc.classList.add('animate-up');
             mainImg.parentElement.classList.add('animate-up');
         });
     });
 
+    // pindah thumbnails mobile/desktop
     function moveThumbnails() {
         if (window.innerWidth < 768) {
             if (thumbMobileWrap && thumbnailContainer && thumbnailContainer.parentElement !== thumbMobileWrap) {
@@ -379,6 +403,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 @endpush
+
 
 @endsection
 
