@@ -59,20 +59,22 @@
 <section style="padding:60px 0; background: transparent;">
     <div class="container">
         <div class="rounded-5 shadow overflow-hidden coffee-wrap" style="background-color:#670103;">
-            <div class="row g-4 align-items-center justify-content-center justify-content-md-between p-4 p-md-5">
+            <div class="row g-2 align-items-center justify-content-center p-4 p-md-5">
             
 			<!-- Teks + Thumbnail (kiri) -->
 			<div class="col-md-6 d-flex flex-column justify-content-center text-white text-center text-md-start order-md-1">
+				<img id="main-label" class="mb-3 animate-up" alt="coffee label image" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
 				<img id="main-text" class="mb-3 animate-up" alt="coffee name image" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
-				<img id="main-desc" class="animate-up" alt="coffee description image" style="max-width: 420px; width:100%; height:auto; object-fit:contain;" />
-				<div id="thumb-desktop-wrap" class="mt-3 d-none d-md-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
+                <img id="main-desc" class="mb-3 animate-up" alt="coffee description image" style="max-width: 420px; width:100%; height:auto; object-fit:contain;" />
+				<div class="text-white-50 small mt-2">Pilih kemasan mu</div>
+				<div id="thumb-desktop-wrap" class="mt-2 d-none d-md-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
 					<div id="thumbnail-container" class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start"><!-- Thumbnail di-generate via JS --></div>
 				</div>
 			</div>
 
 			<!-- Gambar utama (kanan) -->
 			<div id="main-col" class="col-md-5 text-center order-md-2">
-			<div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 900px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
+            <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 540px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
 					<img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
 				</div>
 				<div id="thumb-mobile-wrap" class="d-flex d-md-none mt-3 justify-content-center"><!-- Thumbnails dipindah ke sini pada mobile --></div>
@@ -116,9 +118,9 @@
     #main-col { position: relative; min-height: 420px; }
     #main-box {
         position: absolute;
-        top: -100px;
-        left: 10%;
-        transform: translateX(-50%);
+        top: -120px; /* naikkan sedikit untuk mengurangi space atas */
+        left: 0;
+        transform: none; /* dekatkan ke kolom kiri */
     }
 }
 </style>
@@ -282,6 +284,7 @@
         return [
             'image' => $i->image_path ? asset('storage/'.$i->image_path) : asset('img/coffe/1.png'),
             'name' => $i->name ? asset('storage/'.$i->name) : null,
+            'label' => $i->label ? asset('storage/'.$i->label) : null,
             'desc' => $i->description ? asset('storage/'.$i->description) : null,
         ];
     })->values();
@@ -292,6 +295,10 @@
     0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); }
 }
 .animate-up { animation: slideUp 0.8s ease forwards; }
+@keyframes slideUpSmall {
+    0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); }
+}
+.animate-up-small { animation: slideUpSmall 0.5s ease forwards; }
 @keyframes zoomOut {
     0% { transform: scale(1.2); opacity: 0; } 100% { transform: scale(1); opacity: 1; }
 }
@@ -311,19 +318,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const thumbMobileWrap = document.getElementById('thumb-mobile-wrap');
     const thumbDesktopWrap = document.getElementById('thumb-desktop-wrap');
     const mainImg = document.getElementById('main-img');
+    const mainLabel = document.getElementById('main-label');
     const mainText = document.getElementById('main-text');
     const mainDesc = document.getElementById('main-desc');
     if(coffees.length > 0){
         mainImg.src = coffees[0].image;
+        if (coffees[0].label) { mainLabel.src = coffees[0].label; } else { mainLabel.removeAttribute('src'); }
         if (coffees[0].name) { mainText.src = coffees[0].name; } else { mainText.removeAttribute('src'); }
         if (coffees[0].desc) { mainDesc.src = coffees[0].desc; } else { mainDesc.removeAttribute('src'); }
     }
     coffees.forEach(coffee => {
         const thumb = document.createElement('div');
-        thumb.className = 'card shadow-sm rounded-3';
+        thumb.className = 'card shadow-sm rounded-3 animate-up-small';
         thumb.style.cssText = 'min-width: 70px; width: 70px; height: 70px; cursor: pointer; overflow: hidden;';
         thumb.dataset.image = coffee.image;
         thumb.dataset.name = coffee.name;
+        thumb.dataset.label = coffee.label;
         thumb.dataset.desc = coffee.desc;
         const img = document.createElement('img');
         img.src = coffee.image;
@@ -340,9 +350,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             void mainImg.offsetWidth;
             mainImg.src = coffee.image;
+            if (coffee.label) { mainLabel.src = coffee.label; } else { mainLabel.removeAttribute('src'); }
             if (coffee.name) { mainText.src = coffee.name; } else { mainText.removeAttribute('src'); }
             if (coffee.desc) { mainDesc.src = coffee.desc; } else { mainDesc.removeAttribute('src'); }
             mainImg.classList.add('animate-zoom-out');
+            mainLabel.classList.add('animate-up');
             mainText.classList.add('animate-up');
             mainDesc.classList.add('animate-up');
             mainImg.parentElement.classList.add('animate-up');

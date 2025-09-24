@@ -17,6 +17,13 @@
                 @endif
             </div>
             <div class="form-group mb-3">
+                <label>Label (gambar)</label>
+                <input type="file" name="label" class="form-control" accept="image/*">
+                @if($item->label)
+                    <img src="{{ asset('storage/'.$item->label) }}" class="img-fluid mt-2" style="max-height:120px;" />
+                @endif
+            </div>
+            <div class="form-group mb-3">
                 <label>Deskripsi (gambar)</label>
                 <input type="file" name="description" class="form-control" accept="image/*">
                 @if($item->description)

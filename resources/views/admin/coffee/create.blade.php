@@ -14,6 +14,10 @@
                 <input type="file" name="name" class="form-control" accept="image/*" required>
             </div>
             <div class="form-group mb-3">
+                <label>Label (gambar)</label>
+                <input type="file" name="label" class="form-control" accept="image/*">
+            </div>
+            <div class="form-group mb-3">
                 <label>Deskripsi (gambar)</label>
                 <input type="file" name="description" class="form-control" accept="image/*">
             </div>

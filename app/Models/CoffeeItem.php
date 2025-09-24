@@ -11,6 +11,7 @@ class CoffeeItem extends Model
 
     protected $fillable = [
         'name',
+        'label',
         'description',
         'image_path',
         'is_active',

@@ -31,6 +31,7 @@ class CoffeeItemController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
+            'label' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:4096'],
             'description' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
             'is_active' => ['nullable', 'boolean'],
@@ -43,10 +44,12 @@ class CoffeeItemController extends Controller
         }
 
         $namePath = $request->file('name')->store('coffee/name', 'public');
+        $labelPath = $request->hasFile('label') ? $request->file('label')->store('coffee/label', 'public') : null;
         $descPath = $request->hasFile('description') ? $request->file('description')->store('coffee/description', 'public') : null;
 
         CoffeeItem::create([
             'name' => $namePath,
+            'label' => $labelPath,
             'description' => $descPath,
             'image_path' => $imagePath,
             'is_active' => (bool)($validated['is_active'] ?? true),
@@ -66,6 +69,7 @@ class CoffeeItemController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
+            'label' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:4096'],
             'description' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
             'is_active' => ['nullable', 'boolean'],
@@ -96,6 +100,13 @@ class CoffeeItemController extends Controller
                 Storage::disk('public')->delete($coffee->image_path);
             }
             $data['image_path'] = $request->file('image')->store('coffee', 'public');
+        }
+
+        if ($request->hasFile('label')) {
+            if ($coffee->label) {
+                Storage::disk('public')->delete($coffee->label);
+            }
+            $data['label'] = $request->file('label')->store('coffee/label', 'public');
         }
 
         $coffee->update($data);
