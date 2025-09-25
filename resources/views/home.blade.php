@@ -63,9 +63,9 @@
             
 			<!-- Teks + Thumbnail (kiri) -->
 			<div class="col-md-6 d-flex flex-column justify-content-center text-white text-center text-md-start order-md-1">
-				<img id="main-label" class="mb-3 animate-up" alt="coffee label image" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
-				<img id="main-text" class="mb-3 animate-up" alt="coffee name image" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
-                <img id="main-desc" class="mb-3 animate-up" alt="coffee description image" style="max-width: 420px; width:100%; height:auto; object-fit:contain;" />
+				<img id="main-label" class="mb-3 animate-up" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
+				<img id="main-text" class="mb-3 animate-up"  style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
+                <img id="main-desc" class="mb-3 animate-up"  style="max-width: 420px; width:100%; height:auto; object-fit:contain;" />
 				<p class="text-white small fw-semibold mt-2 mb-1">
                 <i class="bi bi-box-seam me-2"></i> Pilih Kemasanmu
                 </p>
@@ -75,7 +75,7 @@
 			</div>
 
 			<!-- Gambar utama (kanan) -->
-			<div id="main-col" class="col-md-5 text-center order-md-2">
+			<div id="main-col" class="col-lg-5 col-md-6 col-12 text-center order-md-2">
             <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 450px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
 					<img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
 				</div>
@@ -112,17 +112,104 @@
         gap: 12px !important;
         padding: 6px 4px;
     }
+    
+    /* Tambahan untuk mobile - pastikan gambar utama tidak overflow */
+    #main-box {
+        width: 100% !important;
+        max-width: 90vw !important;
+        margin: 0 auto;
+    }
+    
+    /* Pastikan container tidak overflow di mobile */
+    .coffee-wrap {
+        overflow: hidden !important;
+    }
 }
 </style>
 <style>
-@media (min-width: 768px) {
+/* Responsive styling untuk gambar utama */
+#main-box {
+    transition: all 0.3s ease;
+}
+
+/* Mobile (xs) - layar sangat kecil */
+@media (max-width: 575.98px) {
+    #main-box {
+        max-width: 280px !important;
+        aspect-ratio: 1/1;
+        margin: 0 auto;
+    }
+    #main-col {
+        padding: 0 15px;
+    }
+}
+
+/* Mobile (sm) - layar kecil */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    #main-box {
+        max-width: 320px !important;
+        aspect-ratio: 1/1;
+        margin: 0 auto;
+    }
+    #main-col {
+        padding: 0 20px;
+    }
+}
+
+/* Tablet (md) - layar sedang */
+@media (min-width: 768px) and (max-width: 991.98px) {
     .coffee-wrap { overflow: visible !important; }
-    #main-col { position: relative; min-height: 400px; }
+    #main-col { 
+        position: relative; 
+        min-height: 400px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     #main-box {
         position: absolute;
-        top: -70px; /* naikkan sedikit untuk mengurangi space atas */
+        top: 10px;
+        left: 50px;
+        max-width: 380px !important;
+        transform: none;
+    }
+}
+
+/* Desktop (lg) - layar besar */
+@media (min-width: 992px) {
+    .coffee-wrap { overflow: visible !important; }
+    #main-col { 
+        position: relative; 
+        min-height: 400px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #main-box {
+        position: absolute;
+        top: 10px;
+        left: 50px;
+        max-width: 450px !important;
+        transform: none;
+    }
+}
+
+/* Extra large (xl) - layar sangat besar */
+@media (min-width: 1200px) {
+    .coffee-wrap { overflow: visible !important; }
+    #main-col { 
+        position: relative; 
+        min-height: 400px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #main-box {
+        position: absolute;
+        top: -50px;
         left: 100px;
-        transform: none; /* dekatkan ke kolom kiri */
+        max-width: 450px !important;
+        transform: none;
     }
 }
 </style>
