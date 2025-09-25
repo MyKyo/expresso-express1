@@ -59,7 +59,7 @@
 <section style="padding:60px 0; background: transparent;">
     <div class="container">
         <div class="rounded-5 shadow overflow-hidden coffee-wrap" style="background-color:#670103;">
-            <div class="row g-2 align-items-center justify-content-center p-4 p-md-5">
+            <div class="row g-2 align-items-center justify-content-center p-4 p-md-3">
             
 			<!-- Teks + Thumbnail (kiri) -->
 			<div class="col-md-6 d-flex flex-column justify-content-center text-white text-center text-md-start order-md-1">
