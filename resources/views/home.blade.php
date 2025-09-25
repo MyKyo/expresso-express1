@@ -59,7 +59,7 @@
 <section style="padding:60px 0; background: transparent;">
     <div class="container">
         <div class="rounded-5 shadow overflow-hidden coffee-wrap" style="background-color:#670103;">
-            <div class="row g-2 align-items-center justify-content-center p-4 p-md-5">
+            <div class="row g-2 align-items-center justify-content-center p-4 p-md-4">
             
 			<!-- Teks + Thumbnail (kiri) -->
 			<div class="col-md-6 d-flex flex-column justify-content-center text-white text-center text-md-start order-md-1">
@@ -76,7 +76,7 @@
 
 			<!-- Gambar utama (kanan) -->
 			<div id="main-col" class="col-md-5 text-center order-md-2">
-            <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 600px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
+            <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 450px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
 					<img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
 				</div>
 				<div id="thumb-mobile-wrap" class="d-flex d-md-none mt-3 justify-content-center"><!-- Thumbnails dipindah ke sini pada mobile --></div>
@@ -120,8 +120,8 @@
     #main-col { position: relative; min-height: 400px; }
     #main-box {
         position: absolute;
-        top: -110px; /* naikkan sedikit untuk mengurangi space atas */
-        left: 0;
+        top: -70px; /* naikkan sedikit untuk mengurangi space atas */
+        left: 100px;
         transform: none; /* dekatkan ke kolom kiri */
     }
 }
