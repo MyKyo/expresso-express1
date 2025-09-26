@@ -163,13 +163,13 @@
 
         <!-- Tombol download -->
         <div class="d-flex gap-3 mt-2 justify-content-center justify-content-md-start align-items-center flex-wrap">
-            <a href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=id" class="text-decoration-none">
-                <img src="{{ asset('assets/img/Asset_15.png') }}" alt="Get it on Google Play" class="img-fluid" style="height:48px;">
-            </a>
-            <a href="https://apps.apple.com/id/app/minecraft-bangun-bertahan/id479516143?l=id" class="text-decoration-none">
-                <img src="{{ asset('assets/img/Asset_16.png') }}" alt="Download on the App Store" class="img-fluid" style="height:48px;">
-            </a>
-        </div>
+    <a href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=id" class="store-btn">
+        <img src="{{ asset('assets/img/Asset_15.png') }}" alt="Get it on Google Play" class="img-fluid" style="height:48px;">
+    </a>
+    <a href="https://apps.apple.com/id/app/minecraft-bangun-bertahan/id479516143?l=id" class="store-btn">
+        <img src="{{ asset('assets/img/Asset_16.png') }}" alt="Download on the App Store" class="img-fluid" style="height:48px;">
+    </a>
+</div>
     </div>
 </div>
 
@@ -191,6 +191,17 @@
 <style>
 .col-lg-6 .text-color {
     color: #ebdece !important;
+}
+.store-btn {
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px; /* opsional, biar ada sudut membulat */
+    overflow: hidden;
+}
+
+.store-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
     </style>
 
@@ -251,6 +262,10 @@
 @php
     $about = \App\Models\About::where('is_published', true)->latest('id')->first();
     $bg = $about && $about->image_path ? asset('storage/'.$about->image_path) : asset('img/about/2.png');
+    $rawAboutText = $about ? strip_tags($about->content) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.';
+    
+    $cleanAboutText = preg_replace('/\b(kami\s+bersemangat)\b[^\.!?\n]*(?:[\.!?]|$)/i', '', $rawAboutText);
+    $aboutText = Str::limit(trim(preg_replace('/\s+/', ' ', $cleanAboutText)), 160);
 @endphp
 
 <section id="about" class="py-5 section-bg">
@@ -259,18 +274,13 @@
                 background-size: cover;
                 width: 100%;
                 min-height: 500px;
-                border-radius: 50px;">
+                  border-radius: 50px; position: relative;">
         <div class="row text-white w-100 p-4">
-            <div class="col-md-6 mt-4 mt-md-0">
-                <h2 class="display-5 fw-bold" style="font-family: 'Halima Sofira', sans-serif;">
-                    {{ $about->title ?? 'Cerita di Balik Setiap Cangkir' }}
-                </h2>
-                <p class="lead">
-                    {{ $about ? Str::limit(strip_tags($about->content), 160) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.' }}
-                </p>
-                <a href="{{ route('about.show') }}" class="btn btn-light">Selengkapnya</a>
+            <div class="col-md-6 mt-4 mt-md-0 d-flex flex-column align-items-start justify-content-between" style="min-height: 260px;">
+                <p class="lead mb-3">{{ $aboutText }}</p>
             </div>
         </div>
+        <a href="{{ route('about.show') }}" class="btn btn-light position-absolute" style="left: 900px; bottom: 20px;">Selengkapnya</a>
     </div>
 </section>
 
