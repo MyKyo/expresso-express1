@@ -8,6 +8,7 @@
 @section('content')
 
 {{-- ================================================================
+   SECTI
     SECTION: PRODUK UNGGULAN (Carousel horizontal scroll)
 ================================================================ --}}
 <section id="menu" class="product-section bg-light py-5">
@@ -128,45 +129,79 @@
 }
 </style>
 
-{{-- =================================================================
-    HOW TO ORDER SECTION (EXPRESSO EXPRESS APP PROMO)
-================================================================== --}}
-<section id="how-to-order" class="py-3" style="background:#670103;">
-    <div class="container-fluid px-0" style="border: radius 40px;">
-        <div class="row align-items-center">
-            <div class="col-lg-6 col-md-12 text-white px-5 py-4 d-flex flex-column justify-content-center">
-                <div class="mb-4">
-                    <h5 class="fw-bold mb-3" style="letter-spacing:2px;font-size:2.2rem;line-height:1;">EXPRESSO EXPRESS APP</h5>
-                    <h2 class="fw-bold mb-3" style="font-size:2.2rem;line-height:1.2;">
-                        MOODBOOSTER KAMU<br>
-                        TERLETAK DI GENGGAMANMU!
-                    </h2>
-                    <h3 class="fw-bold mb-4" style="font-size:1.5rem;">
-                        DAPATKAN PROMO DAN EXPERIENCE<br>
-                        PENUH HANYA TERSEDIA DI APLIKASI
-                    </h3>
-                    <p class="mt-4" style="font-size:1.1rem;">Unduh sekarang</p>
-                   <div class="d-flex gap-3 mt-2 justify-content-start align-items-center flex-wrap">
-                     <a href="#" class="text-decoration-none">
-                       <img src="{{ asset('assets/img/Asset_15.png') }}" alt="Get it on Google Play" style="height: 48px; max-width: 100%;">
-                     </a>
-                   <a href="#" class="text-decoration-none">
-                   <img src="{{ asset('assets/img/Asset_16.png') }}" alt="Download on the App Store" style="height: 48px; max-width: 100%;">
-                  </a>
-            </div>
+{{-- ================================================================
+    SECTION: HOW TO ORDER (APP DOWNLOAD)
+================================================================ --}}
+<section id="how-to-order" style="padding:4px 0; background: transparent;">
+    <div class="container">
+        <div class="rounded-5 shadow overflow-hidden animated-gradient-bg">
+            <div class="row g-2 align-items-center justify-content-center p-4 p-md-4">
+
+  {{-- Kolom Kiri: Teks & Button --}}
+<div class="col-lg-6 col-md-12 d-flex flex-column justify-content-center text-center text-md-start py-4 px-3">
+    <div class="mb-4">
+
+        <!-- Judul kecil -->
+        <h1 class="fw-bold mb-5 text-uppercase lh-1 fs-3 text-color">
+            EXPRESSO EXPRESS APP
+        </h1>
+
+        <!-- Judul besar -->
+        <h5 class="fw-bold mb-5 lh-sm fs-2">
+            MOODBOOSTER KAMU<br>
+            TERLETAK DI GENGGAMANMU!
+        </h5>
+
+        <!-- Sub headline -->
+        <h5 class="fw-bold mb-5 fs-2">
+            DAPATKAN PROMO DAN EXPERIENCE<br>
+            PENUH HANYA TERSEDIA DI APLIKASI
+        </h5>
+
+        <!-- Deskripsi -->
+        <p class="mb-5 fs-5">Unduh sekarang</p>
+
+        <!-- Tombol download -->
+        <div class="d-flex gap-3 mt-2 justify-content-center justify-content-md-start align-items-center flex-wrap">
+            <a href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=id" class="text-decoration-none">
+                <img src="{{ asset('assets/img/Asset_15.png') }}" alt="Get it on Google Play" class="img-fluid" style="height:48px;">
+            </a>
+            <a href="https://apps.apple.com/id/app/minecraft-bangun-bertahan/id479516143?l=id" class="text-decoration-none">
+                <img src="{{ asset('assets/img/Asset_16.png') }}" alt="Download on the App Store" class="img-fluid" style="height:48px;">
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+                {{-- Kolom Kanan: Mockup Aplikasi --}}
+                <div class="col-lg-6 col-md-12 text-center">
+                    <img src="{{ asset('assets/img/Asset_14.png') }}" 
+                         alt="Mockup App Expresso Express" 
+                         class="img-fluid" 
+                         style="max-height:500px;">
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-12 text-center px-0 py-4">
-                <img src="{{ asset('assets/img/Asset_14.png') }}" alt="Mockup App Expresso Express" class="img-fluid" style="max-height:500px;">
+
             </div>
         </div>
     </div>
 </section>
 
+<style>
+.col-lg-6 .text-color {
+    color: #ebdece !important;
+}
+    </style>
+
+
+
+
+
 {{-- CSS Styling original Anda --}}
 <style>
 #how-to-order { background: #1b0404ff; color: #fff; border-radius: 40px 40px 40px 40px; overflow: hidden; }
-#how-to-order h2, #how-to-order h3, #how-to-order h5, #how-to-order p { color: #fff !important; }
+#how-to-order h2, #how-to-order h3, #how-to-order h5, #how-to-order p { color: #ebdece !important; }
 #how-to-order img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
 @media (min-width: 992px) {
     #how-to-order .row { align-items: start !important; }
@@ -213,20 +248,27 @@
     </div>
 </section>
 
-{{-- ================================================================
-    SECTION: TENTANG KAMI
-================================================================ --}}
+@php
+    $about = \App\Models\About::where('is_published', true)->latest('id')->first();
+    $bg = $about && $about->image_path ? asset('storage/'.$about->image_path) : asset('img/about/2.png');
+@endphp
+
 <section id="about" class="py-5 section-bg">
-    <div class="container">
-        <div class="row align-items-center">
-            @php
-                $about = \App\Models\About::where('is_published', true)->latest('id')->first();
-            @endphp
-            <div class="col-md-6"><img src="{{ $about && $about->image_path ? asset('storage/'.$about->image_path) : asset('img/about/2.png') }}" class="img-fluid rounded shadow" alt="Tentang Kami"></div>
+    <div class="container d-flex align-items-center justify-content-center rounded shadow overflow-hidden"
+         style="background: url('{{ $bg }}') no-repeat center center;
+                background-size: cover;
+                width: 100%;
+                min-height: 500px;
+                border-radius: 50px;">
+        <div class="row text-white w-100 p-4">
             <div class="col-md-6 mt-4 mt-md-0">
-                <h2 class="display-5 fw-bold" style="font-family: 'Halima Sofira', sans-serif;">{{ $about->title ?? 'Cerita di Balik Setiap Cangkir' }}</h2>
-                <p class="lead">{{ $about ? Str::limit(strip_tags($about->content), 160) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.' }}</p>
-                <a href="{{ route('about.show') }}" class="btn btn-dark">Selengkapnya</a>
+                <h2 class="display-5 fw-bold" style="font-family: 'Halima Sofira', sans-serif;">
+                    {{ $about->title ?? 'Cerita di Balik Setiap Cangkir' }}
+                </h2>
+                <p class="lead">
+                    {{ $about ? Str::limit(strip_tags($about->content), 160) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.' }}
+                </p>
+                <a href="{{ route('about.show') }}" class="btn btn-light">Selengkapnya</a>
             </div>
         </div>
     </div>
