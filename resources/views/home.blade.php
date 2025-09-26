@@ -8,219 +8,132 @@
 @section('content')
 
 {{-- ================================================================
-   SECTION: PRODUK UNGGULAN (Carousel horizontal scroll)
-   Menampilkan daftar produk aktif dalam bentuk kartu yang bisa discroll
-   dengan tombol navigasi untuk desktop dan mobile.
+    SECTION: PRODUK UNGGULAN (Carousel horizontal scroll)
 ================================================================ --}}
 <section id="menu" class="product-section bg-light py-5">
-   <div class="position-relative">
-    <div class="product-scroll-wrapper" id="product-wrapper">
-        @php
-            $products = \App\Models\Product::where('is_active', true)
-                ->orderBy('sort_order')
-                ->orderBy('id', 'desc')
-                ->get();
-        @endphp
+    <div class="position-relative">
+        <div class="product-scroll-wrapper" id="product-wrapper">
+            @php
+                $products = \App\Models\Product::where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->orderBy('id', 'desc')
+                    ->get();
+            @endphp
 
-        <div class="product-row d-flex">
-            @forelse($products as $product)
-                <div class="text-center product-card">
-                    <img src="{{ $product->image_path ? asset('storage/'.$product->image_path) : asset('img/coffe/1.png') }}" alt="{{ $product->name }}" class="img-fluid">
-                    <div class="product-card-title">{{ $product->name }}</div>
-                </div>
-            @empty
-                <div class="text-center w-100 py-4">Belum ada produk.</div>
-            @endforelse
+            <div class="product-row d-flex">
+                @forelse($products as $product)
+                    <div class="text-center product-card">
+                        <img src="{{ $product->image_path ? asset('storage/'.$product->image_path) : asset('img/coffe/1.png') }}" alt="{{ $product->name }}" class="img-fluid">
+                        <div class="product-card-title">{{ $product->name }}</div>
+                    </div>
+                @empty
+                    <div class="text-center w-100 py-4">Belum ada produk.</div>
+                @endforelse
+            </div>
+            {{-- Tombol NAVIGASI khusus mobile: di dalam wrapper --}}
+            <button id="mobile-prev-btn" type="button" class="product-nav-arrow prev d-flex d-md-none" aria-label="Geser ke kiri">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <button id="mobile-next-btn" type="button" class="product-nav-arrow next d-flex d-md-none" aria-label="Geser ke kanan">
+                <i class="bi bi-chevron-right"></i>
+            </button>
         </div>
-        {{-- Tombol NAVIGASI khusus mobile: di dalam wrapper --}}
-        <button id="mobile-prev-btn" type="button" class="product-nav-arrow prev d-flex d-md-none" aria-label="Geser ke kiri">
+
+        {{-- Tombol navigasi untuk desktop/tablet (posisi di luar wrapper) --}}
+        <button id="prev-btn" type="button" class="product-nav-arrow prev d-none d-md-flex" aria-label="Geser ke kiri">
             <i class="bi bi-chevron-left"></i>
         </button>
-        <button id="mobile-next-btn" type="button" class="product-nav-arrow next d-flex d-md-none" aria-label="Geser ke kanan">
+        <button id="next-btn" type="button" class="product-nav-arrow next d-none d-md-flex" aria-label="Geser ke kanan">
             <i class="bi bi-chevron-right"></i>
         </button>
     </div>
-
-    {{-- Tombol navigasi untuk desktop/tablet (posisi di luar wrapper) --}}
-    <button id="prev-btn" type="button" class="product-nav-arrow prev d-none d-md-flex" aria-label="Geser ke kiri">
-        <i class="bi bi-chevron-left"></i>
-    </button>
-    <button id="next-btn" type="button" class="product-nav-arrow next d-none d-md-flex" aria-label="Geser ke kanan">
-        <i class="bi bi-chevron-right"></i>
-    </button>
-</div>
 </section>
 
 
 {{-- ================================================================
-   SECTION: INTERAKTIF KOLEKSI KOPI
-   Thumbnail dinamis (dari DB) untuk mengganti gambar dan deskripsi utama.
+    SECTION: INTERAKTIF KOLEKSI KOPI
 ================================================================ --}}
 <section style="padding:60px 0; background: transparent;">
     <div class="container">
-        <div class="rounded-5 shadow overflow-hidden coffee-wrap" style="background-color:#670103;">
+        {{-- Class "animated-gradient-bg" ditambahkan di sini --}}
+        <div class="rounded-5 shadow overflow-hidden coffee-wrap animated-gradient-bg">
             <div class="row g-2 align-items-center justify-content-center p-4 p-md-4">
             
-			<!-- Teks + Thumbnail (kiri) -->
-			<div class="col-md-6 d-flex flex-column justify-content-center text-white text-center text-md-start order-md-1">
-				<img id="main-label" class="mb-3 animate-up" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
-				<img id="main-text" class="mb-3 animate-up"  style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
-                <img id="main-desc" class="mb-3 animate-up"  style="max-width: 420px; width:100%; height:auto; object-fit:contain;" />
-				<p class="text-white small fw-semibold mt-2 mb-1">
-                <i class="bi bi-box-seam me-2"></i> Pilih Kemasanmu
-                </p>
-				<div id="thumb-desktop-wrap" class="mt-2 d-none d-md-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
-					<div id="thumbnail-container" class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start"><!-- Thumbnail di-generate via JS --></div>
-				</div>
-			</div>
+                <div class="col-md-6 d-flex flex-column justify-content-center text-white text-center text-md-start order-md-1">
+                    <img id="main-label" class="mb-3 animate-up" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
+                    <img id="main-text" class="mb-3 animate-up"  style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
+                    <img id="main-desc" class="mb-3 animate-up"  style="max-width: 420px; width:100%; height:auto; object-fit:contain;" />
+                    <p class="text-white small fw-semibold mt-2 mb-1">
+                        <i class="bi bi-box-seam me-2"></i> Pilih Kemasanmu
+                    </p>
+                    <div id="thumb-desktop-wrap" class="mt-2 d-none d-md-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
+                        <div id="thumbnail-container" class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start"></div>
+                    </div>
+                </div>
 
-			<!-- Gambar utama (kanan) -->
-			<div id="main-col" class="col-lg-5 col-md-6 col-12 text-center order-md-2">
-            <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 450px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
-					<img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
-				</div>
-				<div id="thumb-mobile-wrap" class="d-flex d-md-none mt-3 justify-content-center"><!-- Thumbnails dipindah ke sini pada mobile --></div>
-			</div>
+                <div id="main-col" class="col-lg-5 col-md-6 col-12 text-center order-md-2">
+                    {{-- class "animate-up" dihapus dari sini --}}
+                    <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white" style="max-width: 450px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
+                        <img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
+                    </div>
+                    <div id="thumb-mobile-wrap" class="d-flex d-md-none mt-3 justify-content-center"></div>
+                </div>
 
             </div>
         </div>
     </div>
-</section>  
+</section>  
 
+{{-- CSS Styling original Anda --}}
 <style>
-#thumbnail-container img {
-    max-width: 100px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform .3s;
+#thumbnail-container .card {
+    transition: transform .3s, box-shadow .3s;
 }
-#thumbnail-container img:hover {
+#thumbnail-container .card:hover {
     transform: scale(1.05);
 }
-/* Mobile horizontal scroll for thumbnails */
 @media (max-width: 767.98px) {
-    #thumb-mobile-wrap {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        width: 100%;
-    }
+    #thumb-mobile-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
     #thumb-mobile-wrap::-webkit-scrollbar { height: 6px; }
     #thumb-mobile-wrap::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.4); border-radius: 3px; }
-    #thumbnail-container {
-        display: inline-flex !important;
-        flex-wrap: nowrap !important;
-        gap: 12px !important;
-        padding: 6px 4px;
-    }
-    
-    /* Tambahan untuk mobile - pastikan gambar utama tidak overflow */
-    #main-box {
-        width: 100% !important;
-        max-width: 90vw !important;
-        margin: 0 auto;
-    }
-    
-    /* Pastikan container tidak overflow di mobile */
-    .coffee-wrap {
-        overflow: hidden !important;
-    }
+    #thumbnail-container { display: inline-flex !important; flex-wrap: nowrap !important; gap: 12px !important; padding: 6px 4px; }
+    #main-box { width: 100% !important; max-width: 90vw !important; margin: 0 auto; }
+    .coffee-wrap { overflow: hidden !important; }
 }
 </style>
 <style>
-/* Responsive styling untuk gambar utama */
-#main-box {
-    transition: all 0.3s ease;
-}
-
-/* Mobile (xs) - layar sangat kecil */
+#main-box { transition: all 0.3s ease; }
 @media (max-width: 575.98px) {
-    #main-box {
-        max-width: 280px !important;
-        aspect-ratio: 1/1;
-        margin: 0 auto;
-    }
-    #main-col {
-        padding: 0 15px;
-    }
+    #main-box { max-width: 280px !important; aspect-ratio: 1/1; margin: 0 auto; }
+    #main-col { padding: 0 15px; }
 }
-
-/* Mobile (sm) - layar kecil */
 @media (min-width: 576px) and (max-width: 767.98px) {
-    #main-box {
-        max-width: 320px !important;
-        aspect-ratio: 1/1;
-        margin: 0 auto;
-    }
-    #main-col {
-        padding: 0 20px;
-    }
+    #main-box { max-width: 320px !important; aspect-ratio: 1/1; margin: 0 auto; }
+    #main-col { padding: 0 20px; }
 }
-
-/* Tablet (md) - layar sedang */
 @media (min-width: 768px) and (max-width: 991.98px) {
     .coffee-wrap { overflow: visible !important; }
-    #main-col { 
-        position: relative; 
-        min-height: 400px; 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    #main-box {
-        position: absolute;
-        top: 10px;
-        left: 50px;
-        max-width: 380px !important;
-        transform: none;
-    }
+    #main-col { position: relative; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+    #main-box { position: absolute; top: 10px; left: 50px; max-width: 380px !important; transform: none; }
 }
-
-/* Desktop (lg) - layar besar */
 @media (min-width: 992px) {
     .coffee-wrap { overflow: visible !important; }
-    #main-col { 
-        position: relative; 
-        min-height: 400px; 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    #main-box {
-        position: absolute;
-        top: 10px;
-        left: 50px;
-        max-width: 450px !important;
-        transform: none;
-    }
+    #main-col { position: relative; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+    #main-box { position: absolute; top: 10px; left: 50px; max-width: 450px !important; transform: none; }
 }
-
-/* Extra large (xl) - layar sangat besar */
 @media (min-width: 1200px) {
     .coffee-wrap { overflow: visible !important; }
-    #main-col { 
-        position: relative; 
-        min-height: 400px; 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    #main-box {
-        position: absolute;
-        top: -50px;
-        left: 100px;
-        max-width: 450px !important;
-        transform: none;
-    }
+    #main-col { position: relative; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+    #main-box { position: absolute; top: -50px; left: 100px; max-width: 450px !important; transform: none; }
 }
 </style>
 
 {{-- =================================================================
-   HOW TO ORDER SECTION (EXPRESSO EXPRESS APP PROMO)
+    HOW TO ORDER SECTION (EXPRESSO EXPRESS APP PROMO)
 ================================================================== --}}
 <section id="how-to-order" class="py-3" style="background:#670103;">
     <div class="container-fluid px-0" style="border: radius 40px;">
         <div class="row align-items-center">
-            <!-- Kolom Kiri: Teks & Logo Store -->
             <div class="col-lg-6 col-md-12 text-white px-5 py-4 d-flex flex-column justify-content-center">
                 <div class="mb-4">
                     <h5 class="fw-bold mb-3" style="letter-spacing:2px;font-size:2.2rem;line-height:1;">EXPRESSO EXPRESS APP</h5>
@@ -234,16 +147,15 @@
                     </h3>
                     <p class="mt-4" style="font-size:1.1rem;">Unduh sekarang</p>
                    <div class="d-flex gap-3 mt-2 justify-content-start align-items-center flex-wrap">
-                    <a href="#" class="text-decoration-none">
-                     <img src="{{ asset('assets/img/Asset_15.png') }}" alt="Get it on Google Play" style="height: 48px; max-width: 100%;">
-                    </a>
-                 <a href="#" class="text-decoration-none">
-                 <img src="{{ asset('assets/img/Asset_16.png') }}" alt="Download on the App Store" style="height: 48px; max-width: 100%;">
-                </a>
+                     <a href="#" class="text-decoration-none">
+                       <img src="{{ asset('assets/img/Asset_15.png') }}" alt="Get it on Google Play" style="height: 48px; max-width: 100%;">
+                     </a>
+                   <a href="#" class="text-decoration-none">
+                   <img src="{{ asset('assets/img/Asset_16.png') }}" alt="Download on the App Store" style="height: 48px; max-width: 100%;">
+                  </a>
             </div>
                 </div>
             </div>
-            <!-- Kolom Kanan: Mockup HP -->
             <div class="col-lg-6 col-md-12 text-center px-0 py-4">
                 <img src="{{ asset('assets/img/Asset_14.png') }}" alt="Mockup App Expresso Express" class="img-fluid" style="max-height:500px;">
             </div>
@@ -251,69 +163,25 @@
     </div>
 </section>
 
+{{-- CSS Styling original Anda --}}
 <style>
-#how-to-order {
-    background: #1b0404ff; /* warna latar belakang hitam  */
-    color: #fff;
-     border-radius: 40px 40px 40px 40px; /* radius hanya di bawah */
-    overflow: hidden;
-}
-
-#how-to-order h2,
-#how-to-order h3,
-#how-to-order h5,
-#how-to-order p {
-    color: #fff !important;
-}
-
-#how-to-order img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-/* CSS untuk menyelaraskan teks dengan atas gambar HP */
+#how-to-order { background: #1b0404ff; color: #fff; border-radius: 40px 40px 40px 40px; overflow: hidden; }
+#how-to-order h2, #how-to-order h3, #how-to-order h5, #how-to-order p { color: #fff !important; }
+#how-to-order img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
 @media (min-width: 992px) {
-    #how-to-order .row {
-        align-items: start !important;
-    }
-    
-    #how-to-order .col-lg-6:first-child {
-        padding-top: 4rem !important;
-        padding-bottom: 4rem !important;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-    
-    #how-to-order .col-lg-6:last-child {
-        padding-top: 2rem !important;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-    }
-    
-    #how-to-order .col-lg-6:last-child img {
-        max-height: 450px;
-        width: auto;
-    }
+    #how-to-order .row { align-items: start !important; }
+    #how-to-order .col-lg-6:first-child { padding-top: 4rem !important; padding-bottom: 4rem !important; display: flex; flex-direction: column; justify-content: flex-start; }
+    #how-to-order .col-lg-6:last-child { padding-top: 2rem !important; display: flex; align-items: flex-start; justify-content: center; }
+    #how-to-order .col-lg-6:last-child img { max-height: 450px; width: auto; }
 }
-
 @media (max-width: 777.98px) {
-    #how-to-order .px-5 {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }
-    #how-to-order .py-4 {
-        padding-top: 1.5rem !important;
-        padding-bottom: 1.5rem !important;
-    }
+    #how-to-order .px-5 { padding-left: 1rem !important; padding-right: 1rem !important; }
+    #how-to-order .py-4 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
 }
 </style>
 
 {{-- ================================================================
-   SECTION: BLOG TERBARU — 3 artikel terbaru yang dipublikasikan
+    SECTION: BLOG TERBARU
 ================================================================ --}}
 <section id="blog" class="py-5">
     <div class="container">
@@ -346,7 +214,7 @@
 </section>
 
 {{-- ================================================================
-   SECTION: TENTANG KAMI — Ringkasan singkat dengan tombol menuju halaman penuh
+    SECTION: TENTANG KAMI
 ================================================================ --}}
 <section id="about" class="py-5 section-bg">
     <div class="container">
@@ -363,14 +231,18 @@
         </div>
     </div>
 </section>
-{{-- Script untuk bagian Interaktif --}}
+
+{{-- ================================================================
+    SCRIPT DAN STYLE UNTUK BAGIAN INTERAKTIF
+================================================================ --}}
 @php
     $coffeeModels = \App\Models\CoffeeItem::where('is_active', true)
         ->orderBy('sort_order')
         ->orderBy('id','desc')
         ->get();
-    $coffees = $coffeeModels->map(function($i){
+    $coffees = $coffeeModels->map(function($i, $key){
         return [
+            'id' => $key,
             'image' => $i->image_path ? asset('storage/'.$i->image_path) : asset('img/coffe/1.png'),
             'name' => $i->name ? asset('storage/'.$i->name) : null,
             'label' => $i->label ? asset('storage/'.$i->label) : null,
@@ -380,60 +252,100 @@
 @endphp
 @push('scripts')
 <style>
-@keyframes slideUp {
-    0% { opacity: 0; transform: translateY(50px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-.animate-up { animation: slideUp 0.8s ease forwards; }
+    /* 1. ANIMASI GRADIENT (HANYA AKTIF SAAT DIKLIK) */
+    .animated-gradient-bg {
+        background: linear-gradient(135deg, #670103, #420102 40%, #670103);
+        background-size: 300% 300%;
+        background-position: 0% 50%;
+        transition: background-position 0.5s ease;
+    }
+    .animated-gradient-bg.is-animating {
+        animation: animatedGradient 5s ease forwards;
+    }
+    @keyframes animatedGradient {
+        from { background-position: 0% 50%; }
+        to { background-position: 100% 50%; }
+    }
 
-@keyframes slideUpSmall {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-.animate-up-small { animation: slideUpSmall 0.5s ease forwards; }
+    /* 2. ANIMASI PRODUK POP-UP */
+    .product-enter-animation {
+        animation: product-pop 0.5s ease-out forwards;
+    }
+    @keyframes product-pop {
+        from { opacity: 0.5; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
 
-@keyframes zoomOut {
-    0% { transform: scale(1.2); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-.animate-zoom-out { animation: zoomOut 0.6s ease forwards; }
+    /* 3. STYLE THUMBNAIL AKTIF */
+    #thumbnail-container .card.active {
+        outline: 3px solid #FFD700;
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Animasi original Anda untuk teks (opsional, bisa disimpan atau dihapus) */
+    @keyframes slideUp { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
+    .animate-up { animation: slideUp 0.8s ease forwards; }
+    @keyframes slideUpSmall { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+    .animate-up-small { animation: slideUpSmall 0.5s ease forwards; }
 </style>
 
 <script id="coffee-data" type="application/json">{!! json_encode($coffees) !!}</script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Ambil data kopi dari HTML
     const dataEl = document.getElementById('coffee-data');
     let coffees = [];
     try {
         coffees = dataEl && dataEl.textContent ? JSON.parse(dataEl.textContent) : [];
     } catch (e) {
+        console.error("Gagal parse data kopi:", e);
         coffees = [];
     }
-    const thumbnailContainer = document.getElementById('thumbnail-container');
-    const thumbMobileWrap = document.getElementById('thumb-mobile-wrap');
-    const thumbDesktopWrap = document.getElementById('thumb-desktop-wrap');
+
+    // Deklarasi semua elemen yang dibutuhkan
+    const coffeeWrap = document.querySelector('.coffee-wrap');
+    const mainBox = document.getElementById('main-box');
     const mainImg = document.getElementById('main-img');
     const mainLabel = document.getElementById('main-label');
     const mainText = document.getElementById('main-text');
     const mainDesc = document.getElementById('main-desc');
+    const thumbnailContainer = document.getElementById('thumbnail-container');
+    const thumbMobileWrap = document.getElementById('thumb-mobile-wrap');
+    const thumbDesktopWrap = document.getElementById('thumb-desktop-wrap');
 
-    // tampilkan item pertama
-    if(coffees.length > 0){
-        mainImg.src = coffees[0].image;
-        if (coffees[0].label) { mainLabel.src = coffees[0].label; } else { mainLabel.removeAttribute('src'); }
-        if (coffees[0].name) { mainText.src = coffees[0].name; } else { mainText.removeAttribute('src'); }
-        if (coffees[0].desc) { mainDesc.src = coffees[0].desc; } else { mainDesc.removeAttribute('src'); }
+    // Fungsi utama untuk update tampilan saat thumbnail diklik
+    function updateProductDisplay(coffee) {
+        // Picu animasi "pop" pada gambar produk
+        mainBox.classList.remove('product-enter-animation');
+        void mainBox.offsetWidth;
+        mainBox.classList.add('product-enter-animation');
+
+        // Picu animasi gradien di latar belakang
+        if (coffeeWrap) {
+            coffeeWrap.classList.remove('is-animating');
+            void coffeeWrap.offsetWidth;
+            coffeeWrap.classList.add('is-animating');
+        }
+
+        // Ganti semua sumber gambar
+        mainImg.src = coffee.image;
+        if (coffee.label) { mainLabel.src = coffee.label; } else { mainLabel.removeAttribute('src'); }
+        if (coffee.name) { mainText.src = coffee.name; } else { mainText.removeAttribute('src'); }
+        if (coffee.desc) { mainDesc.src = coffee.desc; } else { mainDesc.removeAttribute('src'); }
+
+        // Tandai thumbnail yang aktif
+        document.querySelectorAll('#thumbnail-container .card').forEach(thumb => {
+            thumb.classList.toggle('active', thumb.dataset.id == coffee.id);
+        });
     }
-
-    // generate thumbnail
+    
+    // Buat dan tampilkan semua thumbnail
     coffees.forEach(coffee => {
         const thumb = document.createElement('div');
         thumb.className = 'card shadow-sm rounded-3 animate-up-small';
         thumb.style.cssText = 'min-width: 70px; width: 70px; height: 70px; cursor: pointer; overflow: hidden;';
-        thumb.dataset.image = coffee.image;
-        thumb.dataset.name = coffee.name;
-        thumb.dataset.label = coffee.label;
-        thumb.dataset.desc = coffee.desc;
+        thumb.dataset.id = coffee.id;
 
         const img = document.createElement('img');
         img.src = coffee.image;
@@ -443,43 +355,26 @@ document.addEventListener('DOMContentLoaded', function() {
         thumb.appendChild(img);
         thumbnailContainer.appendChild(thumb);
 
+        // Tambahkan event listener pada setiap thumbnail
         thumb.addEventListener('click', () => {
-            // reset animasi
-            ['animate-zoom-out','animate-up'].forEach(cls => {
-                mainImg.classList.remove(cls);
-                mainLabel.classList.remove(cls);
-                mainText.classList.remove(cls);
-                mainDesc.classList.remove(cls);
-                mainImg.parentElement.classList.remove(cls);
-            });
-
-            // force reflow agar animasi bisa diulang
-            void mainImg.offsetWidth;
-
-            // update gambar
-            mainImg.src = coffee.image;
-            if (coffee.label) { mainLabel.src = coffee.label; } else { mainLabel.removeAttribute('src'); }
-            if (coffee.name) { mainText.src = coffee.name; } else { mainText.removeAttribute('src'); }
-            if (coffee.desc) { mainDesc.src = coffee.desc; } else { mainDesc.removeAttribute('src'); }
-
-            // kasih animasi baru
-            mainImg.classList.add('animate-zoom-out'); // gambar utama tetap zoom-out
-            mainLabel.classList.add('animate-up');     // label persis sama animasi dengan text & desc
-            mainText.classList.add('animate-up');
-            mainDesc.classList.add('animate-up');
-            mainImg.parentElement.classList.add('animate-up');
+            updateProductDisplay(coffee);
         });
     });
 
-    // pindah thumbnails mobile/desktop
+    // Tampilkan produk pertama saat halaman dimuat
+    if(coffees.length > 0){
+        updateProductDisplay(coffees[0]);
+    }
+
+    // Fungsi untuk memindahkan thumbnail antara view mobile dan desktop
     function moveThumbnails() {
         if (window.innerWidth < 768) {
-            if (thumbMobileWrap && thumbnailContainer && thumbnailContainer.parentElement !== thumbMobileWrap) {
+            if (thumbMobileWrap && thumbnailContainer.parentElement !== thumbMobileWrap) {
                 thumbMobileWrap.innerHTML = '';
                 thumbMobileWrap.appendChild(thumbnailContainer);
             }
         } else {
-            if (thumbDesktopWrap && thumbnailContainer && thumbnailContainer.parentElement !== thumbDesktopWrap) {
+            if (thumbDesktopWrap && thumbnailContainer.parentElement !== thumbDesktopWrap) {
                 thumbDesktopWrap.innerHTML = '';
                 thumbDesktopWrap.appendChild(thumbnailContainer);
             }
@@ -491,6 +386,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 @endpush
 
-
 @endsection
-
