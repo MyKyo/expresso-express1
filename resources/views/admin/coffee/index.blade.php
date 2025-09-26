@@ -11,7 +11,8 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nama</th>
+                    <th>Nama (Gambar)</th>
+                    <th>Label (Gambar)</th>
                     <th>Aktif</th>
                     <th>Urutan</th>
                     <th>Aksi</th>
@@ -21,7 +22,16 @@
                 @forelse($items as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->name }}</td>
+                    <td>
+                        <img src="{{ asset('storage/' . $item->name) }}" alt="Coffee Item" style="max-width: 100px; height: auto;">
+                    </td>
+                    <td>
+                        @if($item->label)
+                            <img src="{{ asset('storage/' . $item->label) }}" alt="Label" style="max-width: 100px; height: auto;">
+                        @else
+                            No Label
+                        @endif
+                    </td>
                     <td>{{ $item->is_active ? 'Ya' : 'Tidak' }}</td>
                     <td>{{ $item->sort_order }}</td>
                     <td>

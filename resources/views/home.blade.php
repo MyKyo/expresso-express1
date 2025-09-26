@@ -338,29 +338,84 @@
     $imgMain = $about && $about->image_path ? asset('storage/'.$about->image_path) : asset('img/about/2.png');
 @endphp
 
+<style>
+#about .image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+#about .image-container img {
+    transition: transform 0.5s ease;
+}
+
+#about .image-container:hover img {
+    transform: scale(1.05);
+}
+
+#about .btn-dark {
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+#about .btn-dark:hover {
+    transform: translateY(-5px);
+    opacity: 1;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+}
+
+#about h2 {
+    position: relative;
+    display: inline-block;
+}
+
+#about h2::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #3f0c0c;
+    transition: all 0.3s ease;
+}
+
+#about h2:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+#about .lead {
+    transition: color 0.3s ease;
+}
+
+#about .lead:hover {
+    color: #3f0c0c;
+}
+</style>
+
 <section id="about" class="py-5">
     <div class="container">
         <div class="row align-items-center justify-content-center">
             
             {{-- Gambar Full dengan Tombol Overlay --}}
             <div class="col-12 mb-4">
-                <div class="position-relative d-inline-block w-100">
+                <div class="position-relative d-inline-block w-100 image-container">
                     {{-- Gambar Utama --}}
                     <img src="{{ $imgMain }}" 
                          alt="Tentang Kami"
-                         class="img-fluid w-100 rounded-4 shadow"
+                         class="img-fluid w-100 shadow"
                          style="max-height: 500px; object-fit: contain;">
 
                     {{-- Tombol Overlay --}}
                     <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
- <a href="{{ route('about.show') }}"
-   class="btn btn-dark px-4 py-2 fw-semibold shadow-sm position-absolute 
-          btn-sm btn-md px-md-4 py-md-2"
-   style="bottom: 20px; right: 20px;">
-    Selengkapnya
-</a>
-
-
+                        <a href="{{ route('about.show') }}"
+                           class="btn btn-dark px-4 py-2 fw-semibold shadow-sm position-absolute 
+                                  btn-sm btn-md px-md-4 py-md-2"
+                           style="bottom: 20px; right: 20px;">
+                            Selengkapnya
+                        </a>
+                    </div>
                 </div>
             </div>
 
