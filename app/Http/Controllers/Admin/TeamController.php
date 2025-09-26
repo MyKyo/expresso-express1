@@ -42,8 +42,7 @@ class TeamController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'position' => ['required', 'string', 'max:255'],
             'bio' => ['nullable', 'string'],
-            'email' => ['nullable', 'email', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:20'],
+            // 'email' dan 'phone' dihapus dari validasi
             'social_linkedin' => ['nullable', 'url', 'max:255'],
             'social_instagram' => ['nullable', 'url', 'max:255'],
             'social_twitter' => ['nullable', 'url', 'max:255'],
@@ -61,8 +60,7 @@ class TeamController extends Controller
             'name' => $validated['name'],
             'position' => $validated['position'],
             'bio' => $validated['bio'] ?? null,
-            'email' => $validated['email'] ?? null,
-            'phone' => $validated['phone'] ?? null,
+            // 'email' dan 'phone' dihapus dari assignment
             'social_linkedin' => $validated['social_linkedin'] ?? null,
             'social_instagram' => $validated['social_instagram'] ?? null,
             'social_twitter' => $validated['social_twitter'] ?? null,

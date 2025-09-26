@@ -16,8 +16,7 @@ class Team extends Model
         'position',
         'image_path',
         'bio',
-        'email',
-        'phone',
+    // 'email' dan 'phone' dihapus dari fillable
         'social_linkedin',
         'social_instagram',
         'social_twitter',

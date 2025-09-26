@@ -39,27 +39,6 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label>Email</label>
-                        <input type="email" name="email" class="form-control" value="{{ old('email') }}">
-                        @error('email')
-                            <div class="text-danger small">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label>Telepon</label>
-                        <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">
-                        @error('phone')
-                            <div class="text-danger small">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label>LinkedIn URL</label>

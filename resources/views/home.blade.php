@@ -9,7 +9,7 @@
 
 {{-- ================================================================
    SECTI
-    SECTION: PRODUK UNGGULAN (Carousel horizontal scroll)
+    SECTION: PRODUK UNGGULAN (Carousel)
 ================================================================ --}}
 <section id="menu" class="product-section bg-light py-5">
     <div class="position-relative">
@@ -73,8 +73,7 @@
                 </div>
 
                 <div id="main-col" class="col-lg-5 col-md-6 col-12 text-center order-md-2">
-                    {{-- class "animate-up" dihapus dari sini --}}
-                    <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white" style="max-width: 450px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
+                    <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 450px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
                         <img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
                     </div>
                     <div id="thumb-mobile-wrap" class="d-flex d-md-none mt-3 justify-content-center"></div>
@@ -163,13 +162,30 @@
 
         <!-- Tombol download -->
         <div class="d-flex gap-3 mt-2 justify-content-center justify-content-md-start align-items-center flex-wrap">
-    <a href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=id" class="store-btn">
-        <img src="{{ asset('assets/img/Asset_15.png') }}" alt="Get it on Google Play" class="img-fluid" style="height:48px;">
-    </a>
-    <a href="https://apps.apple.com/id/app/minecraft-bangun-bertahan/id479516143?l=id" class="store-btn">
-        <img src="{{ asset('assets/img/Asset_16.png') }}" alt="Download on the App Store" class="img-fluid" style="height:48px;">
-    </a>
-</div>
+            <a href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=id" class="text-decoration-none store-button">
+                <img src="{{ asset('assets/img/Asset_15.png') }}" alt="Get it on Google Play" class="img-fluid" style="height:48px;">
+            </a>
+            <a href="https://apps.apple.com/id/app/minecraft-bangun-bertahan/id479516143?l=id" class="text-decoration-none store-button">
+                <img src="{{ asset('assets/img/Asset_16.png') }}" alt="Download on the App Store" class="img-fluid" style="height:48px;">
+            </a>
+        </div>
+
+        <style>
+        .store-button {
+            transition: all 0.3s ease;
+            display: inline-block;
+            transform: translateY(0);
+        }
+        
+        .store-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            filter: brightness(1.1);
+        }
+        
+        .store-button:active {
+            transform: translateY(0) scale(0.95);
+        }
+        </style>
     </div>
 </div>
 
@@ -192,17 +208,6 @@
 .col-lg-6 .text-color {
     color: #ebdece !important;
 }
-.store-btn {
-    display: inline-block;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 12px; /* opsional, biar ada sudut membulat */
-    overflow: hidden;
-}
-
-.store-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
     </style>
 
 
@@ -214,6 +219,24 @@
 #how-to-order { background: #1b0404ff; color: #fff; border-radius: 40px 40px 40px 40px; overflow: hidden; }
 #how-to-order h2, #how-to-order h3, #how-to-order h5, #how-to-order p { color: #ebdece !important; }
 #how-to-order img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+#how-to-order .animated-gradient-bg {
+    background: linear-gradient(135deg, #670103, #420102 40%, #670103);
+    background-size: 300% 300%;
+    background-position: 0% 50%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#how-to-order .animated-gradient-bg:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 @media (min-width: 992px) {
     #how-to-order .row { align-items: start !important; }
     #how-to-order .col-lg-6:first-child { padding-top: 4rem !important; padding-bottom: 4rem !important; display: flex; flex-direction: column; justify-content: flex-start; }
@@ -232,9 +255,57 @@
 <section id="blog" class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold" style="font-family: 'Halima Sofira', sans-serif;">Dari Blog Kami</h2>
+            <h2 class="display-5 fw-bold blog-title" style="font-family: 'Halima Sofira', sans-serif;">Dari Blog Kami</h2>
             <p class="lead text-muted">Baca cerita dan tips menarik seputar dunia kopi.</p>
         </div>
+
+<style>
+/* Hover effects untuk "Dari Blog Kami" section */
+#blog .blog-title {
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+#blog .blog-title::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #3f0c0c;
+    transition: all 0.3s ease;
+}
+
+#blog .blog-title:hover {
+    color: #3f0c0c;
+}
+
+#blog .blog-title:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+#blog .card {
+    transition: all 0.3s ease;
+    border: none;
+    overflow: hidden;
+}
+
+#blog .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+#blog .card-img-top {
+    transition: all 0.5s ease;
+}
+
+#blog .card:hover .card-img-top {
+    transform: scale(1.05);
+}
+</style>
         @php
             $latestPosts = \App\Models\BlogPost::where('is_published', true)->latest('published_at')->take(3)->get();
         @endphp
@@ -259,28 +330,51 @@
     </div>
 </section>
 
+{{-- ================================================================
+    Tentang Kami
+================================================================ --}}
 @php
     $about = \App\Models\About::where('is_published', true)->latest('id')->first();
-    $bg = $about && $about->image_path ? asset('storage/'.$about->image_path) : asset('img/about/2.png');
-    $rawAboutText = $about ? strip_tags($about->content) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.';
-    
-    $cleanAboutText = preg_replace('/\b(kami\s+bersemangat)\b[^\.!?\n]*(?:[\.!?]|$)/i', '', $rawAboutText);
-    $aboutText = Str::limit(trim(preg_replace('/\s+/', ' ', $cleanAboutText)), 160);
+    $imgMain = $about && $about->image_path ? asset('storage/'.$about->image_path) : asset('img/about/2.png');
 @endphp
 
-<section id="about" class="py-5 section-bg">
-    <div class="container d-flex align-items-center justify-content-center rounded shadow overflow-hidden"
-         style="background: url('{{ $bg }}') no-repeat center center;
-                background-size: cover;
-                width: 100%;
-                min-height: 500px;
-                  border-radius: 50px; position: relative;">
-        <div class="row text-white w-100 p-4">
-            <div class="col-md-6 mt-4 mt-md-0 d-flex flex-column align-items-start justify-content-between" style="min-height: 260px;">
-                <p class="lead mb-3">{{ $aboutText }}</p>
+<section id="about" class="py-5">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            
+            {{-- Gambar Full dengan Tombol Overlay --}}
+            <div class="col-12 mb-4">
+                <div class="position-relative d-inline-block w-100">
+                    {{-- Gambar Utama --}}
+                    <img src="{{ $imgMain }}" 
+                         alt="Tentang Kami"
+                         class="img-fluid w-100 rounded-4 shadow"
+                         style="max-height: 500px; object-fit: contain;">
+
+                    {{-- Tombol Overlay --}}
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+ <a href="{{ route('about.show') }}"
+   class="btn btn-dark px-4 py-2 fw-semibold shadow-sm position-absolute 
+          btn-sm btn-md px-md-4 py-md-2"
+   style="bottom: 20px; right: 20px;">
+    Selengkapnya
+</a>
+
+
+                </div>
             </div>
+
+            {{-- Teks --}}
+            <div class="col-lg-10 text-center text-lg-start">
+                <h2 class="display-5 fw-bold mb-3" style="font-family: 'Halima Sofira', sans-serif;">
+                    {{ $about->title ?? 'Cerita di Balik Setiap Cangkir' }}
+                </h2>
+                <p class="lead mb-4">
+                    {{ $about ? Str::limit(strip_tags($about->content), 220) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.' }}
+                </p>
+            </div>
+
         </div>
-        <a href="{{ route('about.show') }}" class="btn btn-light position-absolute" style="left: 900px; bottom: 20px;">Selengkapnya</a>
     </div>
 </section>
 
@@ -319,27 +413,42 @@
         to { background-position: 100% 50%; }
     }
 
-    /* 2. ANIMASI PRODUK POP-UP */
-    .product-enter-animation {
-        animation: product-pop 0.5s ease-out forwards;
-    }
-    @keyframes product-pop {
-        from { opacity: 0.5; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
-    }
-
-    /* 3. STYLE THUMBNAIL AKTIF */
+    /* STYLE THUMBNAIL AKTIF */
     #thumbnail-container .card.active {
         outline: 3px solid #FFD700;
         transform: scale(1.1);
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-    /* Animasi original Anda untuk teks (opsional, bisa disimpan atau dihapus) */
-    @keyframes slideUp { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
-    .animate-up { animation: slideUp 0.8s ease forwards; }
-    @keyframes slideUpSmall { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
-    .animate-up-small { animation: slideUpSmall 0.5s ease forwards; }
+    /* Animasi untuk teks dan elemen */
+    @keyframes slideUp { 
+        0% { 
+            opacity: 0; 
+            transform: translateY(30px); 
+        } 
+        100% { 
+            opacity: 1; 
+            transform: translateY(0); 
+        } 
+    }
+    .animate-up { 
+        opacity: 0;
+        animation: slideUp 0.6s ease-out forwards;
+    }
+    @keyframes slideUpSmall { 
+        0% { 
+            opacity: 0; 
+            transform: translateY(15px); 
+        } 
+        100% { 
+            opacity: 1; 
+            transform: translateY(0); 
+        } 
+    }
+    .animate-up-small { 
+        opacity: 0;
+        animation: slideUpSmall 0.4s ease-out forwards;
+    }
 </style>
 
 <script id="coffee-data" type="application/json">{!! json_encode($coffees) !!}</script>
@@ -368,11 +477,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fungsi utama untuk update tampilan saat thumbnail diklik
     function updateProductDisplay(coffee) {
-        // Picu animasi "pop" pada gambar produk
-        mainBox.classList.remove('product-enter-animation');
-        void mainBox.offsetWidth;
-        mainBox.classList.add('product-enter-animation');
-
         // Picu animasi gradien di latar belakang
         if (coffeeWrap) {
             coffeeWrap.classList.remove('is-animating');
@@ -380,8 +484,21 @@ document.addEventListener('DOMContentLoaded', function() {
             coffeeWrap.classList.add('is-animating');
         }
 
-        // Ganti semua sumber gambar
+        // Reset animasi untuk main-box
+        mainBox.classList.remove('animate-up');
+        void mainBox.offsetWidth; // Force reflow
+        mainBox.classList.add('animate-up');
+
+        // Ganti sumber gambar
         mainImg.src = coffee.image;
+        
+        // Reset animations by removing and re-adding animate-up class
+        [mainLabel, mainText, mainDesc].forEach(el => {
+            el.classList.remove('animate-up');
+            void el.offsetWidth; // Force reflow
+            el.classList.add('animate-up');
+        });
+        
         if (coffee.label) { mainLabel.src = coffee.label; } else { mainLabel.removeAttribute('src'); }
         if (coffee.name) { mainText.src = coffee.name; } else { mainText.removeAttribute('src'); }
         if (coffee.desc) { mainDesc.src = coffee.desc; } else { mainDesc.removeAttribute('src'); }

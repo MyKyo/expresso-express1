@@ -14,7 +14,7 @@
                     <th>Foto</th>
                     <th>Nama</th>
                     <th>Posisi</th>
-                    <th>Email</th>
+                    <!-- Kolom Email dihapus -->
                     <th>Publik</th>
                     <th>Urutan</th>
                     <th>Aksi</th>
@@ -35,7 +35,7 @@
                     </td>
                     <td>{{ $team->name }}</td>
                     <td>{{ $team->position }}</td>
-                    <td>{{ $team->email ?? '-' }}</td>
+                    <!-- Data Email dihapus -->
                     <td>
                         <span class="badge {{ $team->is_published ? 'badge-success' : 'badge-secondary' }}">
                             {{ $team->is_published ? 'Ya' : 'Tidak' }}

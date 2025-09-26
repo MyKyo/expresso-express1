@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top shadow-sm px-0">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top px-0" id="mainNav">
         <div class="container-fluid px-3">
             <!-- Logo kiri -->
             <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
@@ -53,4 +53,39 @@
         width: 100%;
     }
 }
+
+/* Styling untuk navbar saat di-scroll */
+#mainNav {
+    transition: all 0.3s ease-in-out;
+    padding: 1rem 0;
+}   
+
+#mainNav.navbar-scrolled {
+    padding: 0.5rem 0;
+    background-color: #670103;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    margin: 1rem auto 0;
+    width: 90%;
+    max-width: 1200px;
+}
+
+@media (max-width: 991.98px) {
+    #mainNav.navbar-scrolled {
+        margin: 0.5rem auto 0;
+        width: 95%;
+    }
+}
 </style>
+
+<script>
+window.addEventListener('scroll', function() {
+    const mainNav = document.getElementById('mainNav');
+    if (window.scrollY > 50) {
+        mainNav.classList.add('navbar-scrolled');
+    } else {
+        mainNav.classList.remove('navbar-scrolled');
+    }
+});
+</script>

@@ -68,7 +68,7 @@ class CoffeeItemController extends Controller
     public function update(Request $request, CoffeeItem $coffee)
     {
         $validated = $request->validate([
-            'name' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
+            'name' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
             'label' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:4096'],
             'description' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:4096'],

@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('position');
             $table->string('image_path')->nullable();
             $table->text('bio')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
+            // Kolom email dan phone dihapus dari migration
             $table->string('social_linkedin')->nullable();
             $table->string('social_instagram')->nullable();
             $table->string('social_twitter')->nullable();
