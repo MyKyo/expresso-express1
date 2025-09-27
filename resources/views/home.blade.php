@@ -62,29 +62,56 @@
     height: 40px;
     justify-content: center;
     align-items: center;
-    transition: 0.3s;
-    position: absolute; /* biar bisa rapat ke dalam */
+    transition: all 0.3s ease;
+    position: absolute;
     z-index: 10;
+    border: none;
+    cursor: pointer;
 }
 
-/* Desktop: rapatkan tombol */
-#prev-btn {
-    left: 250px;
+/* Desktop & tablet positioning */
+@media (min-width: 768px) {
+    #prev-btn {
+        left: 2%;
+    }
+    #next-btn {
+        right: 2%;
+    }
 }
-#next-btn {
-    right: 250px;
+
+/* Large desktop positioning */
+@media (min-width: 1200px) {
+    #prev-btn {
+        left: 15%;
+    }
+    #next-btn {
+        right: 15%;
+    }
 }
 
 /* Mobile: tombol di dalam wrapper */
 #mobile-prev-btn {
-    left: 5px;
+    left: 10px;
 }
 #mobile-next-btn {
-    right: 5px;
+    right: 10px;
+}
+
+/* Additional mobile styles */
+@media (max-width: 767px) {
+    .product-nav-arrow {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .product-nav-arrow i {
+        font-size: 0.9em;
+    }
 }
 
 .product-nav-arrow:hover {
     background: rgba(0,0,0,0.7);
+    transform: translateY(-50%) scale(1.1);
 }
 </style>
 
