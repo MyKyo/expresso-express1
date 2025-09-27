@@ -207,20 +207,20 @@
     <div class="mb-4">
 
         <!-- Judul kecil -->
-        <h1 class="fw-bold mb-5 text-uppercase lh-1 fs-3 text-color">
+        <h1 class="mb-5 text-uppercase lh-1 fs-3 text-color" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">
             EXPRESSO EXPRESS APP
         </h1>
 
         <!-- Judul besar -->
-        <h5 class="fw-bold mb-5 lh-sm fs-2">
+        <h5 class="fw-bold mb-5 lh-sm fs-2" style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
             MOODBOOSTER KAMU<br>
             TERLETAK DI GENGGAMANMU!
         </h5>
 
         <!-- Sub headline -->
-        <h5 class="fw-bold mb-5 fs-2">
-            DAPATKAN PROMO DAN EXPERIENCE<br>
-            PENUH HANYA TERSEDIA DI APLIKASI
+        <h5 class="fw-bold mb-5 fs-2" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.2;">
+            DAPATKAN PROMO & EXPERIENCE<br>
+            PENUH HANYA DI APLIKASI
         </h5>
 
         <!-- Deskripsi -->

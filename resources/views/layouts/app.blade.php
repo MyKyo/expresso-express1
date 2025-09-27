@@ -27,6 +27,9 @@
             font-display: swap;
         }
 
+        /* Import Montserrat from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap');
+
         /* Menambahkan efek scroll yang halus saat mengklik link navigasi */
         html {
             scroll-behavior: smooth;
