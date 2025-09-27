@@ -50,6 +50,45 @@
     </div>
 </section>
 
+<!-- Custom CSS untuk merapatkan tombol carousel -->
+<style>
+.product-nav-arrow {
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    position: absolute; /* biar bisa rapat ke dalam */
+    z-index: 10;
+}
+
+/* Desktop: rapatkan tombol */
+#prev-btn {
+    left: 250px;
+}
+#next-btn {
+    right: 250px;
+}
+
+/* Mobile: tombol di dalam wrapper */
+#mobile-prev-btn {
+    left: 5px;
+}
+#mobile-next-btn {
+    right: 5px;
+}
+
+.product-nav-arrow:hover {
+    background: rgba(0,0,0,0.7);
+}
+</style>
+
+
 
 {{-- ================================================================
     SECTION: INTERAKTIF KOLEKSI KOPI
