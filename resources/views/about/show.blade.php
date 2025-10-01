@@ -6,7 +6,7 @@
 
 {{-- Banner Full Width --}}
 @if($about->image_path)
-    <div class="container-fluid px-0">
+    <div class="container-fluid px-0" style="padding-top: 25px;">
         <img src="{{ asset('storage/'.$about->image_path) }}"
              alt="{{ $about->title }}"
              class="d-block"

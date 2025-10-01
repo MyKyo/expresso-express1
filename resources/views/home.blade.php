@@ -8,7 +8,7 @@
 @section('content')
 
 {{-- ================================================================
-   SECTION: PRODUK UNGGULAN (Carousel)
+    SECTION: PRODUK UNGGULAN (Carousel)
 ================================================================ --}}
 <section id="menu" class="product-section bg-light py-5 scroll-reveal">
     <div class="position-relative">
@@ -455,11 +455,14 @@
 }
 </style>
 
+{{-- ============================================
+== ABOUT SECTION
+============================================ --}}
 <section id="about" class="py-5 scroll-reveal">
     <div class="container">
         <div class="row align-items-center justify-content-center">
             
-            {{-- Gambar Full dengan Tombol Overlay --}}
+            {{-- Gambar Full --}}
             <div class="col-12 mb-4">
                 <div class="position-relative d-inline-block w-100 image-container">
                     {{-- Gambar Utama --}}
@@ -467,27 +470,15 @@
                          alt="Tentang Kami"
                          class="img-fluid w-100 shadow"
                          style="max-height: 500px; object-fit: contain;">
-
-                    {{-- Tombol Overlay --}}
-                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
-                        <a href="{{ route('about.show') }}"
-                           class="btn btn-dark px-4 py-2 fw-semibold shadow-sm position-absolute 
-                                  btn-sm btn-md px-md-4 py-md-2"
-                           style="bottom: 20px; right: 20px;">
-                            Selengkapnya
-                        </a>
-                    </div>
                 </div>
             </div>
-
-            {{-- Teks --}}
-            <div class="col-lg-10 text-center text-lg-start">
-                <h2 class="display-5 fw-bold mb-3" style="font-family: 'Halima Sofira', sans-serif;">
-                    {{ $about->title ?? 'Cerita di Balik Setiap Cangkir' }}
-                </h2>
-                <p class="lead mb-4">
-                    {{ $about ? Str::limit(strip_tags($about->content), 220) : 'Kami percaya bahwa kopi berkualitas tidak harus mahal. Berawal dari mimpi sederhana untuk menyajikan kopi terbaik dari biji pilihan Indonesia kepada semua orang, kami lahir.' }}
-                </p>
+                {{-- Tombol di bawah teks --}}
+                <div class="text-center text-lg-start mt-4">
+                    <a href="{{ route('about.show') }}"
+                       class="btn btn-dark px-5 py-3 fw-semibold shadow-lg">
+                        <i class="bi bi-arrow-right-circle me-2"></i> Ikuti Perjalanan Kami
+                    </a>
+                </div>
             </div>
 
         </div>

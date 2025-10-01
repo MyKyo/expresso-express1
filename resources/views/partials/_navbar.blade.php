@@ -16,16 +16,16 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-center py-2" href="#menu">Menu</a>
+                        <a class="nav-link text-center py-2" href="{{ url('/#menu') }}">Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-center py-2" href="#how-to-order">How to Order</a>
+                        <a class="nav-link text-center py-2" href="{{ url('/#how-to-order') }}">How to Order</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-center py-2" href="#about">About Us</a>
+                        <a class="nav-link text-center py-2" href="{{ url('/#about') }}">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-center py-2" href="#blog">Blog</a>
+                        <a class="nav-link text-center py-2" href="{{ url('/#blog') }}">Blog</a>
                     </li>
                 </ul>
             </div>
