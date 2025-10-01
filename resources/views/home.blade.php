@@ -313,83 +313,257 @@
 {{-- ================================================================
     SECTION: BLOG TERBARU
 ================================================================ --}}
-<section id="blog" class="py-5 scroll-reveal">
+<section id="blog" class="py-5 scroll-reveal" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
     <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold blog-title" style="font-family: 'Halima Sofira', sans-serif;">Dari Blog Kami</h2>
-            <p class="lead text-muted">Baca cerita dan tips menarik seputar dunia kopi.</p>
+        <!-- Header Section -->
+        <div class="text-center mb-5 animate-fade-in">
+            <h1 class="display-4 fw-bold mb-3" style="font-family: 'Halima Sofira', sans-serif; color: #670103;">
+                Dari Blog Kami
+            </h1>
+            <div class="header-divider mx-auto mb-4"></div>
+            <p class="lead text-muted" style="max-width: 600px; margin: 0 auto;">
+                Baca cerita dan tips menarik seputar dunia kopi
+            </p>
         </div>
 
-<style>
-/* Hover effects untuk "Dari Blog Kami" section */
-#blog .blog-title {
-    position: relative;
-    display: inline-block;
-    transition: color 0.3s ease;
-}
-
-#blog .blog-title::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 50%;
-    background-color: #3f0c0c;
-    transition: all 0.3s ease;
-}
-
-#blog .blog-title:hover {
-    color: #3f0c0c;
-}
-
-#blog .blog-title:hover::after {
-    width: 100%;
-    left: 0;
-}
-
-#blog .card {
-    transition: all 0.3s ease;
-    border: none;
-    overflow: hidden;
-}
-
-#blog .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
-}
-
-#blog .card-img-top {
-    transition: all 0.5s ease;
-}
-
-#blog .card:hover .card-img-top {
-    transform: scale(1.05);
-}
-</style>
         @php
             $latestPosts = \App\Models\BlogPost::where('is_published', true)->latest('published_at')->take(3)->get();
         @endphp
-        <div class="row">
+
+        <!-- Blog Grid -->
+        <div class="row g-4">
             @forelse($latestPosts as $index => $post)
-            <div class="col-lg-4 col-md-6 mb-4 scroll-reveal scroll-reveal-delay-{{ ($index % 3) + 1 }}">
-                <div class="card h-100 shadow-sm">
-                    @if($post->cover_path)
-                        <img src="{{ asset('storage/'.$post->cover_path) }}" class="card-img-top" alt="{{ $post->title }}">
-                    @endif
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $post->title }}</h5>
-                        <p class="card-text">{{ Str::limit(strip_tags($post->excerpt ?: $post->content), 120) }}</p>
-                        <a href="{{ route('blog.show', $post->slug) }}" class="btn btn-sm btn-outline-dark">Baca Selengkapnya</a>
-                    </div>
-                </div>
+            <div class="col-lg-4 col-md-6 scroll-reveal scroll-reveal-delay-{{ ($index % 3) + 1 }}">
+                <article class="blog-card h-100">
+                    <a href="{{ route('blog.show', $post->slug) }}" class="blog-card-link">
+                        <div class="blog-image-wrapper">
+                            @if($post->cover_path)
+                                <img src="{{ asset('storage/'.$post->cover_path) }}" 
+                                     class="blog-image" 
+                                     alt="{{ $post->title }}"
+                                     loading="lazy">
+                            @else
+                                <div class="blog-image-placeholder">
+                                    <i class="bi bi-cup-hot"></i>
+                                </div>
+                            @endif
+                            <div class="blog-overlay">
+                                <span class="read-more-badge">
+                                    Baca Artikel <i class="bi bi-arrow-right ms-2"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title-card">{{ $post->title }}</h3>
+                            <p class="blog-excerpt">
+                                {{ Str::limit($post->excerpt ?: strip_tags($post->content), 100) }}
+                            </p>
+                            <div class="blog-meta">
+                                <span class="meta-date">
+                                    <i class="bi bi-calendar3 me-1"></i>
+                                    {{ $post->published_at ? $post->published_at->format('d M Y') : 'Baru' }}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
             </div>
             @empty
-            <div class="col-12 text-center">Belum ada artikel.</div>
+                <div class="col-12">
+                    <div class="empty-state text-center py-5">
+                        <i class="bi bi-journal-text mb-3" style="font-size: 4rem; color: #dee2e6;"></i>
+                        <h3 class="text-muted">Belum ada artikel</h3>
+                        <p class="text-muted">Nantikan artikel menarik dari kami segera!</p>
+                    </div>
+                </div>
             @endforelse
         </div>
     </div>
 </section>
+
+<style>
+/* ===================================
+   BLOG SECTION STYLES
+=================================== */
+#blog .header-divider {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #670103, #9d2533);
+    border-radius: 2px;
+}
+
+/* Blog Card Styles */
+#blog .blog-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+#blog .blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(103, 1, 3, 0.15);
+}
+
+#blog .blog-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Image Styles */
+#blog .blog-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 65%; /* 16:10 aspect ratio */
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+}
+
+#blog .blog-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#blog .blog-card:hover .blog-image {
+    transform: scale(1.1);
+}
+
+#blog .blog-image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: #670103;
+    opacity: 0.3;
+}
+
+/* Overlay Styles */
+#blog .blog-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(103, 1, 3, 0.9) 0%, transparent 70%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#blog .blog-card:hover .blog-overlay {
+    opacity: 1;
+}
+
+#blog .read-more-badge {
+    background: white;
+    color: #670103;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+}
+
+#blog .blog-card:hover .read-more-badge {
+    transform: translateY(0);
+}
+
+/* Content Styles */
+#blog .blog-content {
+    padding: 1.8rem;
+}
+
+#blog .blog-title-card {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.3s ease;
+}
+
+#blog .blog-card:hover .blog-title-card {
+    color: #670103;
+}
+
+#blog .blog-excerpt {
+    font-size: 0.95rem;
+    color: #636e72;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Meta Styles */
+#blog .blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+#blog .meta-date {
+    font-size: 0.85rem;
+    color: #95a5a6;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+/* Empty State */
+#blog .empty-state {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #blog .blog-title-card {
+        font-size: 1.2rem;
+    }
+    
+    #blog .blog-excerpt {
+        font-size: 0.9rem;
+        -webkit-line-clamp: 2;
+    }
+    
+    #blog .blog-content {
+        padding: 1.5rem;
+    }
+
+    #blog .blog-image-wrapper {
+        padding-top: 70%;
+    }
+}
+</style>
 
 {{-- ================================================================
     Tentang Kami
@@ -400,87 +574,100 @@
 @endphp
 
 <style>
+/* About Section Divider */
+.about-divider {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #670103, #9d2533);
+    border-radius: 2px;
+}
+
+/* About Image Container */
 #about .image-container {
     position: relative;
     overflow: hidden;
-    border-radius: 1rem;
+    border-radius: 20px;
 }
 
 #about .image-container img {
-    transition: transform 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #about .image-container:hover img {
     transform: scale(1.05);
 }
 
-#about .btn-dark {
-    transition: all 0.3s ease;
-    opacity: 0.9;
+/* Custom Button for About Section */
+.btn-about-custom {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, #670103, #9d2533);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    box-shadow: 0 10px 30px rgba(103, 1, 3, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
 }
 
-#about .btn-dark:hover {
+.btn-about-custom:hover {
     transform: translateY(-5px);
-    opacity: 1;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+    box-shadow: 0 15px 40px rgba(103, 1, 3, 0.4);
+    color: white;
+    background: linear-gradient(135deg, #9d2533, #670103);
 }
 
-#about h2 {
-    position: relative;
-    display: inline-block;
+.btn-about-custom:active {
+    transform: translateY(-2px);
 }
 
-#about h2::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 50%;
-    background-color: #3f0c0c;
-    transition: all 0.3s ease;
+.btn-about-custom i {
+    transition: transform 0.3s ease;
 }
 
-#about h2:hover::after {
-    width: 100%;
-    left: 0;
-}
-
-#about .lead {
-    transition: color 0.3s ease;
-}
-
-#about .lead:hover {
-    color: #3f0c0c;
+.btn-about-custom:hover i {
+    transform: translateX(5px);
 }
 </style>
 
 {{-- ============================================
 == ABOUT SECTION
 ============================================ --}}
-<section id="about" class="py-5 scroll-reveal">
+<section id="about" class="py-5 scroll-reveal" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
     <div class="container">
+        <!-- Header Section -->
+        <div class="text-center mb-5 animate-fade-in">
+            <h1 class="display-4 fw-bold mb-3" style="font-family: 'Halima Sofira', sans-serif; color: #670103;">
+                Tentang Kami
+            </h1>
+            <div class="about-divider mx-auto mb-4"></div>
+            <p class="lead text-muted" style="max-width: 600px; margin: 0 auto;">
+                Kenali lebih dekat perjalanan kami dalam menghadirkan kopi terbaik untuk Anda
+            </p>
+        </div>
+
         <div class="row align-items-center justify-content-center">
-            
             {{-- Gambar Full --}}
             <div class="col-12 mb-4">
                 <div class="position-relative d-inline-block w-100 image-container">
                     {{-- Gambar Utama --}}
                     <img src="{{ $imgMain }}" 
                          alt="Tentang Kami"
-                         class="img-fluid w-100 shadow"
-                         style="max-height: 500px; object-fit: contain;">
+                         class="img-fluid w-100"
+                         style="max-height: 500px; object-fit: contain; border-radius: 20px; box-shadow: 0 15px 40px rgba(103, 1, 3, 0.15);">
                 </div>
             </div>
-                {{-- Tombol di bawah teks --}}
-                <div class="text-center text-lg-start mt-4">
-                    <a href="{{ route('about.show') }}"
-                       class="btn btn-dark px-5 py-3 fw-semibold shadow-lg">
-                        <i class="bi bi-arrow-right-circle me-2"></i> Ikuti Perjalanan Kami
-                    </a>
-                </div>
+            
+            {{-- Tombol di bawah gambar --}}
+            <div class="text-center mt-4">
+                <a href="{{ route('about.show') }}"
+                   class="btn-about-custom">
+                    <i class="bi bi-arrow-right-circle me-2"></i> Ikuti Perjalanan Kami
+                </a>
             </div>
-
         </div>
     </div>
 </section>
