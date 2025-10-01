@@ -68,7 +68,7 @@
     border-radius: 1rem;
     margin: 1rem auto 0;
     width: 90%;
-    max-width: 1200px;
+    max-width: 1305px;
 }
 
 @media (max-width: 991.98px) {

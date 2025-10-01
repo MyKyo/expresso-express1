@@ -8,10 +8,9 @@
 @section('content')
 
 {{-- ================================================================
-   SECTI
-    SECTION: PRODUK UNGGULAN (Carousel)
+   SECTION: PRODUK UNGGULAN (Carousel)
 ================================================================ --}}
-<section id="menu" class="product-section bg-light py-5">
+<section id="menu" class="product-section bg-light py-5 scroll-reveal">
     <div class="position-relative">
         <div class="product-scroll-wrapper" id="product-wrapper">
             @php
@@ -121,34 +120,34 @@
     SECTION: INTERAKTIF KOLEKSI KOPI
 ================================================================ --}}
 <section style="padding:60px 0; background: transparent;">
-    <div class="container">
+    <div class="container scroll-reveal">
         {{-- Class "animated-gradient-bg" ditambahkan di sini --}}
         <div class="rounded-5 shadow overflow-hidden coffee-wrap animated-gradient-bg">
             <div class="row g-2 align-items-center justify-content-center p-4 p-md-4">
             
                 <div class="col-md-6 d-flex flex-column justify-content-center text-white text-center text-md-start order-md-1">
-                    <img id="main-label" class="mb-3 animate-up" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
-                    <img id="main-text" class="mb-3 animate-up"  style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
-                    <img id="main-desc" class="mb-3 animate-up"  style="max-width: 420px; width:100%; height:auto; object-fit:contain;" />
-                    <p class="text-white small fw-semibold mt-2 mb-1">
+                    <img id="main-label" class="mb-3 scroll-reveal scroll-reveal-delay-1" style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
+                    <img id="main-text" class="mb-3 scroll-reveal scroll-reveal-delay-2"  style="max-width: 320px; width:100%; height:auto; object-fit:contain;" />
+                    <img id="main-desc" class="mb-3 scroll-reveal scroll-reveal-delay-3"  style="max-width: 420px; width:100%; height:auto; object-fit:contain;" />
+                    <p class="text-white small fw-semibold mt-2 mb-1 scroll-reveal scroll-reveal-delay-1">
                         <i class="bi bi-box-seam me-2"></i> Pilih Kemasanmu
                     </p>
-                    <div id="thumb-desktop-wrap" class="mt-2 d-none d-md-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
+                    <div id="thumb-desktop-wrap" class="mt-2 d-none d-md-flex flex-wrap gap-3 justify-content-center justify-content-md-start scroll-reveal scroll-reveal-delay-2">
                         <div id="thumbnail-container" class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start"></div>
                     </div>
                 </div>
 
                 <div id="main-col" class="col-lg-5 col-md-6 col-12 text-center order-md-2">
-                    <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white animate-up" style="max-width: 450px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
+                    <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white scroll-reveal" style="max-width: 450px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
                         <img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
                     </div>
-                    <div id="thumb-mobile-wrap" class="d-flex d-md-none mt-3 justify-content-center"></div>
+                    <div id="thumb-mobile-wrap" class="d-flex d-md-none mt-3 justify-content-center scroll-reveal scroll-reveal-delay-1"></div>
                 </div>
 
             </div>
         </div>
     </div>
-</section>  
+</section>  
 
 {{-- CSS Styling original Anda --}}
 <style>
@@ -198,7 +197,7 @@
     SECTION: HOW TO ORDER (APP DOWNLOAD)
 ================================================================ --}}
 <section id="how-to-order" style="padding:4px 0; background: transparent;">
-    <div class="container">
+    <div class="container scroll-reveal">
         <div class="rounded-5 shadow overflow-hidden animated-gradient-bg">
             <div class="row g-2 align-items-center justify-content-center p-4 p-md-4">
 
@@ -207,20 +206,20 @@
     <div class="mb-4">
 
         <!-- Judul kecil -->
-        <h1 class="mb-5 text-uppercase lh-1 fs-3 text-color" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">
+        <h1 class="fw-bold mb-5 text-uppercase lh-1 fs-3 text-color">
             EXPRESSO EXPRESS APP
         </h1>
 
         <!-- Judul besar -->
-        <h5 class="fw-bold mb-5 lh-sm fs-2" style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+        <h5 class="fw-bold mb-5 lh-sm fs-2">
             MOODBOOSTER KAMU<br>
             TERLETAK DI GENGGAMANMU!
         </h5>
 
         <!-- Sub headline -->
-        <h5 class="fw-bold mb-5 fs-2" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.2;">
-            DAPATKAN PROMO & EXPERIENCE<br>
-            PENUH HANYA DI APLIKASI
+        <h5 class="fw-bold mb-5 fs-2">
+            DAPATKAN PROMO DAN EXPERIENCE<br>
+            PENUH HANYA TERSEDIA DI APLIKASI
         </h5>
 
         <!-- Deskripsi -->
@@ -228,7 +227,7 @@
 
         <!-- Tombol download -->
         <div class="d-flex gap-3 mt-2 justify-content-center justify-content-md-start align-items-center flex-wrap">
-            <a href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=id" class="text-decoration-none store-button">
+            <a href="https://play.google.com/store/apps/details?id=com.garena.game.codm&hl=id" class="text-decoration-none store-button">
                 <img src="{{ asset('assets/img/Asset_15.png') }}" alt="Get it on Google Play" class="img-fluid" style="height:48px;">
             </a>
             <a href="https://apps.apple.com/id/app/minecraft-bangun-bertahan/id479516143?l=id" class="text-decoration-none store-button">
@@ -274,11 +273,7 @@
 .col-lg-6 .text-color {
     color: #ebdece !important;
 }
-    </style>
-
-
-
-
+</style>
 
 {{-- CSS Styling original Anda --}}
 <style>
@@ -318,7 +313,7 @@
 {{-- ================================================================
     SECTION: BLOG TERBARU
 ================================================================ --}}
-<section id="blog" class="py-5">
+<section id="blog" class="py-5 scroll-reveal">
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="display-5 fw-bold blog-title" style="font-family: 'Halima Sofira', sans-serif;">Dari Blog Kami</h2>
@@ -376,8 +371,8 @@
             $latestPosts = \App\Models\BlogPost::where('is_published', true)->latest('published_at')->take(3)->get();
         @endphp
         <div class="row">
-            @forelse($latestPosts as $post)
-            <div class="col-lg-4 col-md-6 mb-4">
+            @forelse($latestPosts as $index => $post)
+            <div class="col-lg-4 col-md-6 mb-4 scroll-reveal scroll-reveal-delay-{{ ($index % 3) + 1 }}">
                 <div class="card h-100 shadow-sm">
                     @if($post->cover_path)
                         <img src="{{ asset('storage/'.$post->cover_path) }}" class="card-img-top" alt="{{ $post->title }}">
@@ -460,7 +455,7 @@
 }
 </style>
 
-<section id="about" class="py-5">
+<section id="about" class="py-5 scroll-reveal">
     <div class="container">
         <div class="row align-items-center justify-content-center">
             
@@ -519,6 +514,50 @@
 @endphp
 @push('scripts')
 <style>
+    /* ================================================================
+       SCROLL ANIMATION STYLES - MINIMALIST
+    ================================================================ */
+    .scroll-reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .scroll-reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .scroll-reveal-left {
+        opacity: 0;
+        transform: translateX(-30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .scroll-reveal-left.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .scroll-reveal-right {
+        opacity: 0;
+        transform: translateX(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .scroll-reveal-right.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Delay untuk efek stagger */
+    .scroll-reveal-delay-1 { transition-delay: 0.1s; }
+    .scroll-reveal-delay-2 { transition-delay: 0.2s; }
+    .scroll-reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ================================================================
+       COFFEE SECTION STYLES
+    ================================================================ */
     /* 1. ANIMASI GRADIENT (HANYA AKTIF SAAT DIKLIK) */
     .animated-gradient-bg {
         background: linear-gradient(135deg, #670103, #420102 40%, #670103);
@@ -541,7 +580,7 @@
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-    /* Animasi untuk teks dan elemen */
+    /* Animasi untuk teks dan elemen - Tetap digunakan untuk interaksi klik */
     @keyframes slideUp { 
         0% { 
             opacity: 0; 
@@ -553,7 +592,6 @@
         } 
     }
     .animate-up { 
-        opacity: 0;
         animation: slideUp 0.6s ease-out forwards;
     }
     @keyframes slideUpSmall { 
@@ -567,7 +605,6 @@
         } 
     }
     .animate-up-small { 
-        opacity: 0;
         animation: slideUpSmall 0.4s ease-out forwards;
     }
 </style>
@@ -575,6 +612,36 @@
 <script id="coffee-data" type="application/json">{!! json_encode($coffees) !!}</script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // ================================================================
+    // SCROLL ANIMATION FUNCTIONALITY
+    // ================================================================
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85 &&
+            rect.bottom >= 0
+        );
+    }
+
+    function revealOnScroll() {
+        const elements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right');
+        
+        elements.forEach(element => {
+            if (isInViewport(element) && !element.classList.contains('active')) {
+                element.classList.add('active');
+            }
+        });
+    }
+
+    // Jalankan saat scroll
+    window.addEventListener('scroll', revealOnScroll);
+    
+    // Jalankan saat halaman pertama kali dimuat
+    revealOnScroll();
+
+    // ================================================================
+    // COFFEE INTERACTIVE SECTION
+    // ================================================================
     // Ambil data kopi dari HTML
     const dataEl = document.getElementById('coffee-data');
     let coffees = [];
@@ -605,19 +672,17 @@ document.addEventListener('DOMContentLoaded', function() {
             coffeeWrap.classList.add('is-animating');
         }
 
-        // Reset animasi untuk main-box
-        mainBox.classList.remove('animate-up');
-        void mainBox.offsetWidth; // Force reflow
+        // Tambahkan animasi saat klik (tidak mengganggu scroll reveal)
         mainBox.classList.add('animate-up');
+        setTimeout(() => mainBox.classList.remove('animate-up'), 600);
 
         // Ganti sumber gambar
         mainImg.src = coffee.image;
         
-        // Reset animations by removing and re-adding animate-up class
-        [mainLabel, mainText, mainDesc].forEach(el => {
-            el.classList.remove('animate-up');
-            void el.offsetWidth; // Force reflow
+        // Tambahkan animasi untuk elemen teks saat klik
+        [mainLabel, mainText, mainDesc].forEach((el, idx) => {
             el.classList.add('animate-up');
+            setTimeout(() => el.classList.remove('animate-up'), 600);
         });
         
         if (coffee.label) { mainLabel.src = coffee.label; } else { mainLabel.removeAttribute('src'); }
