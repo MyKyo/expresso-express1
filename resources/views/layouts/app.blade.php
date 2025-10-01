@@ -8,7 +8,8 @@
     <title>@yield('title', 'Expresso Express') - Expresso Express</title>
 
     <!-- Favicon (Icon di Tab Browser) -->
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logo.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/logo/logos.png') }}">
+
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
