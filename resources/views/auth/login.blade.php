@@ -26,7 +26,7 @@
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
 				<a href="/">
-					<img src="{{url('assets-admin')}}/vendors/images/started.svg" alt="">
+					<img src="{{url('assets')}}/img/logo/logo.png" alt="">
 				</a>
 			</div>
 		</div>

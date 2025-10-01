@@ -137,11 +137,16 @@
                     </div>
                 </div>
 
-                <div id="main-col" class="col-lg-5 col-md-6 col-12 text-center order-md-2">
-                    <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white scroll-reveal" style="max-width: 450px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px;">
+                <div id="main-col" class="col-lg-5 col-md-6 col-12 text-center order-md-2 position-relative">
+                    <!-- Gambar Background Absolute -->
+                    <div class="position-absolute coffee-bg-decoration" style="z-index: 0;">
+                        <img src="{{ asset('assets/img/Asset_42.png') }}" alt="background decoration" class="w-100 h-100 object-fit-contain">
+                    </div>
+                    
+                    <div id="main-box" class="mx-auto d-flex align-items-center justify-content-center fw-bold text-white scroll-reveal position-relative" style="max-width: 450px; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 20px; z-index: 1;">
                         <img src="" alt="coffee image" class="w-100 h-100 object-fit-contain" id="main-img">
                     </div>
-                    <div id="thumb-mobile-wrap" class="d-flex d-md-none mt-3 justify-content-center scroll-reveal scroll-reveal-delay-1"></div>
+                    <div id="thumb-mobile-wrap" class="d-flex d-md-none mt-3 justify-content-center scroll-reveal scroll-reveal-delay-1 position-relative" style="z-index: 1;"></div>
                 </div>
 
             </div>
@@ -164,6 +169,78 @@
     #thumbnail-container { display: inline-flex !important; flex-wrap: nowrap !important; gap: 12px !important; padding: 6px 4px; }
     #main-box { width: 100% !important; max-width: 90vw !important; margin: 0 auto; }
     .coffee-wrap { overflow: hidden !important; }
+}
+
+/* ===== BACKGROUND DECORATION - RESPONSIF ===== */
+.coffee-bg-decoration {
+    /* Default untuk mobile kecil */
+    width: 280px !important;
+    height: 280px !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0) rotate(45deg) !important; /* Mulai dari ukuran 0 dengan rotasi */
+    transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; /* Animasi bounce-out effect */
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* Class untuk mengaktifkan animasi zoom dari 0 ke 100% */
+.coffee-bg-decoration.animate-in {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg) !important; /* Zoom dari 0% ke 100% tanpa rotasi */
+    opacity: 1;
+    transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1.2s ease !important;
+}
+
+/* Animasi pulse tambahan saat hover thumbnail */
+.coffee-bg-decoration.pulse {
+    animation: backgroundPulse 0.6s ease-out;
+}
+
+@keyframes backgroundPulse {
+    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    25% { transform: translate(-50%, -50%) scale(0.95) rotate(-3deg); }
+    50% { transform: translate(-50%, -50%) scale(1.08) rotate(2deg); }
+    75% { transform: translate(-50%, -50%) scale(0.98) rotate(-1deg); }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+}
+
+/* Mobile Sedang */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .coffee-bg-decoration {
+        width: 320px !important;
+        height: 320px !important;
+    }
+}
+
+/* Tablet - posisi mengikuti main-box yang bergeser */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .coffee-bg-decoration {
+        width: 380px !important;
+        height: 380px !important;
+        top: 50% !important;
+        left: 60% !important; /* Sedikit ke kanan mengikuti box */
+    }
+}
+
+/* Desktop - posisi mengikuti main-box */
+@media (min-width: 992px) {
+    .coffee-bg-decoration {
+        width: 450px !important;
+        height: 450px !important;
+        top: 45% !important;
+        left: 65% !important; /* Mengikuti posisi main-box */
+    }
+}
+
+/* Desktop Besar - posisi mengikuti main-box yang lebih tinggi */
+@media (min-width: 1200px) {
+    .coffee-bg-decoration {
+        width: 500px !important;
+        height: 500px !important;
+        top: 50% !important; /* Mengikuti main-box yang naik ke atas */
+        left: 70% !important; /* Lebih ke kanan */
+    }
 }
 </style>
 <style>
@@ -732,6 +809,15 @@
     .scroll-reveal-delay-1 { transition-delay: 0.1s; }
     .scroll-reveal-delay-2 { transition-delay: 0.2s; }
     .scroll-reveal-delay-3 { transition-delay: 0.3s; }
+    
+    /* Prevent animation conflicts */
+    .scroll-reveal.active {
+        pointer-events: auto;
+    }
+    
+    .scroll-reveal:not(.active) {
+        pointer-events: none;
+    }
 
     /* ================================================================
        COFFEE SECTION STYLES
@@ -854,18 +940,39 @@ document.addEventListener('DOMContentLoaded', function() {
         mainBox.classList.add('animate-up');
         setTimeout(() => mainBox.classList.remove('animate-up'), 600);
 
-        // Ganti sumber gambar
-        mainImg.src = coffee.image;
+        // Ganti sumber gambar dengan preload untuk menghindari flicker
+        const img = new Image();
+        img.onload = () => {
+            mainImg.src = coffee.image;
+        };
+        img.src = coffee.image;
         
-        // Tambahkan animasi untuk elemen teks saat klik
+        // Tambahkan animasi untuk elemen teks saat klik dengan stagger effect
         [mainLabel, mainText, mainDesc].forEach((el, idx) => {
-            el.classList.add('animate-up');
-            setTimeout(() => el.classList.remove('animate-up'), 600);
+            if (el) {
+                el.classList.add('animate-up');
+                setTimeout(() => el.classList.remove('animate-up'), 600 + (idx * 100));
+            }
         });
         
-        if (coffee.label) { mainLabel.src = coffee.label; } else { mainLabel.removeAttribute('src'); }
-        if (coffee.name) { mainText.src = coffee.name; } else { mainText.removeAttribute('src'); }
-        if (coffee.desc) { mainDesc.src = coffee.desc; } else { mainDesc.removeAttribute('src'); }
+        // Update text elements with proper null checks
+        if (coffee.label && mainLabel) { 
+            mainLabel.src = coffee.label; 
+        } else if (mainLabel) { 
+            mainLabel.removeAttribute('src'); 
+        }
+        
+        if (coffee.name && mainText) { 
+            mainText.src = coffee.name; 
+        } else if (mainText) { 
+            mainText.removeAttribute('src'); 
+        }
+        
+        if (coffee.desc && mainDesc) { 
+            mainDesc.src = coffee.desc; 
+        } else if (mainDesc) { 
+            mainDesc.removeAttribute('src'); 
+        }
 
         // Tandai thumbnail yang aktif
         document.querySelectorAll('#thumbnail-container .card').forEach(thumb => {
@@ -891,12 +998,70 @@ document.addEventListener('DOMContentLoaded', function() {
         // Tambahkan event listener pada setiap thumbnail
         thumb.addEventListener('click', () => {
             updateProductDisplay(coffee);
+            animateBackgroundDecoration();
         });
     });
+
+    // Fungsi untuk animasi background decoration dengan efek zoom out yang lebih dramatis
+    function animateBackgroundDecoration() {
+        const bgDecoration = document.querySelector('.coffee-bg-decoration');
+        if (bgDecoration) {
+            // Reset semua class animasi
+            bgDecoration.classList.remove('animate-in', 'pulse');
+            
+            // Trigger reflow untuk memastikan class dihapus
+            void bgDecoration.offsetWidth;
+            
+            // Tambahkan class animasi zoom out setelah delay singkat
+            requestAnimationFrame(() => {
+                bgDecoration.classList.add('animate-in');
+                
+                // Tambahkan efek pulse setelah zoom out selesai
+                setTimeout(() => {
+                    bgDecoration.classList.add('pulse');
+                    
+                    // Hapus class pulse setelah animasi selesai
+                    setTimeout(() => {
+                        bgDecoration.classList.remove('pulse');
+                    }, 600);
+                }, 1200); // Increased delay to match CSS animation duration
+            });
+        }
+    }
+    
+    // Fungsi untuk efek hover pada thumbnail dengan animasi background
+    function addThumbnailHoverEffects() {
+        document.querySelectorAll('#thumbnail-container .card').forEach(thumb => {
+            // Remove existing listeners to prevent duplicates
+            thumb.removeEventListener('mouseenter', thumb._hoverHandler);
+            
+            // Create new handler
+            thumb._hoverHandler = () => {
+                const bgDecoration = document.querySelector('.coffee-bg-decoration');
+                if (bgDecoration && !thumb.classList.contains('active')) {
+                    // Prevent multiple pulse animations
+                    if (!bgDecoration.classList.contains('pulse')) {
+                        bgDecoration.classList.add('pulse');
+                        setTimeout(() => {
+                            bgDecoration.classList.remove('pulse');
+                        }, 600);
+                    }
+                }
+            };
+            
+            thumb.addEventListener('mouseenter', thumb._hoverHandler);
+        });
+    }
 
     // Tampilkan produk pertama saat halaman dimuat
     if(coffees.length > 0){
         updateProductDisplay(coffees[0]);
+        // Tambahkan efek hover pada thumbnail
+        addThumbnailHoverEffects();
+        // Trigger animasi background saat halaman pertama kali dimuat
+        setTimeout(() => {
+            animateBackgroundDecoration();
+        }, 500);
     }
 
     // Fungsi untuk memindahkan thumbnail antara view mobile dan desktop
@@ -905,18 +1070,35 @@ document.addEventListener('DOMContentLoaded', function() {
             if (thumbMobileWrap && thumbnailContainer.parentElement !== thumbMobileWrap) {
                 thumbMobileWrap.innerHTML = '';
                 thumbMobileWrap.appendChild(thumbnailContainer);
+                // Re-add hover effects setelah dipindah dengan delay untuk memastikan DOM ready
+                setTimeout(() => {
+                    addThumbnailHoverEffects();
+                }, 100);
             }
         } else {
             if (thumbDesktopWrap && thumbnailContainer.parentElement !== thumbDesktopWrap) {
                 thumbDesktopWrap.innerHTML = '';
                 thumbDesktopWrap.appendChild(thumbnailContainer);
+                // Re-add hover effects setelah dipindah dengan delay untuk memastikan DOM ready
+                setTimeout(() => {
+                    addThumbnailHoverEffects();
+                }, 100);
             }
         }
     }
+    
+    // Debounce resize event untuk performa yang lebih baik
+    let resizeTimeout;
+    function debouncedMoveThumbnails() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(moveThumbnails, 150);
+    }
+    
     moveThumbnails();
-    window.addEventListener('resize', moveThumbnails);
+    window.addEventListener('resize', debouncedMoveThumbnails);
 });
 </script>
 @endpush
 
 @endsection
+

@@ -117,7 +117,7 @@
 		<div class="pre-loader">
 			<div class="pre-loader-box">
 				<div class="loader-logo">
-					<img src="{{url('assets-admin')}}/vendors/images/started.svg" alt="" />
+					<img src="{{url('assets')}}/img/logo/logo.png" alt="" />
 				</div>
 				<div class="loader-progress" id="progress_div">
 					<div class="bar" id="bar1"></div>
@@ -346,7 +346,7 @@
 		<div class="left-side-bar">
 			<div class="brand-logo">
 				<a href="/">
-					<img src="{{url('assets-admin')}}/vendors/images/started.svg" alt="" class="dark-logo" />
+					<img src="{{url('assets')}}/img/logo/logo.png" alt="" class="dark-logo" />
 					<img
 						src="{{url('assets-admin')}}/vendors/images/strated-white.svg"
 						alt=""
