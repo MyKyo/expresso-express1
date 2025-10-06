@@ -828,6 +828,24 @@
         background-size: 300% 300%;
         background-position: 0% 50%;
         transition: background-position 0.5s ease;
+        position: relative;
+    }
+
+    /* Gradient border untuk bagian bawah Interactive Coffee Items section */
+    .coffee-wrap::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 25px;
+        background: linear-gradient(90deg, 
+            #170202 0%, 
+            #350102 33%, 
+            #520102 66%, 
+            #BCB2A5 100%);
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
     .animated-gradient-bg.is-animating {
         animation: animatedGradient 5s ease forwards;
