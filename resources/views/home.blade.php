@@ -362,6 +362,29 @@
     background-size: 300% 300%;
     background-position: 0% 50%;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+/* Gradient border untuk bagian bawah How to Order section */
+#how-to-order .animated-gradient-bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 25px;
+    background: linear-gradient(90deg, 
+        #170202 0%, 
+        #170202 22%, 
+        #350102 25%, 
+        #350102 47%, 
+        #520102 50%, 
+        #520102 72%, 
+        #BCB2A5 75%, 
+        #BCB2A5 100%);
+    opacity: 1;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 #how-to-order .animated-gradient-bg:hover {
@@ -841,9 +864,14 @@
         height: 25px;
         background: linear-gradient(90deg, 
             #170202 0%, 
-            #350102 33%, 
-            #520102 66%, 
+            #170202 22%, 
+            #350102 25%, 
+            #350102 47%, 
+            #520102 50%, 
+            #520102 72%, 
+            #BCB2A5 75%, 
             #BCB2A5 100%);
+        opacity: 1;
         border-radius: 0 0 20px 20px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
