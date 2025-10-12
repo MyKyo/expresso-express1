@@ -51,6 +51,10 @@
 
 <!-- Custom CSS untuk merapatkan tombol carousel -->
 <style>
+.product-card-title {
+    font-size:20px;
+    font-weight:700;
+}
 .product-nav-arrow {
     top: 50%;
     transform: translateY(-50%);
